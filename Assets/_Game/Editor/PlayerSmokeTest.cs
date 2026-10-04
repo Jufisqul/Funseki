@@ -12,6 +12,8 @@ public static class PlayerSmokeTest
     static Vector3 startPos;
     static InputSettings.EditorInputBehaviorInPlayMode oldEditorBehavior;
     static InputSettings.BackgroundBehavior oldBackground;
+    static Keyboard fake;
+    static bool oldRunInBackground;
 
     [MenuItem("Tools/One Funseki/Debug/Player Smoke Test")]
     static void Run()
@@ -21,6 +23,11 @@ public static class PlayerSmokeTest
         oldBackground = InputSystem.settings.backgroundBehavior;
         InputSystem.settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
         InputSystem.settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
+        // Keep the game ticking while the editor window is not focused (e.g. when driven by tools).
+        oldRunInBackground = Application.runInBackground;
+        Application.runInBackground = true;
+        // A virtual keyboard: the real one gets reset whenever the editor loses focus.
+        fake = InputSystem.AddDevice<Keyboard>("SmokeTestKeyboard");
         startPos = Player().position;
         start = EditorApplication.timeSinceStartup;
         stage = 0;
@@ -30,7 +37,7 @@ public static class PlayerSmokeTest
 
     static Transform Player() => GameObject.Find("Player").transform;
 
-    static void Press(params Key[] keys) => InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(keys));
+    static void Press(params Key[] keys) => InputSystem.QueueStateEvent(fake, new KeyboardState(keys));
 
     static void Tick()
     {
@@ -46,7 +53,8 @@ public static class PlayerSmokeTest
         }
         else if (stage == 1 && t > 1.25)
         {
-            Debug.Log($"[Smoke] Jump: height {Player().position.y:F2} m, vy {pc.Velocity.y:F2}");
+            var anim = Player().GetComponentInChildren<Animator>();
+            Debug.Log($"[Smoke] Jump: height {Player().position.y:F2} m, vy {pc.Velocity.y:F2}, airborne anim {anim.GetCurrentAnimatorStateInfo(0).IsName("Airborne") || anim.GetNextAnimatorStateInfo(0).IsName("Airborne")}");
             Press(Key.F);
             stage = 2;
         }
@@ -63,6 +71,8 @@ public static class PlayerSmokeTest
             Debug.Log($"[Smoke] F released: firstPerson {rig.IsFirstPerson}, camera distance {Vector3.Distance(cam.position, Player().position):F2} m, grounded {pc.IsGrounded}");
             InputSystem.settings.editorInputBehaviorInPlayMode = oldEditorBehavior;
             InputSystem.settings.backgroundBehavior = oldBackground;
+            InputSystem.RemoveDevice(fake);
+            Application.runInBackground = oldRunInBackground;
             EditorApplication.update -= Tick;
         }
     }

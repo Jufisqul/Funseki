@@ -84,17 +84,26 @@ public static class PlayerTestSceneBuilder
         cc.stepOffset = 0.35f;
         cc.slopeLimit = 45f;
 
-        // Placeholder body until the hero models arrive: a capsule and a "nose" that shows facing.
-        var capsule = Prim(PrimitiveType.Capsule, go.transform, "Body", new Vector3(0, 0.85f, 0), new Vector3(0.6f, 0.85f, 0.6f), "Hero", "#2F5D9E");
-        var nose = Prim(PrimitiveType.Cube, go.transform, "Facing", new Vector3(0, 1.45f, 0.3f), new Vector3(0.25f, 0.1f, 0.2f), "Accent", "#FFD23F");
-        body = new[] { capsule.GetComponent<Renderer>(), nose.GetComponent<Renderer>() };
+        // Tomura Ryuta (rigged game build, see Art/Characters/Tomura/build_tomura.py --game).
+        var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(HeroImportSetup.HeroModel);
+        var model = (GameObject)PrefabUtility.InstantiatePrefab(prefab, go.transform);
+        model.name = "Model";
+        model.transform.localPosition = Vector3.zero;
+        model.transform.localRotation = Quaternion.identity;
+        var animator = model.GetComponent<Animator>();
+        animator.runtimeAnimatorController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(HeroAnimatorBuilder.ControllerPath);
+        animator.applyRootMotion = false;
+        body = model.GetComponentsInChildren<Renderer>();
 
         cameraTarget = new GameObject("CameraTarget").transform;
         cameraTarget.SetParent(go.transform, false);
-        cameraTarget.localPosition = new Vector3(0, 1.55f, 0);
+        cameraTarget.localPosition = new Vector3(0, 1.6f, 0);
 
         var controller = go.AddComponent<PlayerController>();
         controller.actions = controls;
+        var anim = go.AddComponent<PlayerAnimator>();
+        anim.player = controller;
+        anim.animator = animator;
         return go;
     }
 

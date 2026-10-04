@@ -1,8 +1,12 @@
-# Builds Tomura Ryuta: low-poly PS2/Persona-4-style character. Run: blender -b --python tomura.py -- <out_dir>
+# Builds Tomura Ryuta: low-poly PS2/Persona-4-style character. Run: blender -b --python tomura.py -- <out_dir> [--game]
+# Default: the posed statue for the main menu (magazine, hand on the belt), no skeleton.
+# --game: the playable hero -- arms down, legs split at the knee, rigidly skinned to a Mixamo-named
+#         skeleton so Mixamo clips retarget through Unity's Humanoid avatar. Exports Tomura_Ryuta_Game.fbx.
 import bpy, bmesh, math, sys, os
 from mathutils import Vector
 
 OUT = sys.argv[sys.argv.index("--") + 1]
+GAME = "--game" in sys.argv
 os.makedirs(OUT, exist_ok=True)
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -34,13 +38,36 @@ for name, rgb in PALETTE.items():
 
 parts = []
 
+# Game build: the bone that owns the next parts -- a name, or fn(world_co) -> name. Low-poly PS2 style,
+# so every vertex follows exactly one bone (rigid skinning), like the segmented models of that era.
+BONE = None
+
 def finish(obj, mat):
     obj.data.materials.clear()
     obj.data.materials.append(MATS[mat])
     for p in obj.data.polygons:
         p.use_smooth = False
+    if GAME:
+        assert BONE, "game build: set BONE before adding a part"
+        bpy.context.view_layer.update()
+        for i, v in enumerate(obj.data.vertices):
+            name = BONE(obj.matrix_world @ v.co) if callable(BONE) else BONE
+            group = obj.vertex_groups.get(name) or obj.vertex_groups.new(name=name)
+            group.add([i], 1.0, "REPLACE")
     parts.append(obj)
     return obj
+
+def torso_bone(co):
+    if co.z < 1.0:
+        return "mixamorig:Hips"
+    if co.z < 1.17:
+        return "mixamorig:Spine"
+    if co.z < 1.32:
+        return "mixamorig:Spine1"
+    return "mixamorig:Spine2"
+
+def side_name(s):  # the hero faces -Y, so his left is +X
+    return "Left" if s > 0 else "Right"
 
 def active():
     return bpy.context.active_object
@@ -83,8 +110,16 @@ def delete_faces(obj, test):
 # ------------------------------------------------------------ body (faces -Y)
 # Legs: wide yankii trousers, slightly apart.
 for s in (-1, 1):
-    limb((0.1 * s, 0, 0.07), (0.095 * s, 0, 0.9), 0.085, 0.105, "Pants")
+    if GAME:  # thigh and shin overlap at the knee so a bent leg shows no gap
+        BONE = f"mixamorig:{side_name(s)}UpLeg"
+        limb((0.1 * s, 0, 0.45), (0.095 * s, 0, 0.9), 0.095, 0.105, "Pants")
+        BONE = f"mixamorig:{side_name(s)}Leg"
+        limb((0.1 * s, 0, 0.07), (0.1 * s, 0, 0.5), 0.085, 0.095, "Pants")
+        BONE = f"mixamorig:{side_name(s)}Foot"
+    else:
+        limb((0.1 * s, 0, 0.07), (0.095 * s, 0, 0.9), 0.085, 0.105, "Pants")
     box((0.12, 0.27, 0.07), (0.1 * s, -0.045, 0.035), "Shoes", bevel=0.02)
+BONE = torso_bone
 cone(0.17, 0.165, 0.1, (0, 0, 0.92), verts=10, mat="Pants")           # waist
 cone(0.17, 0.21, 0.56, (0, 0, 1.17), verts=10, mat="Shirt")           # t-shirt torso
 
@@ -102,14 +137,25 @@ collar.modifiers.new("thick", "SOLIDIFY").thickness = 0.012
 for i in range(5):                                                      # gold buttons on one placket
     blob((0.012, 0.008, 0.012), (0.122, -0.205, 1.4 - i * 0.11), "Gold", seg=6, rings=4)
 
-# Arms: screen-left arm hangs with a magazine, screen-right hand on the belt.
-SL, EL, WL = (-0.25, 0, 1.42), (-0.29, 0.01, 1.13), (-0.3, -0.01, 0.87)
-SR, ER, WR = (0.25, 0, 1.42), (0.34, 0.05, 1.15), (0.17, -0.15, 0.96)
-for a, b, r1, r2 in ((SL, EL, 0.068, 0.058), (EL, WL, 0.058, 0.048), (SR, ER, 0.068, 0.058), (ER, WR, 0.058, 0.048)):
-    limb(a, b, r1, r2, "Jacket")
-blob((0.042, 0.03, 0.06), (-0.3, -0.015, 0.82), "Skin", seg=6, rings=4)   # hand L
-blob((0.045, 0.035, 0.05), (0.14, -0.17, 0.93), "Skin", seg=6, rings=4)   # hand R (thumb in belt)
-box((0.025, 0.17, 0.23), (-0.33, -0.02, 0.8), "Magazine", rot=(math.radians(6), 0, math.radians(-4)))
+if GAME:
+    # Arms hang loose (A-pose) so walk and run clips swing them naturally; joints match the skeleton.
+    for s in (-1, 1):
+        S, E, W = (0.25 * s, 0, 1.42), (0.31 * s, 0.01, 1.16), (0.36 * s, -0.01, 0.92)
+        BONE = f"mixamorig:{side_name(s)}Arm"
+        limb(S, E, 0.068, 0.058, "Jacket")
+        BONE = f"mixamorig:{side_name(s)}ForeArm"
+        limb(E, W, 0.058, 0.048, "Jacket")
+        BONE = f"mixamorig:{side_name(s)}Hand"
+        blob((0.042, 0.03, 0.06), (0.365 * s, -0.015, 0.87), "Skin", seg=6, rings=4)
+else:
+    # Arms: screen-left arm hangs with a magazine, screen-right hand on the belt.
+    SL, EL, WL = (-0.25, 0, 1.42), (-0.29, 0.01, 1.13), (-0.3, -0.01, 0.87)
+    SR, ER, WR = (0.25, 0, 1.42), (0.34, 0.05, 1.15), (0.17, -0.15, 0.96)
+    for a, b, r1, r2 in ((SL, EL, 0.068, 0.058), (EL, WL, 0.058, 0.048), (SR, ER, 0.068, 0.058), (ER, WR, 0.058, 0.048)):
+        limb(a, b, r1, r2, "Jacket")
+    blob((0.042, 0.03, 0.06), (-0.3, -0.015, 0.82), "Skin", seg=6, rings=4)   # hand L
+    blob((0.045, 0.035, 0.05), (0.14, -0.17, 0.93), "Skin", seg=6, rings=4)   # hand R (thumb in belt)
+    box((0.025, 0.17, 0.23), (-0.33, -0.02, 0.8), "Magazine", rot=(math.radians(6), 0, math.radians(-4)))
 
 # ------------------------------------------------------------ head
 HEAD = Vector((0, -0.01, 1.73)); A, B, C = 0.125, 0.135, 0.16   # ellipsoid half-axes
@@ -117,7 +163,9 @@ HEAD = Vector((0, -0.01, 1.73)); A, B, C = 0.125, 0.135, 0.16   # ellipsoid half
 def jaw(z):  # narrowing of the lower face -> anime V jaw
     return 1.0 - 0.38 * max(0.0, -z / C)
 
+BONE = "mixamorig:Neck"
 limb((0, 0, 1.47), (0, -0.005, 1.62), 0.062, 0.058, "Skin")            # neck
+BONE = "mixamorig:Head"
 bpy.ops.mesh.primitive_uv_sphere_add(segments=12, ring_count=9, radius=1, location=HEAD)
 head = active(); head.scale = (A, B, C); bpy.ops.object.transform_apply(scale=True)
 for v in head.data.vertices:
@@ -190,6 +238,54 @@ body = bpy.context.active_object
 body.name = "Tomura_Ryuta"
 bpy.ops.object.origin_set(type="ORIGIN_CURSOR")
 print("TRIS", sum(len(p.vertices) - 2 for p in body.data.polygons))
+
+if GAME:
+    # Mixamo bone names, so Unity's Humanoid auto-mapping finds every bone. Joints match the parts above.
+    bpy.ops.object.armature_add(enter_editmode=True, location=(0, 0, 0))
+    arm = active()
+    arm.name = "Armature"
+    eb = arm.data.edit_bones
+    eb.remove(eb[0])
+
+    def bone(name, head, tail, parent=None):
+        b = eb.new("mixamorig:" + name)
+        b.head, b.tail = head, tail
+        if parent:
+            b.parent = eb["mixamorig:" + parent]
+
+    bone("Hips", (0, 0, 0.95), (0, 0, 1.05))
+    bone("Spine", (0, 0, 1.05), (0, 0, 1.2), "Hips")
+    bone("Spine1", (0, 0, 1.2), (0, 0, 1.33), "Spine")
+    bone("Spine2", (0, 0, 1.33), (0, 0, 1.47), "Spine1")
+    bone("Neck", (0, 0, 1.47), (0, -0.005, 1.6), "Spine2")
+    bone("Head", (0, -0.005, 1.6), (0, -0.01, 1.85), "Neck")
+    bone("HeadTop_End", (0, -0.01, 1.85), (0, -0.01, 1.95), "Head")
+    for s in (-1, 1):
+        n = side_name(s)
+        bone(n + "Shoulder", (0.06 * s, 0, 1.43), (0.25 * s, 0, 1.42), "Spine2")
+        bone(n + "Arm", (0.25 * s, 0, 1.42), (0.31 * s, 0.01, 1.16), n + "Shoulder")
+        bone(n + "ForeArm", (0.31 * s, 0.01, 1.16), (0.36 * s, -0.01, 0.92), n + "Arm")
+        bone(n + "Hand", (0.36 * s, -0.01, 0.92), (0.37 * s, -0.015, 0.82), n + "ForeArm")
+        bone(n + "UpLeg", (0.1 * s, 0, 0.92), (0.1 * s, 0, 0.48), "Hips")
+        bone(n + "Leg", (0.1 * s, 0, 0.48), (0.1 * s, 0, 0.08), n + "UpLeg")
+        bone(n + "Foot", (0.1 * s, 0, 0.08), (0.1 * s, -0.12, 0.03), n + "Leg")
+        bone(n + "ToeBase", (0.1 * s, -0.12, 0.03), (0.1 * s, -0.18, 0.03), n + "Foot")
+    bpy.ops.object.mode_set(mode="OBJECT")
+
+    body.parent = arm
+    body.modifiers.new("Armature", "ARMATURE").object = arm
+    unweighted = [v.index for v in body.data.vertices if not v.groups]
+    assert not unweighted, f"{len(unweighted)} vertices have no bone"
+
+    bpy.ops.wm.save_as_mainfile(filepath=os.path.join(OUT, "Tomura_Ryuta_Game.blend"))
+    bpy.ops.object.select_all(action="DESELECT")
+    body.select_set(True)
+    arm.select_set(True)
+    bpy.ops.export_scene.fbx(filepath=os.path.join(OUT, "Tomura_Ryuta_Game.fbx"), use_selection=True,
+                             object_types={"ARMATURE", "MESH"}, add_leaf_bones=False, bake_anim=False,
+                             apply_scale_options="FBX_SCALE_ALL", axis_forward="-Z", axis_up="Y")
+    print("DONE")
+    sys.exit(0)
 
 world = bpy.data.worlds.new("Sunset"); scene.world = world
 world.use_nodes = True
