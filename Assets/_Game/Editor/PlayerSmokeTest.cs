@@ -18,7 +18,41 @@ public static class PlayerSmokeTest
     [MenuItem("Tools/One Funseki/Debug/Player Smoke Test")]
     static void Run()
     {
-        if (!EditorApplication.isPlaying) { Debug.LogWarning("[Smoke] Enter Play Mode first."); return; }
+        if (!BeginFakeInput()) return;
+        startPos = Player().position;
+        start = EditorApplication.timeSinceStartup;
+        stage = 0;
+        Press(Key.W, Key.LeftShift);
+        EditorApplication.update += Tick;
+    }
+
+    // Walks the hero straight ahead for a few seconds from wherever he stands (turn him first in the
+    // Inspector). Logs where he ends up: handy for checking doors, stairs and slopes in grey boxes.
+    [MenuItem("Tools/One Funseki/Debug/Walk Forward 6s")]
+    static void WalkForward()
+    {
+        if (!BeginFakeInput()) return;
+        var player = Player();
+        var orbit = Object.FindAnyObjectByType<PlayerCameraRig>().thirdPersonCamera.GetComponent<Unity.Cinemachine.CinemachineOrbitalFollow>();
+        orbit.HorizontalAxis.Value = Mathf.DeltaAngle(0f, player.eulerAngles.y);
+        var from = player.position;
+        double t0 = EditorApplication.timeSinceStartup;
+        float maxY = from.y;
+        Press(Key.W);
+        void Walk()
+        {
+            maxY = Mathf.Max(maxY, Player().position.y);
+            if (EditorApplication.timeSinceStartup - t0 < 6.0) return;
+            Debug.Log($"[Smoke] Walk: from {from} to {Player().position}, travelled {Vector3.Distance(from, Player().position):F1} m, highest y {maxY:F2}");
+            EndFakeInput();
+            EditorApplication.update -= Walk;
+        }
+        EditorApplication.update += Walk;
+    }
+
+    static bool BeginFakeInput()
+    {
+        if (!EditorApplication.isPlaying) { Debug.LogWarning("[Smoke] Enter Play Mode first."); return false; }
         oldEditorBehavior = InputSystem.settings.editorInputBehaviorInPlayMode;
         oldBackground = InputSystem.settings.backgroundBehavior;
         InputSystem.settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
@@ -28,11 +62,16 @@ public static class PlayerSmokeTest
         Application.runInBackground = true;
         // A virtual keyboard: the real one gets reset whenever the editor loses focus.
         fake = InputSystem.AddDevice<Keyboard>("SmokeTestKeyboard");
-        startPos = Player().position;
-        start = EditorApplication.timeSinceStartup;
-        stage = 0;
-        Press(Key.W, Key.LeftShift);
-        EditorApplication.update += Tick;
+        return true;
+    }
+
+    static void EndFakeInput()
+    {
+        Press();
+        InputSystem.RemoveDevice(fake);
+        InputSystem.settings.editorInputBehaviorInPlayMode = oldEditorBehavior;
+        InputSystem.settings.backgroundBehavior = oldBackground;
+        Application.runInBackground = oldRunInBackground;
     }
 
     static Transform Player() => GameObject.Find("Player").transform;
@@ -69,10 +108,7 @@ public static class PlayerSmokeTest
         {
             var cam = Camera.main.transform;
             Debug.Log($"[Smoke] F released: firstPerson {rig.IsFirstPerson}, camera distance {Vector3.Distance(cam.position, Player().position):F2} m, grounded {pc.IsGrounded}");
-            InputSystem.settings.editorInputBehaviorInPlayMode = oldEditorBehavior;
-            InputSystem.settings.backgroundBehavior = oldBackground;
-            InputSystem.RemoveDevice(fake);
-            Application.runInBackground = oldRunInBackground;
+            EndFakeInput();
             EditorApplication.update -= Tick;
         }
     }

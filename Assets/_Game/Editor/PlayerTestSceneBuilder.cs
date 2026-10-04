@@ -35,7 +35,7 @@ public static class PlayerTestSceneBuilder
         Debug.Log("[One Funseki] Player test scene built: " + ScenePath);
     }
 
-    static void BuildLighting()
+    internal static void BuildLighting()
     {
         var sun = new GameObject("Sun").AddComponent<Light>();
         sun.type = LightType.Directional;
@@ -72,7 +72,7 @@ public static class PlayerTestSceneBuilder
         Box(root, "Desk", new Vector3(2, 0.4f, 3), new Vector3(1.2f, 0.8f, 0.6f), "Crate", "#C9A26B");
     }
 
-    static GameObject BuildPlayer(InputActionAsset controls, out Transform cameraTarget, out Renderer[] body)
+    internal static GameObject BuildPlayer(InputActionAsset controls, out Transform cameraTarget, out Renderer[] body)
     {
         var go = new GameObject("Player") { tag = "Player" };
         go.transform.position = new Vector3(0, 0.05f, 0);
@@ -107,7 +107,7 @@ public static class PlayerTestSceneBuilder
         return go;
     }
 
-    static void BuildCameras(InputActionAsset controls, GameObject player, Transform cameraTarget, Renderer[] body)
+    internal static void BuildCameras(InputActionAsset controls, GameObject player, Transform cameraTarget, Renderer[] body)
     {
         var camGo = new GameObject("Main Camera") { tag = "MainCamera" };
         var cam = camGo.AddComponent<Camera>();
@@ -157,10 +157,10 @@ public static class PlayerTestSceneBuilder
 
     // ----------------------------------------------------------------- helpers
 
-    static GameObject Box(Transform parent, string name, Vector3 pos, Vector3 size, string mat, string hex)
+    internal static GameObject Box(Transform parent, string name, Vector3 pos, Vector3 size, string mat, string hex)
         => Prim(PrimitiveType.Cube, parent, name, pos, size, mat, hex);
 
-    static GameObject Prim(PrimitiveType type, Transform parent, string name, Vector3 pos, Vector3 scale, string mat, string hex)
+    internal static GameObject Prim(PrimitiveType type, Transform parent, string name, Vector3 pos, Vector3 scale, string mat, string hex)
     {
         var go = GameObject.CreatePrimitive(type);
         go.name = name;
@@ -173,7 +173,7 @@ public static class PlayerTestSceneBuilder
         return go;
     }
 
-    static Material Mat(string name, string hex)
+    internal static Material Mat(string name, string hex)
     {
         string path = MatDir + "Grey_" + name + ".mat";
         var m = AssetDatabase.LoadAssetAtPath<Material>(path);
@@ -188,5 +188,5 @@ public static class PlayerTestSceneBuilder
         return m;
     }
 
-    static Color Hex(string hex) => ColorUtility.TryParseHtmlString(hex, out var c) ? c : Color.magenta;
+    internal static Color Hex(string hex) => ColorUtility.TryParseHtmlString(hex, out var c) ? c : Color.magenta;
 }
