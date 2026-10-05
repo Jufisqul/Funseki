@@ -229,6 +229,11 @@ namespace Funseki.EditorTools
             Set(anim, "settings", settings);
             Set(anim, "motor", motor);
             Set(anim, "animator", animator);
+
+            // Bridge until the interaction task: the school's own E-to-open-doors, reading Gameplay/Interact.
+            var doors = go.AddComponent<Funseki.School.PlayerInteractor>();
+            doors.actions = input;
+            doors.actionMap = PlayerInputReader.MapName;
             return go;
         }
 
