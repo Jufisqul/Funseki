@@ -23,12 +23,19 @@ Assets/_Project/
 ```
 
 Модули: Core, Player, Interaction, Heroes, Dialogue, DayCycle, NPC, Pranks, Lessons, UI, Save, Audio, Telemetry.
-Каждый модуль — отдельная сборка `Funseki.<Module>.asmdef` в своей папке Scripts, она ссылается только на `Funseki.Core` (и при необходимости на Unity.InputSystem, Unity.TextMeshPro, Unity.Cinemachine и т. п.). Ссылок модуль → модуль нет. Asmdef создаётся вместе с первым скриптом модуля; сейчас сборки есть у Core и UI.
+Каждый модуль — отдельная сборка `Funseki.<Module>.asmdef` в своей папке Scripts, она ссылается только на `Funseki.Core` (и при необходимости на Unity.InputSystem, Unity.TextMeshPro, Unity.Cinemachine и т. п.). Ссылок модуль → модуль нет. Asmdef создаётся вместе с первым скриптом модуля; сейчас сборки есть у Core, UI, Player и DayCycle.
 
 Старое, пока не перенесённое:
 - `Assets/Scenes/MainMenu.unity` + `Assets/MainMenu/` — главное меню, используется как сцена MainMenu (кнопки «Новая игра» и «Продолжить» грузят Slice_Day1).
-- `Assets/_Game/` — первый контроллер героя, `GameControls.inputactions`, сцены PlayerTest и Day1_Greybox.
+- `Assets/_Game/` — первый контроллер героя (заменён модулем Funseki.Player, в Slice_Day1 не используется), `GameControls.inputactions`, сцены PlayerTest и Day1_Greybox.
 - Сторонние ассеты персонажей: `Anime Girl`, `3d-character_animeGirlAkane`, `RoloArt`, `Yukki`, `lilToon`.
+
+## Герой (Funseki.Player)
+
+- Ввод — `Assets/_Project/Data/Input/GameInput.inputactions`, карта `Gameplay` (клавиатура и геймпад). Move, Look, Sprint, Jump, FirstPerson работают; Interact, UseItem, AltUseItem, CycleItem, HeroMenu, HeroAbility, Pause только объявлены.
+- Все числа движения и камеры — `Assets/_Project/Data/PlayerSettings.asset`, включая список состояний, где ввод героя выключен (Cutscene, Dialogue, Paused, Lesson).
+- Компоненты на объекте Player: PlayerInputReader, PlayerMotor (CharacterController), PlayerAnimator (Speed, Grounded, Jump в `Assets/_Project/Art/Animation/Player.controller`), PlayerCameraController (CM ThirdPerson с Deoccluder, CM FirstPerson по удержанию F).
+- `Scripts/DayCycle/CutscenePlaceholder` — временная заглушка: переводит Slice_Day1 из Cutscene в Break, пока нет катсцены.
 
 ## Ядро (Funseki.Core)
 
@@ -68,3 +75,4 @@ Assets/_Project/
 
 - `Tools > Funseki > Core > Smoke Test Flow` — Play из Bootstrap, ждёт MainMenu, жмёт «Новая игра», ждёт Slice_Day1 в состоянии Cutscene. Результат в консоли: `[CoreFlowSmokeTest] PASS/FAIL`.
 - `Tools > Funseki > Core > Create Core Scenes` — пересоздаёт недостающие сцены ядра, GameFlowConfig и порядок Build Settings (существующие файлы не трогает).
+- `Tools > Funseki > Slice > Build Slice_Day1 (player + school loader)` — пересобирает в Slice_Day1 героя (Anime Girl, Funseki.Player), камеры Cinemachine и SchoolLoader. Школа не копируется: SchoolLoader при старте подгружает School_Greybox, выключает в ней всё, кроме корня School, и открывает только дверь главного входа. Пока School_Greybox нет в Build Settings, это работает только в редакторе.
