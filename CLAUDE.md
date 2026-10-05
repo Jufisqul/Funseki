@@ -75,4 +75,4 @@ Assets/_Project/
 
 - `Tools > Funseki > Core > Smoke Test Flow` — Play из Bootstrap, ждёт MainMenu, жмёт «Новая игра», ждёт Slice_Day1 в состоянии Cutscene. Результат в консоли: `[CoreFlowSmokeTest] PASS/FAIL`.
 - `Tools > Funseki > Core > Create Core Scenes` — пересоздаёт недостающие сцены ядра, GameFlowConfig и порядок Build Settings (существующие файлы не трогает).
-- `Tools > Funseki > Slice > Build Slice_Day1 (player + school loader)` — пересобирает в Slice_Day1 героя (Anime Girl, Funseki.Player), камеры Cinemachine и SchoolLoader. Школа не копируется: SchoolLoader при старте подгружает School_Greybox, выключает в ней всё, кроме корня School, и открывает только дверь главного входа. Пока School_Greybox нет в Build Settings, это работает только в редакторе.
+- `Tools > Funseki > Slice > Build Slice_Day1 (player + school loader)` — пересобирает в Slice_Day1 героя (Anime Girl, Funseki.Player), камеры Cinemachine и SchoolLoader. Школа не копируется: SchoolLoader при старте подгружает School_Greybox, выключает в ней всё, кроме корня School, и открывает только дверь главного входа. School_Greybox стоит в Build Settings последней.
