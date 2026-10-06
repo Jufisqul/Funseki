@@ -17,7 +17,7 @@ namespace Funseki.EditorTools
         public const string FlowPath = "Assets/_Project/Data/GameFlowConfig.asset";
         public const string BootstrapPath = "Assets/_Project/Scenes/Bootstrap.unity";
         public const string SlicePath = "Assets/_Project/Scenes/Slice_Day1.unity";
-        public const string MainMenuPath = "Assets/Scenes/MainMenu.unity";
+        public const string MainMenuPath = "Assets/_Project/Scenes/MainMenu.unity";
 
         [MenuItem("Tools/Funseki/Core/Create Core Scenes")]
         public static void CreateAll()

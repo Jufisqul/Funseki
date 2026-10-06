@@ -19,7 +19,7 @@ namespace Funseki.EditorTools
 {
     // Tools > Funseki > Slice: makes Slice_Day1 playable for the movement check.
     // - PlayerSettings.asset is created if missing; Player.controller (Speed / Grounded / Jump / Talking / Hit) is rebuilt
-    //   from Assets/Models/Animation.
+    //   from Assets/ThirdParty/Models/Animation.
     // - The school is not copied: a SchoolSceneLoader loads School_Greybox (built from KitSettings) additively at runtime.
     // - The three heroes (HeroesSetup: Рюта, Рэй, Кайто with Funseki.Player + Funseki.Heroes), the two Cinemachine
     //   cameras and test content for the Q actions (two NPCs and an item) are added.
@@ -30,8 +30,8 @@ namespace Funseki.EditorTools
         public const string InputPath = "Assets/_Project/Data/Input/GameInput.inputactions";
         public const string ControllerPath = "Assets/_Project/Art/Animation/Player.controller";
         const string SlicePath = CoreScenesSetup.SlicePath;
-        internal const string GirlFbx = "Assets/Models/Rey/Model/Anime_Girl.fbx";
-        const string AnimDir = "Assets/Models/Animation";
+        internal const string GirlFbx = "Assets/ThirdParty/Models/Rey/Model/Anime_Girl.fbx";
+        const string AnimDir = "Assets/ThirdParty/Models/Animation";
         const string JumpFbx = AnimDir + "/Jumping Up.fbx";
         const string IdleFbx = AnimDir + "/Idle.fbx";
         const string WalkFbx = AnimDir + "/Walk.fbx";
@@ -114,7 +114,7 @@ namespace Funseki.EditorTools
 
         // Locomotion blend tree (Idle / Walk / Run by Speed in m/s), an Airborne state for jumps and falls,
         // Talking (bool, loops while the hero is in a dialogue) and Hit (trigger, plays once).
-        // Clips come from Assets/Models/Animation; Mixamo files imported as Generic are switched to Humanoid first.
+        // Clips come from Assets/ThirdParty/Models/Animation; Mixamo files imported as Generic are switched to Humanoid first.
         // Re-runnable: overwrites the controller so thresholds follow PlayerSettings speeds.
         [MenuItem("Tools/Funseki/Slice/Rebuild Player Animator")]
         static void RebuildAnimator() => BuildAnimatorController(EnsureSettings());

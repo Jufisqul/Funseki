@@ -56,3 +56,13 @@ crashlytics-build.properties
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Screenshots moved to the trash during cleanup stay local
+/[Aa]ssets/_Trash/[Ss]creenshots/
+/[Aa]ssets/_Trash/[Ss]creenshots.meta
+
+# Blender autosave backups
+*.blend1
+
+# unity-mcp generated output
+/GeneratedAssets/

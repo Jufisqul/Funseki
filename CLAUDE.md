@@ -13,29 +13,38 @@ Unity 6000.6.4f1, URP. Пакеты: Input System, Cinemachine, Timeline, TextMe
 ```
 Assets/_Project/
   Scripts/<Module>/   код, namespace Funseki.<Module>
-  Data/               ScriptableObject с настройками и текстами (GameFlowConfig.asset и др.)
-  Prefabs/
-  Scenes/             Bootstrap, Slice_Day1
-  Art/Placeholders/   серая коробка и временные ассеты
-  Audio/
-  Editor/             инструменты редактора (Tools > Funseki > Core)
+  Data/<Module>/      ScriptableObject с настройками и текстами; в корне GameFlowConfig.asset и PlayerSettings.asset
+  Prefabs/            Items, Lessons
+  Scenes/             Bootstrap, MainMenu, Slice_Day1; _Sandbox/ — Dialogue_Test, Interaction_Test
+  Art/                Animation (Player.controller), Heroes (модели-варианты, материалы, портреты), Placeholders
+  Audio/SFX/          BellRing.mp3
+  Editor/             инструменты редактора (Tools > Funseki), Validate References
   School/             школьный модульный кит и School_Greybox (свой тред, Funseki.School)
+Assets/MainMenu/      главное меню: скрипты, шрифты (их берут все меню Tools), материалы, модели крыльца
+Assets/ThirdParty/Models/  модели героев из сторонних паков: Ryuto (Akane, MToon), Rey (Anime Girl), Kaito (Ren, lilToon), Animation (Mixamo)
+Assets/lilToon/       шейдер Кайто; в коде пака зашит путь Assets/lilToon, не переносить
+Assets/TextMesh Pro/, Assets/Settings/ (URP)  стандартные места
+Assets/Editor/Funseki/  билдер школы (тред школы)
+Assets/_Design/Plans/   планы этажей
+Assets/_Trash/        кандидаты на удаление после уборки (Docs/cleanup_report.md); удаляет владелец
+Art/                  вне Assets: Blender-исходники и скрипты генерации
+Docs/                 отчёты (cleanup_report.md)
 ```
 
 Модули: Core, Player, Interaction, Inventory, Heroes, Dialogue, DayCycle, NPC, Pranks, Lessons, UI, Save, Audio, Telemetry.
 Каждый модуль — отдельная сборка `Funseki.<Module>.asmdef` в своей папке Scripts, она ссылается только на `Funseki.Core` (и при необходимости на Unity.InputSystem, Unity.TextMeshPro, Unity.Cinemachine и т. п.). Ссылок модуль → модуль нет. Asmdef создаётся вместе с первым скриптом модуля; сейчас сборки есть у Core, UI, Player, DayCycle, Interaction, Inventory, Dialogue, Audio, Heroes, NPC, Save, Pranks и Lessons.
 
-Старое, пока не перенесённое:
-- `Assets/Scenes/MainMenu.unity` + `Assets/MainMenu/` — главное меню, используется как сцена MainMenu («Новая игра» и «Продолжить» через ISaveSystem, см. «Меню, пауза, катсцена и конец демо»).
-- `Assets/_Game/` — первый контроллер героя (заменён модулем Funseki.Player, в Slice_Day1 не используется), `GameControls.inputactions`, сцены PlayerTest и Day1_Greybox.
-- Сторонние ассеты персонажей: `Anime Girl`, `3d-character_animeGirlAkane`, `RoloArt`, `Yukki`, `lilToon`.
+Пути к ассетам прописаны строками в редакторских скриптах (`_Project/Editor/*Setup.cs`, `MainMenu/Editor/MainMenuBuilder.cs`, `Assets/Editor/Funseki`). Перенос ассета — через AssetDatabase.MoveAsset вместе с правкой этих констант. После переноса — `Tools > Funseki > Validate References` (Missing Script / Missing Reference по сценам и префабам).
+
+Старое:
+- `Assets/_Game/` — остатки первого контроллера героя (`Scripts/Player`, `Hero.controller`, `Input/GameControls.inputactions`). Не удалять: на них ссылается объект игрока в School_Greybox и `SchoolPlayerSetup` (тред школы).
+- `Assets/PF_Kit_*.fbx` в корне Assets и `Assets/InputSystem_Actions.inputactions` — назначение не выяснено, не трогать (см. Docs/cleanup_report.md, таблица C).
 
 ## Герой (Funseki.Player)
 
 - Ввод — `Assets/_Project/Data/Input/GameInput.inputactions`, карта `Gameplay` (клавиатура и геймпад). Move, Look, Sprint, Jump, FirstPerson работают; Interact, UseItem, AltUseItem, CycleItem, HeroMenu, HeroAbility, Pause только объявлены.
 - Все числа движения и камеры — `Assets/_Project/Data/PlayerSettings.asset`, включая список состояний, где ввод героя выключен (Cutscene, Dialogue, Paused, Lesson).
 - Компоненты на объекте Player: PlayerInputReader, PlayerMotor (CharacterController), PlayerAnimator (Speed, Grounded, Jump в `Assets/_Project/Art/Animation/Player.controller`), PlayerCameraController (CM ThirdPerson с Deoccluder, CM FirstPerson по удержанию F).
-- `Scripts/DayCycle/CutscenePlaceholder` — старая заглушка катсцены, в сцене не стоит (катсцену играет `StoryCutscene`), файл можно удалить.
 
 ## Три героя (Funseki.Heroes)
 
@@ -92,7 +101,7 @@ Assets/_Project/
 - В сцене дня: `DayCycleDirector` (объект DayCycle, регистрируется как `IDayCycle`, `ToJson/LoadJson` для сейва) и `LessonEntrance` (триггер, урок начинается, когда герой входит после звонка). Урок или катсцена завершают фазу флагом цели или `IDayCycle.CompletePhase()`.
 - Физра дня 1 — в спортзале (`LessonEntrance_fizra` у восточной двери zone gym). Спортзал по SchoolLayout открыт со 2-го дня; в день 1 его открывает `Funseki.Lessons.LessonWalk` по звонку после break_1. Урок идёт без лимита времени, фазу завершает Funseki.Lessons флагом `lesson_fizra_done`.
 - Debug в редакторе: F9 — следующая фаза, F10 — выставить флаг цели текущей фазы.
-- Звук звонка: `Funseki.Audio.BellSoundPlayer` (объект BellSound под `[Bootstrap]`) слушает `OnBell`, клипы и громкость по типу звонка в `Data/Audio/BellSettings.asset` (сейчас везде `Assets/Sound/BellRing.mp3`). Ставится через `Tools > Funseki > Audio > Add bell sound to Bootstrap`.
+- Звук звонка: `Funseki.Audio.BellSoundPlayer` (объект BellSound под `[Bootstrap]`) слушает `OnBell`, клипы и громкость по типу звонка в `Data/Audio/BellSettings.asset` (сейчас везде `Assets/_Project/Audio/SFX/BellRing.mp3`). Ставится через `Tools > Funseki > Audio > Add bell sound to Bootstrap`.
 - `Tools > Funseki > DayCycle > Setup Day 1 schedule in Slice_Day1` — создаёт расписание (существующее не трогает) и объекты в Slice_Day1; Build Slice_Day1 делает то же.
 
 ## Шалости, Шум и «Поймали» (Funseki.Pranks)
@@ -162,4 +171,4 @@ Assets/_Project/
 
 - `Tools > Funseki > Core > Smoke Test Flow` — Play из Bootstrap, ждёт MainMenu, жмёт «Новая игра», ждёт Slice_Day1 в состоянии Cutscene. Результат в консоли: `[CoreFlowSmokeTest] PASS/FAIL`.
 - `Tools > Funseki > Core > Create Core Scenes` — пересоздаёт недостающие сцены ядра, GameFlowConfig и порядок Build Settings (существующие файлы не трогает).
-- `Tools > Funseki > Slice > Build Slice_Day1 (player + school loader)` — пересобирает в Slice_Day1 трёх героев (Funseki.Player + Funseki.Heroes), камеры Cinemachine, SchoolLoader и HeroBarks (реплики героя). На каждом герое `HeroInteractor`, `HeroItemUser`, `HeldItemView`. Анимации — `Assets/Models/Animation` (Idle, Walk, Run, Jumping Up, Talking, Getting Hit; новые Generic-файлы переводятся в Humanoid). Школа не копируется: SchoolLoader при старте подгружает School_Greybox, выключает в ней всё, кроме корня School, и открывает только дверь главного входа. School_Greybox стоит в Build Settings последней.
+- `Tools > Funseki > Slice > Build Slice_Day1 (player + school loader)` — пересобирает в Slice_Day1 трёх героев (Funseki.Player + Funseki.Heroes), камеры Cinemachine, SchoolLoader и HeroBarks (реплики героя). На каждом герое `HeroInteractor`, `HeroItemUser`, `HeldItemView`. Анимации — `Assets/ThirdParty/Models/Animation` (Idle, Walk, Run, Jumping Up, Talking, Getting Hit; новые Generic-файлы переводятся в Humanoid). Школа не копируется: SchoolLoader при старте подгружает School_Greybox, выключает в ней всё, кроме корня School, и открывает только дверь главного входа. School_Greybox стоит в Build Settings последней.

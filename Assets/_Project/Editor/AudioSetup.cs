@@ -13,7 +13,7 @@ namespace Funseki.EditorTools
     public static class AudioSetup
     {
         public const string BellSettingsPath = "Assets/_Project/Data/Audio/BellSettings.asset";
-        const string BellClipPath = "Assets/Sound/BellRing.mp3";
+        const string BellClipPath = "Assets/_Project/Audio/SFX/BellRing.mp3";
 
         [MenuItem("Tools/Funseki/Audio/Add bell sound to Bootstrap")]
         public static void AddBellToBootstrap()

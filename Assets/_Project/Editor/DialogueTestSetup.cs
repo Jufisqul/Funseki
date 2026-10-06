@@ -19,7 +19,7 @@ namespace Funseki.EditorTools
     // Existing data assets are kept (designer edits survive); the scene is rebuilt from scratch.
     public static class DialogueTestSetup
     {
-        const string ScenePath = "Assets/_Project/Scenes/Dialogue_Test.unity";
+        const string ScenePath = "Assets/_Project/Scenes/_Sandbox/Dialogue_Test.unity";
         const string DataDir = "Assets/_Project/Data/Dialogue";
         const string SpeakersDir = "Assets/_Project/Data/Dialogue/Speakers";
         const string PlaceholderArt = "Assets/_Project/Art/Placeholders/Dialogue";

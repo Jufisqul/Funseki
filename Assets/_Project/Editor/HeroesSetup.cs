@@ -40,8 +40,8 @@ namespace Funseki.EditorTools
         const string FontPath = "Assets/MainMenu/Fonts/GolosText-SemiBold SDF.asset";
         const string MarkerPath = "Assets/_Project/Data/Inventory/Items/Item_Marker.asset";
 
-        const string RyutaModel = "Assets/Models/Ryuto/Prefab/angGirl.prefab";
-        const string KaitoModel = "Assets/Models/Kaito/Ren/Prefabs/Ren_BasicSetup.prefab";
+        const string RyutaModel = "Assets/ThirdParty/Models/Ryuto/Prefab/angGirl.prefab";
+        const string KaitoModel = "Assets/ThirdParty/Models/Kaito/Ren/Prefabs/Ren_BasicSetup.prefab";
         static string ReiModel => PlayerSliceSetup.GirlFbx;
 
         // Followers start behind the leader at the entrance, left and right.

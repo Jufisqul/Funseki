@@ -20,7 +20,7 @@ namespace Funseki.EditorTools
     // Play the scene directly: it carries its own InventoryService, panel and bark view.
     public static class InteractionTestSetup
     {
-        const string ScenePath = "Assets/_Project/Scenes/Interaction_Test.unity";
+        const string ScenePath = "Assets/_Project/Scenes/_Sandbox/Interaction_Test.unity";
         const string InteractionData = "Assets/_Project/Data/Interaction";
         const string InventoryData = "Assets/_Project/Data/Inventory";
         const string ItemsData = "Assets/_Project/Data/Inventory/Items";
