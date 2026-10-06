@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: bf182c2aaad6ab34e980474887a92340
+timeCreated: 1514120022
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 214048
+  packageName: Anime Girl Character Akane
+  packageVersion: 1.1
+  assetPath: Assets/3d-character_animeGirlAkane/DemoScene/Shader/MToon/Resources/Shaders/MToonCore.cginc
+  uploadId: 491159

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 50f1d3c5ad5f4534ea4aade1f5ef1833
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/Shader/Includes/lil_pass_forward_fakeshadow.hlsl
+  uploadId: 771726

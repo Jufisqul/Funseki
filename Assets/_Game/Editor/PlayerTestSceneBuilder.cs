@@ -84,7 +84,7 @@ public static class PlayerTestSceneBuilder
         cc.stepOffset = 0.35f;
         cc.slopeLimit = 45f;
 
-        // Tomura Ryuta (rigged game build, see Art/Characters/Tomura/build_tomura.py --game).
+        // Playable hero (Tripo model rigged by Art/Characters/Hero/rig_hero_glb.py).
         var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(HeroImportSetup.HeroModel);
         var model = (GameObject)PrefabUtility.InstantiatePrefab(prefab, go.transform);
         model.name = "Model";

@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c42a1a9e5a50dee438b7c2d94e12719f, type: 3}
+  m_Name: HudTheme
+  m_EditorClassIdentifier: Funseki.UI::Funseki.UI.HudTheme
+  referenceResolution: {x: 1920, y: 1080}
+  matchWidthOrHeight: 1
+  margin: {x: 40, y: 32}
+  sortingOrder: 30
+  titleFont: {fileID: 11400000, guid: ba6055a273ae8bb4aba14d364ec95cd6, type: 2}
+  bodyFont: {fileID: 11400000, guid: 8969047a57a7a1a48b98b080e76dead6, type: 2}
+  dayFontSize: 40
+  objectiveFontSize: 30
+  hintFontSize: 30
+  keyFontSize: 28
+  toastTitleFontSize: 24
+  toastTextFontSize: 30
+  heroNameFontSize: 18
+  cooldownFontSize: 30
+  textColor: {r: 1, g: 0.98, b: 0.93, a: 1}
+  textDimColor: {r: 1, g: 0.98, b: 0.93, a: 0.65}
+  textOutlineColor: {r: 0.08, g: 0.06, b: 0.1, a: 0.9}
+  textOutlineWidth: 0.18
+  panelColor: {r: 0.1, g: 0.08, b: 0.14, a: 0.72}
+  accentColor: {r: 1, g: 0.78, b: 0.25, a: 1}
+  dawnIcon: {fileID: 0}
+  sunIcon: {fileID: 0}
+  sunsetIcon: {fileID: 0}
+  dawnColor: {r: 1, g: 0.62, b: 0.55, a: 1}
+  sunColor: {r: 1, g: 0.85, b: 0.3, a: 1}
+  sunsetColor: {r: 1, g: 0.45, b: 0.2, a: 1}
+  timeIconSize: 72
+  portraitSize: 84
+  currentPortraitScale: 1.25
+  portraitSpacing: 14
+  portraitFrame: 5
+  inactivePortraitTint: {r: 0.6, g: 0.6, b: 0.65, a: 0.85}
+  cooldownColor: {r: 0.05, g: 0.04, b: 0.08, a: 0.7}
+  abilityReadyColor: {r: 0.45, g: 0.95, b: 0.55, a: 1}
+  abilitySpentColor: {r: 0.55, g: 0.55, b: 0.6, a: 1}
+  noiseIcon: {fileID: 0}
+  noiseIconSize: 84
+  noiseQuietColor: {r: 1, g: 0.98, b: 0.93, a: 1}
+  noiseSuspiciousColor: {r: 1, g: 0.55, b: 0.2, a: 1}
+  noiseCaughtColor: {r: 1, g: 0.2, b: 0.2, a: 1}
+  noiseBarBackColor: {r: 0.1, g: 0.08, b: 0.14, a: 0.6}
+  noiseBarSize: {x: 110, y: 12}
+  keyCapColor: {r: 1, g: 0.98, b: 0.93, a: 1}
+  keyTextColor: {r: 0.1, g: 0.08, b: 0.14, a: 1}
+  padCapColor: {r: 0.35, g: 0.75, b: 1, a: 1}
+  keyCapHeight: 52
+  keyIcons: []
+  journalIcon: {fileID: 0}
+  journalAccentColor: {r: 1, g: 0.78, b: 0.25, a: 1}
+  toastSize: {x: 460, y: 92}
+  panelSprite: {fileID: 0}

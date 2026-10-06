@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 70e462e0b8466484d80daad8d29b6f79
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/External/Editor/VRChatModule.cs
+  uploadId: 771726

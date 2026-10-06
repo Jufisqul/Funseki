@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b5e5281f7e78649b7f26b8b4404c4b, type: 3}
+  m_Name: Interactable_WaterTap
+  m_EditorClassIdentifier: Funseki.Interaction::Funseki.Interaction.WaterTapData
+  prompt: "\u041E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C"
+  repeat: 2
+  firstLines:
+  - "\u0414\u0435\u0440\u044C\u043C\u043E."
+  repeatLines: []
+  heroLines: []
+  teacherNearbyLines: []
+  teacherRadius: 12
+  noiseAmount: 0
+  noiseReason: 
+  requiredFlag: 
+  blockedByFlag: 
+  flagsOnFirstUse: []
+  countersOnUse: []
+  openPrompt: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u043A\u0440\u0430\u043D"
+  closePrompt: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C \u043A\u0440\u0430\u043D"
+  dirtyDuration: 2
+  clearingTime: 0.4
+  dirtyColor: {r: 0.45, g: 0.3, b: 0.12, a: 0.9}
+  cleanColor: {r: 0.65, g: 0.85, b: 1, a: 0.55}
+  milestoneEvery: 10
+  milestoneLines:
+  - "\u0414\u0430, \u0432\u0441\u0451 \u0435\u0449\u0451 \u0432\u043E\u0434\u0430."

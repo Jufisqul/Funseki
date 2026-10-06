@@ -1,0 +1,13 @@
+This 3d model package contains or uses following third party assets:
+
+Shader used: Lil Toon Shader
+https://github.com/lilxyzw/lilToon
+licensed under MIT License
+https://github.com/lilxyzw/lilToon/blob/master/LICENSE
+
+Demo Animations used in demo scene: By Unity
+Unity Technologies Japan Co. Ltd.
+https://unity.com/ja/legal/licenses/unity-companion-license
+
+Magica Cloth 2 has been used for physics but not included with the package.
+https://assetstore.unity.com/packages/tools/physics/magica-cloth-2-242307?srsltid=AfmBOoqWAfvYr-ohUDcQgS4Ss50AdW9Xz4R_czCw9_hdfblmuizIcegn

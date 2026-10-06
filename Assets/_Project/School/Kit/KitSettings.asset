@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028d8b98cb49bfa409cd82b6e2642452, type: 3}
+  m_Name: KitSettings
+  m_EditorClassIdentifier: Assembly-CSharp::Funseki.School.KitSettings
+  gridStep: 1
+  wallModuleWidth: 2
+  floorHeight: 4.2
+  ceilingHeight: 4.2
+  slabThickness: 0.3
+  ceilingPanelThickness: 0.05
+  wallThickness: 0.2
+  cornerSize: 0.2
+  columnSize: 0.4
+  corridorWidth: 4
+  corridorWidthNorthSouth: 5
+  corridorWidthWestEast: 7
+  classroomSize: 12
+  doorWidth: 1.2
+  doorHeight: 2.2
+  doubleDoorWidth: 2.4
+  doubleDoorHeight: 2.4
+  doubleDoorModuleWidth: 4
+  doorThickness: 0.05
+  windowWidth: 1.6
+  windowHeight: 1.2
+  windowSillHeight: 0.9
+  stairWidth: 2
+  stairStepsPerFlight: 12
+  stairTread: 0.3
+  railingHeight: 1
+  stageHeight: 1
+  wallColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+  floorColor: {r: 0.35, g: 0.35, b: 0.37, a: 1}
+  doorColor: {r: 0, g: 0.3167702, b: 1, a: 1}
+  propColor: {r: 0.95, g: 0.55, b: 0.15, a: 1}
+  interactiveColor: {r: 1, g: 0.85, b: 0.1, a: 1}
+  gridTextureSize: 256
+  gridLinePixels: 4
+  gridLineDarkness: 0.35

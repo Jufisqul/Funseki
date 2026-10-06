@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b8d0e7c3bef5f314f83c8e0d63521e51
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/CustomShaderResources/BRP/DefaultUsePassNoForwardAdd.lilblock
+  uploadId: 771726

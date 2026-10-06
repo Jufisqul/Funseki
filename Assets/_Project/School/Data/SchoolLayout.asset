@@ -1,0 +1,1352 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77281dc301499db4190bd9fad363330a, type: 3}
+  m_Name: SchoolLayout
+  m_EditorClassIdentifier: Assembly-CSharp::Funseki.School.SchoolLayout
+  zones:
+  - zoneId: utility_1f
+    displayName: "\u0425\u043E\u0437\u043A\u043E\u043C\u043D\u0430\u0442\u0430"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 0
+      y: 0
+      width: 6
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 15
+    openings:
+    - side: 1
+      offset: 2
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: art
+    displayName: "\u0420\u0438\u0441\u043E\u0432\u0430\u043D\u0438\u0435"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 6
+      y: 0
+      width: 8
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 1
+    openings:
+    - side: 1
+      offset: 5
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: heroes_class
+    displayName: "\u041A\u043E\u043D\u0442\u0440\u043E\u043B\u044C\u043D\u0430\u044F (\u043A\u043B\u0430\u0441\u0441 \u0433\u0435\u0440\u043E\u0435\u0432)"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 14
+      y: 0
+      width: 8
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 1
+    openings:
+    - side: 1
+      offset: 5
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: geometry
+    displayName: "\u0413\u0435\u043E\u043C\u0435\u0442\u0440\u0438\u044F (\u043A\u0430\u0431\u0438\u043D\u0435\u0442 \u21164)"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 22
+      y: 0
+      width: 8
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 2
+    openings:
+    - side: 1
+      offset: 5
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: music
+    displayName: "\u041C\u0443\u0437\u044B\u043A\u0430"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 30
+      y: 0
+      width: 8
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 1
+    openings:
+    - side: 1
+      offset: 5
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: physics
+    displayName: "\u0424\u0438\u0437\u0438\u043A\u0430"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 38
+      y: 0
+      width: 8
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 1
+    openings:
+    - side: 1
+      offset: 5
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: stairs_ne
+    displayName: "\u041B\u0435\u0441\u0442\u043D\u0438\u0446\u0430 \u0421\u0412"
+    floor: 1
+    group: 0
+    kind: 3
+    rect:
+      x: 46
+      y: 0
+      width: 6
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings:
+    - side: 1
+      offset: 0
+      type: 4
+      width: 6
+      floorOffset: 0
+  - zoneId: corridor_n_1f
+    displayName: "\u041A\u043E\u0440\u0438\u0434\u043E\u0440, \u0441\u0435\u0432\u0435\u0440"
+    floor: 1
+    group: 0
+    kind: 1
+    rect:
+      x: 0
+      y: 8
+      width: 52
+      height: 4
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr1
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings: []
+  - zoneId: corridor_w_1f
+    displayName: "\u041A\u043E\u0440\u0438\u0434\u043E\u0440, \u0437\u0430\u043F\u0430\u0434"
+    floor: 1
+    group: 0
+    kind: 1
+    rect:
+      x: 0
+      y: 12
+      width: 6
+      height: 25
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr1
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings: []
+  - zoneId: corridor_e_1f
+    displayName: "\u041A\u043E\u0440\u0438\u0434\u043E\u0440, \u0432\u043E\u0441\u0442\u043E\u043A"
+    floor: 1
+    group: 0
+    kind: 1
+    rect:
+      x: 46
+      y: 12
+      width: 6
+      height: 25
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr1
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings: []
+  - zoneId: corridor_s_1f
+    displayName: "\u041A\u043E\u0440\u0438\u0434\u043E\u0440 \u0441\u043E \u0448\u043A\u0430\u0444\u0447\u0438\u043A\u0430\u043C\u0438 \u0434\u043B\u044F \u043E\u0431\u0443\u0432\u0438"
+    floor: 1
+    group: 0
+    kind: 1
+    rect:
+      x: 0
+      y: 37
+      width: 52
+      height: 5
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr1
+    stairEntry: 1
+    topLanding: 0
+    furnish: 22
+    openings:
+    - side: 1
+      offset: 24
+      type: 2
+      width: 0
+      floorOffset: 0
+  - zoneId: courtyard
+    displayName: "\u0412\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0438\u0439 \u0434\u0432\u043E\u0440"
+    floor: 1
+    group: 0
+    kind: 2
+    rect:
+      x: 6
+      y: 12
+      width: 40
+      height: 18
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 21
+    openings:
+    - side: 0
+      offset: 18
+      type: 2
+      width: 0
+      floorOffset: 0
+    - side: 1
+      offset: 18
+      type: 2
+      width: 0
+      floorOffset: 0
+    - side: 2
+      offset: 7
+      type: 2
+      width: 0
+      floorOffset: 0
+    - side: 3
+      offset: 7
+      type: 2
+      width: 0
+      floorOffset: 0
+  - zoneId: shop
+    displayName: "\u0422\u0440\u0443\u0434 (\u043C\u0430\u0441\u0442\u0435\u0440\u0441\u043A\u0430\u044F)"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 6
+      y: 30
+      width: 8
+      height: 7
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 3
+    openings:
+    - side: 1
+      offset: 5
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: shop_2
+    displayName: "\u0422\u0440\u0443\u0434 (\u0441\u043A\u043B\u0430\u0434 \u043C\u0430\u0441\u0442\u0435\u0440\u0441\u043A\u043E\u0439)"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 14
+      y: 30
+      width: 9
+      height: 7
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 3
+    openings:
+    - side: 1
+      offset: 6
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: passage_s
+    displayName: "\u041F\u0440\u043E\u0445\u043E\u0434 \u0432\u043E \u0434\u0432\u043E\u0440"
+    floor: 1
+    group: 0
+    kind: 1
+    rect:
+      x: 23
+      y: 30
+      width: 6
+      height: 7
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr1
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings: []
+  - zoneId: anatomy
+    displayName: "\u0410\u043D\u0430\u0442\u043E\u043C\u0438\u044F"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 29
+      y: 30
+      width: 9
+      height: 7
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 4
+    openings:
+    - side: 1
+      offset: 1
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: literature
+    displayName: "\u041B\u0438\u0442\u0435\u0440\u0430\u0442\u0443\u0440\u0430"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 38
+      y: 30
+      width: 8
+      height: 7
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 1
+    openings:
+    - side: 1
+      offset: 1
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: stairs_sw
+    displayName: "\u041B\u0435\u0441\u0442\u043D\u0438\u0446\u0430 \u042E\u0417"
+    floor: 1
+    group: 0
+    kind: 3
+    rect:
+      x: 0
+      y: 42
+      width: 10
+      height: 6
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 0
+    topLanding: 0
+    furnish: 0
+    openings:
+    - side: 0
+      offset: 0
+      type: 4
+      width: 10
+      floorOffset: 0
+  - zoneId: elevator
+    displayName: "\u041B\u0438\u0444\u0442 (\u0441 1-\u0433\u043E \u043D\u0430 1-\u0439)"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 42
+      y: 42
+      width: 5
+      height: 6
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 20
+    openings:
+    - side: 3
+      offset: 2
+      type: 3
+      width: 0
+      floorOffset: 0
+  - zoneId: elevator_hall
+    displayName: "\u0425\u043E\u043B\u043B \u0443 \u043B\u0438\u0444\u0442\u0430"
+    floor: 1
+    group: 0
+    kind: 1
+    rect:
+      x: 47
+      y: 42
+      width: 5
+      height: 6
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr1
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings: []
+  - zoneId: weights
+    displayName: "\u041A\u0430\u0447\u0430\u043B\u043A\u0430"
+    floor: 1
+    group: 3
+    kind: 0
+    rect:
+      x: -22
+      y: 10
+      width: 10
+      height: 6
+    heightFloors: 1
+    unlockDay: 2
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 14
+    openings:
+    - side: 1
+      offset: 5
+      type: 2
+      width: 0
+      floorOffset: 0
+  - zoneId: equipment
+    displayName: "\u0418\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044C"
+    floor: 1
+    group: 3
+    kind: 0
+    rect:
+      x: -12
+      y: 10
+      width: 4
+      height: 6
+    heightFloors: 1
+    unlockDay: 2
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 15
+    openings:
+    - side: 1
+      offset: 1
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: pe_office
+    displayName: "\u041A\u0430\u0431\u0438\u043D\u0435\u0442 \u0444\u0438\u0437\u0440\u0443\u043A\u0430"
+    floor: 1
+    group: 3
+    kind: 0
+    rect:
+      x: -8
+      y: 10
+      width: 8
+      height: 6
+    heightFloors: 1
+    unlockDay: 2
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 16
+    openings:
+    - side: 1
+      offset: 2
+      type: 0
+      width: 0
+      floorOffset: 0
+    - side: 3
+      offset: 2
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: gym
+    displayName: "\u0421\u043F\u043E\u0440\u0442\u0437\u0430\u043B (\u0424\u0438\u0437\u0440\u0430)"
+    floor: 1
+    group: 3
+    kind: 0
+    rect:
+      x: -22
+      y: 16
+      width: 22
+      height: 16
+    heightFloors: 2
+    unlockDay: 2
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 12
+    openings:
+    - side: 3
+      offset: 6
+      type: 2
+      width: 0
+      floorOffset: 0
+    - side: 1
+      offset: 18
+      type: 2
+      width: 0
+      floorOffset: 0
+  - zoneId: locker_a
+    displayName: "\u0420\u0430\u0437\u0434\u0435\u0432\u0430\u043B\u043A\u0430 \u0416"
+    floor: 1
+    group: 3
+    kind: 0
+    rect:
+      x: -10
+      y: 32
+      width: 6
+      height: 5
+    heightFloors: 1
+    unlockDay: 2
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 13
+    openings:
+    - side: 3
+      offset: 1
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: locker_b
+    displayName: "\u0420\u0430\u0437\u0434\u0435\u0432\u0430\u043B\u043A\u0430 \u041C"
+    floor: 1
+    group: 3
+    kind: 0
+    rect:
+      x: -10
+      y: 37
+      width: 6
+      height: 5
+    heightFloors: 1
+    unlockDay: 2
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 13
+    openings:
+    - side: 3
+      offset: 1
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: gym_vestibule
+    displayName: "\u0422\u0430\u043C\u0431\u0443\u0440 \u0441\u043F\u043E\u0440\u0442\u0437\u0430\u043B\u0430"
+    floor: 1
+    group: 3
+    kind: 1
+    rect:
+      x: -4
+      y: 32
+      width: 4
+      height: 10
+    heightFloors: 1
+    unlockDay: 2
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings:
+    - side: 3
+      offset: 6
+      type: 2
+      width: 0
+      floorOffset: 0
+  - zoneId: canteen
+    displayName: "\u0421\u0442\u043E\u043B\u043E\u0432\u0430\u044F"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 52
+      y: 10
+      width: 22
+      height: 12
+    heightFloors: 1
+    unlockDay: 3
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 9
+    openings:
+    - side: 2
+      offset: 0
+      type: 4
+      width: 4
+      floorOffset: 0
+    - side: 1
+      offset: 6
+      type: 4
+      width: 4
+      floorOffset: 0
+  - zoneId: kitchen
+    displayName: "\u041A\u0443\u0445\u043D\u044F"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 62
+      y: 22
+      width: 12
+      height: 10
+    heightFloors: 1
+    unlockDay: 3
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 10
+    openings:
+    - side: 0
+      offset: 5
+      type: 3
+      width: 0
+      floorOffset: 0
+    - side: 1
+      offset: 4
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: kitchen_yard
+    displayName: "\u0422\u0435\u0445\u043D\u0438\u0447\u0435\u0441\u043A\u0438\u0439 \u0432\u044B\u0445\u043E\u0434 \u0441 \u043C\u0443\u0441\u043E\u0440\u043A\u0430\u043C\u0438"
+    floor: 1
+    group: 0
+    kind: 2
+    rect:
+      x: 62
+      y: 32
+      width: 11
+      height: 4
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 11
+    openings: []
+  - zoneId: wc_f_1f
+    displayName: "\u0422\u0443\u0430\u043B\u0435\u0442 \u0416"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 52
+      y: 22
+      width: 6
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 6
+    openings:
+    - side: 2
+      offset: 3
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: wc_m_1f
+    displayName: "\u0422\u0443\u0430\u043B\u0435\u0442 \u041C"
+    floor: 1
+    group: 0
+    kind: 0
+    rect:
+      x: 52
+      y: 30
+      width: 6
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 6
+    openings:
+    - side: 2
+      offset: 3
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: passage_e
+    displayName: "\u041F\u0440\u043E\u0445\u043E\u0434 \u0443 \u0441\u0442\u043E\u043B\u043E\u0432\u043E\u0439"
+    floor: 1
+    group: 0
+    kind: 1
+    rect:
+      x: 58
+      y: 22
+      width: 4
+      height: 16
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr1
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings: []
+  - zoneId: hall_e
+    displayName: "\u0412\u043E\u0441\u0442\u043E\u0447\u043D\u044B\u0439 \u0445\u043E\u043B\u043B"
+    floor: 1
+    group: 0
+    kind: 1
+    rect:
+      x: 52
+      y: 38
+      width: 10
+      height: 4
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr1
+    stairEntry: 1
+    topLanding: 0
+    furnish: 23
+    openings: []
+  - zoneId: stairs_3f
+    displayName: "\u041B\u0435\u0441\u0442\u043D\u0438\u0446\u0430 \u043D\u0430 3-\u0439 \u044D\u0442\u0430\u0436"
+    floor: 2
+    group: 1
+    kind: 3
+    rect:
+      x: 0
+      y: 0
+      width: 6
+      height: 8
+    heightFloors: 2
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 1
+    furnish: 0
+    openings:
+    - side: 1
+      offset: 0
+      type: 4
+      width: 6
+      floorOffset: 0
+  - zoneId: floor_3
+    displayName: "\u0422\u0440\u0435\u0442\u0438\u0439 \u044D\u0442\u0430\u0436 (\u0434\u0432\u0435\u0440\u044C \xAB\u0421\u043E\u0432\u0435\u0449\u0430\u043D\u0438\u0435 \u0438\u0434\u0451\u0442\xBB)"
+    floor: 3
+    group: 1
+    kind: 5
+    rect:
+      x: 0
+      y: 8
+      width: 6
+      height: 4
+    heightFloors: 1
+    unlockDay: 7
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings:
+    - side: 0
+      offset: 4
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: dorm_1
+    displayName: "\u0416\u0438\u043B\u0430\u044F \u043A\u043E\u043C\u043D\u0430\u0442\u0430 1"
+    floor: 2
+    group: 2
+    kind: 0
+    rect:
+      x: 6
+      y: 0
+      width: 8
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 5
+    openings:
+    - side: 1
+      offset: 3
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: dorm_2
+    displayName: "\u0416\u0438\u043B\u0430\u044F \u043A\u043E\u043C\u043D\u0430\u0442\u0430 2"
+    floor: 2
+    group: 2
+    kind: 0
+    rect:
+      x: 14
+      y: 0
+      width: 8
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 5
+    openings:
+    - side: 1
+      offset: 3
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: dorm_3
+    displayName: "\u0416\u0438\u043B\u0430\u044F \u043A\u043E\u043C\u043D\u0430\u0442\u0430 3"
+    floor: 2
+    group: 2
+    kind: 0
+    rect:
+      x: 22
+      y: 0
+      width: 8
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 5
+    openings:
+    - side: 1
+      offset: 3
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: dorm_4
+    displayName: "\u0416\u0438\u043B\u0430\u044F \u043A\u043E\u043C\u043D\u0430\u0442\u0430 4"
+    floor: 2
+    group: 2
+    kind: 0
+    rect:
+      x: 30
+      y: 0
+      width: 8
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 5
+    openings:
+    - side: 1
+      offset: 3
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: dorm_5
+    displayName: "\u0416\u0438\u043B\u0430\u044F \u043A\u043E\u043C\u043D\u0430\u0442\u0430 5"
+    floor: 2
+    group: 2
+    kind: 0
+    rect:
+      x: 38
+      y: 0
+      width: 8
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 5
+    openings:
+    - side: 1
+      offset: 3
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: stairs_ne_top
+    displayName: "\u041B\u0435\u0441\u0442\u043D\u0438\u0446\u0430 \u0421\u0412, 2-\u0439 \u044D\u0442\u0430\u0436"
+    floor: 2
+    group: 1
+    kind: 4
+    rect:
+      x: 46
+      y: 0
+      width: 6
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings:
+    - side: 1
+      offset: 0
+      type: 4
+      width: 6
+      floorOffset: 0
+  - zoneId: corridor_n_2f
+    displayName: "\u041A\u043E\u0440\u0438\u0434\u043E\u0440 2-\u0433\u043E \u044D\u0442\u0430\u0436\u0430, \u0441\u0435\u0432\u0435\u0440"
+    floor: 2
+    group: 1
+    kind: 1
+    rect:
+      x: 0
+      y: 8
+      width: 52
+      height: 4
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr2
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings: []
+  - zoneId: corridor_w_2f
+    displayName: "\u041A\u043E\u0440\u0438\u0434\u043E\u0440 2-\u0433\u043E \u044D\u0442\u0430\u0436\u0430, \u0437\u0430\u043F\u0430\u0434"
+    floor: 2
+    group: 1
+    kind: 1
+    rect:
+      x: 0
+      y: 12
+      width: 6
+      height: 25
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr2
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings: []
+  - zoneId: corridor_e_2f
+    displayName: "\u041A\u043E\u0440\u0438\u0434\u043E\u0440 2-\u0433\u043E \u044D\u0442\u0430\u0436\u0430, \u0432\u043E\u0441\u0442\u043E\u043A"
+    floor: 2
+    group: 1
+    kind: 1
+    rect:
+      x: 46
+      y: 12
+      width: 6
+      height: 25
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr2
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings: []
+  - zoneId: corridor_s_2f
+    displayName: "\u041A\u043E\u0440\u0438\u0434\u043E\u0440 2-\u0433\u043E \u044D\u0442\u0430\u0436\u0430, \u044E\u0433"
+    floor: 2
+    group: 1
+    kind: 1
+    rect:
+      x: 0
+      y: 37
+      width: 52
+      height: 5
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: corr2
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings: []
+  - zoneId: staff_room
+    displayName: "\u0423\u0447\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0430\u044F"
+    floor: 2
+    group: 1
+    kind: 0
+    rect:
+      x: 6
+      y: 30
+      width: 16
+      height: 7
+    heightFloors: 1
+    unlockDay: 4
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 17
+    openings:
+    - side: 2
+      offset: 2
+      type: 0
+      width: 0
+      floorOffset: 0
+    - side: 1
+      offset: 10
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: wc_a_2f
+    displayName: "\u0422\u0443\u0430\u043B\u0435\u0442 \u0416, 2-\u0439 \u044D\u0442\u0430\u0436"
+    floor: 2
+    group: 1
+    kind: 0
+    rect:
+      x: 22
+      y: 30
+      width: 4
+      height: 7
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 6
+    openings:
+    - side: 1
+      offset: 2
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: wc_b_2f
+    displayName: "\u0422\u0443\u0430\u043B\u0435\u0442 \u041C, 2-\u0439 \u044D\u0442\u0430\u0436"
+    floor: 2
+    group: 1
+    kind: 0
+    rect:
+      x: 26
+      y: 30
+      width: 4
+      height: 7
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 6
+    openings:
+    - side: 1
+      offset: 0
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: detention
+    displayName: "\u041A\u043E\u043C\u043D\u0430\u0442\u0430 \u043D\u0430\u043A\u0430\u0437\u0430\u043D\u0438\u0439"
+    floor: 2
+    group: 1
+    kind: 0
+    rect:
+      x: 30
+      y: 30
+      width: 8
+      height: 7
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 18
+    openings:
+    - side: 1
+      offset: 4
+      type: 1
+      width: 0
+      floorOffset: 0
+  - zoneId: utility_2f
+    displayName: "\u0425\u043E\u0437\u043A\u043E\u043C\u043D\u0430\u0442\u0430, 2-\u0439 \u044D\u0442\u0430\u0436"
+    floor: 2
+    group: 1
+    kind: 0
+    rect:
+      x: 38
+      y: 30
+      width: 8
+      height: 7
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 15
+    openings:
+    - side: 3
+      offset: 1
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: stairs_sw_top
+    displayName: "\u041B\u0435\u0441\u0442\u043D\u0438\u0446\u0430 \u042E\u0417, 2-\u0439 \u044D\u0442\u0430\u0436"
+    floor: 2
+    group: 1
+    kind: 4
+    rect:
+      x: 0
+      y: 42
+      width: 10
+      height: 6
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 0
+    topLanding: 0
+    furnish: 0
+    openings:
+    - side: 0
+      offset: 0
+      type: 4
+      width: 10
+      floorOffset: 0
+  - zoneId: laundry
+    displayName: "\u041F\u0440\u0430\u0447\u0435\u0447\u043D\u0430\u044F"
+    floor: 2
+    group: 2
+    kind: 0
+    rect:
+      x: -10
+      y: 32
+      width: 10
+      height: 10
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 8
+    openings:
+    - side: 3
+      offset: 5
+      type: 2
+      width: 0
+      floorOffset: 0
+  - zoneId: assembly_foyer
+    displayName: "\u0424\u043E\u0439\u0435 \u0430\u043A\u0442\u043E\u0432\u043E\u0433\u043E \u0437\u0430\u043B\u0430"
+    floor: 2
+    group: 1
+    kind: 0
+    rect:
+      x: 52
+      y: 10
+      width: 10
+      height: 8
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 0
+    openings:
+    - side: 2
+      offset: 0
+      type: 4
+      width: 4
+      floorOffset: 0
+    - side: 3
+      offset: 2
+      type: 2
+      width: 0
+      floorOffset: 0
+  - zoneId: showers_m
+    displayName: "\u0414\u0443\u0448\u0435\u0432\u044B\u0435 \u041C"
+    floor: 2
+    group: 2
+    kind: 0
+    rect:
+      x: 52
+      y: 18
+      width: 6
+      height: 14
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 7
+    openings:
+    - side: 2
+      offset: 2
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: showers_f
+    displayName: "\u0414\u0443\u0448\u0435\u0432\u044B\u0435 \u0416"
+    floor: 2
+    group: 2
+    kind: 0
+    rect:
+      x: 58
+      y: 18
+      width: 4
+      height: 14
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 0
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 7
+    openings:
+    - side: 0
+      offset: 1
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: assembly_hall
+    displayName: "\u0410\u043A\u0442\u043E\u0432\u044B\u0439 \u0437\u0430\u043B"
+    floor: 2
+    group: 1
+    kind: 0
+    rect:
+      x: 62
+      y: 10
+      width: 12
+      height: 22
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 19
+    openings: []
+  - zoneId: principal
+    displayName: "\u041A\u0430\u0431\u0438\u043D\u0435\u0442 \u0434\u0438\u0440\u0435\u043A\u0442\u043E\u0440\u0430"
+    floor: 2
+    group: 1
+    kind: 0
+    rect:
+      x: 52
+      y: 32
+      width: 10
+      height: 10
+    heightFloors: 1
+    unlockDay: 5
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 16
+    openings:
+    - side: 2
+      offset: 6
+      type: 0
+      width: 0
+      floorOffset: 0
+  - zoneId: principal
+    displayName: "\u0414\u0440\u043E\u0447\u0438\u043B\u044C\u043D\u044F"
+    floor: 2
+    group: 1
+    kind: 0
+    rect:
+      x: 52
+      y: 32
+      width: 10
+      height: 10
+    heightFloors: 1
+    unlockDay: 1
+    autoWindows: 1
+    openGroup: 
+    stairEntry: 1
+    topLanding: 0
+    furnish: 1
+    openings:
+    - side: 2
+      offset: 6
+      type: 0
+      width: 0
+      floorOffset: 0

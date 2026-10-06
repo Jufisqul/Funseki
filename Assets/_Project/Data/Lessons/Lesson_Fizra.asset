@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563189264e6b55c44b7580c1f8c01d5c, type: 3}
+  m_Name: Lesson_Fizra
+  m_EditorClassIdentifier: Funseki.Lessons::Funseki.Lessons.LessonData
+  id: fizra
+  title: "\u0424\u0438\u0437\u0440\u0430"
+  leadHero: 0
+  miniGamePrefab: {fileID: 3553449077717983953, guid: 08bf7cbc42c766344973cb9e26fb2bc2, type: 3}
+  intro:
+  - speaker: 0
+    text: "\u0424\u044C\u044E\u0442\u044C! *\u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442: \u0441\u0442\u0440\u043E\u0438\u0442\u044C\u0441\u044F*"
+    duration: 2.2
+  - speaker: 1
+    text: "\u041E\u043D \u0441\u043A\u0430\u0437\u0430\u043B \xAB\u043F\u043E\u0441\u0442\u0440\u043E\u0438\u043B\u0438\u0441\u044C\xBB. \u042F \u043F\u0435\u0440\u0435\u0432\u043E\u0436\u0443, \u0435\u0441\u043B\u0438 \u0447\u0442\u043E."
+    duration: 2.6
+  - speaker: 2
+    text: "\u0420\u0443\u043A\u0438 \u0438\u0437 \u043A\u0430\u0440\u043C\u0430\u043D\u043E\u0432 \u043D\u0435 \u0432\u044B\u043D\u0438\u043C\u0430\u044E. \u041F\u0440\u0438\u043D\u0446\u0438\u043F."
+    duration: 2.2
+  lateIntro:
+  - speaker: 0
+    text: "*\u0434\u043E\u043B\u0433\u0438\u0439 \u0443\u043A\u043E\u0440\u0438\u0437\u043D\u0435\u043D\u043D\u044B\u0439 \u0441\u0432\u0438\u0441\u0442\u043E\u043A*"
+    duration: 2.4
+  - speaker: 0
+    text: "*\u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442 \u043D\u0430 \u0447\u0430\u0441\u044B, \u043F\u043E\u0442\u043E\u043C \u043D\u0430 \u043D\u0435\u0431\u043E*"
+    duration: 2.2
+  - speaker: 1
+    text: "\u041E\u043D \u0433\u043E\u0432\u043E\u0440\u0438\u0442: \xAB\u041E\u043F\u043E\u0437\u0434\u0430\u0432\u0448\u0438\u0435 \u0431\u0435\u0433\u0430\u044E\u0442 \u0434\u043E \u0432\u044B\u043F\u0443\u0441\u043A\u043D\u043E\u0433\u043E\xBB. \u0428\u0443\u0447\u0443. \u041D\u0430\u0432\u0435\u0440\u043D\u043E\u0435."
+    duration: 3
+  lateFlag: lesson_late
+  excellentFrom: 0.9
+  normalFrom: 0.5
+  outcomes:
+  - name: "\u0411\u043B\u0435\u0441\u0442\u044F\u0449\u0435 \u0431\u0435\u0437 \u0441\u0432\u0438\u0441\u0442\u043A\u0430"
+    outcome: 0
+    requireFlags:
+    - prank_whistle_done
+    forbidFlags: []
+    gag: voice_anthem
+    caption: "\u0411\u043B\u0435\u0441\u0442\u044F\u0449\u0435!"
+    lines:
+    - speaker: 0
+      text: "\u0413-\u0433\u0438\u043C\u043D \u0448\u043A\u043E\u043B\u044B\u2026 *\u043F\u043E\u0451\u0442 \u0441\u0432\u043E\u0438\u043C \u0433\u043E\u043B\u043E\u0441\u043E\u043C*"
+      duration: 2.6
+    - speaker: 1
+      text: "\u041E\u043D \u0437\u0430\u0433\u043E\u0432\u043E\u0440\u0438\u043B! \u0422\u0440\u0438 \u0433\u043E\u0434\u0430 \u043D\u0438 \u0441\u043B\u043E\u0432\u0430!"
+      duration: 2.4
+    - speaker: 3
+      text: "*\u043F\u0430\u0434\u0430\u0435\u0442 \u0432 \u043E\u0431\u043C\u043E\u0440\u043E\u043A*"
+      duration: 2
+    timeline: {fileID: 0}
+    minDuration: 6
+    setFlags:
+    - fizra_day1_voice_heard
+  - name: "\u0411\u043B\u0435\u0441\u0442\u044F\u0449\u0435"
+    outcome: 0
+    requireFlags: []
+    forbidFlags: []
+    gag: anthem
+    caption: "\u0411\u043B\u0435\u0441\u0442\u044F\u0449\u0435!"
+    lines:
+    - speaker: 0
+      text: "*\u043F\u0443\u0441\u043A\u0430\u0435\u0442 \u0441\u043B\u0435\u0437\u0443 \u0438 \u0441\u0432\u0438\u0441\u0442\u0438\u0442 \u0433\u0438\u043C\u043D*"
+      duration: 3
+    - speaker: 1
+      text: "\u041B\u0430\u0434\u043D\u043E, \u043F\u0440\u043E\u0438\u0433\u0440\u0430\u043B. \u0414\u044B\u043D\u043D\u044B\u0439 \u0441\u043E\u043A \u0441 \u043C\u0435\u043D\u044F."
+      duration: 2.5
+    timeline: {fileID: 0}
+    minDuration: 6
+    setFlags: []
+  - name: "\u041D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E"
+    outcome: 1
+    requireFlags: []
+    forbidFlags: []
+    gag: nod
+    caption: "\u041D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E"
+    lines:
+    - speaker: 0
+      text: "*\u043A\u043E\u0440\u043E\u0442\u043A\u0438\u0439 \u043E\u0434\u043E\u0431\u0440\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0439 \u0441\u0432\u0438\u0441\u0442\u043E\u043A*"
+      duration: 2
+    - speaker: 1
+      text: "\u041E\u043D \u0433\u043E\u0432\u043E\u0440\u0438\u0442: \xAB\u0421\u043E\u0439\u0434\u0451\u0442\xBB. \u042D\u0442\u043E \u0432\u044B\u0441\u0448\u0430\u044F \u043F\u043E\u0445\u0432\u0430\u043B\u0430 \u043F\u043E\u0441\u043B\u0435 \u0433\u0438\u043C\u043D\u0430."
+      duration: 2.8
+    timeline: {fileID: 0}
+    minDuration: 4
+    setFlags: []
+  - name: "\u041F\u043E\u0437\u043E\u0440\u043D\u043E"
+    outcome: 2
+    requireFlags: []
+    forbidFlags: []
+    gag: point_exit
+    caption: "\u041F\u043E\u0437\u043E\u0440\u043D\u043E"
+    lines:
+    - speaker: 0
+      text: "*\u0433\u043D\u0435\u0432\u043D\u043E \u0441\u0432\u0438\u0441\u0442\u0438\u0442 \u0438 \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442 \u043D\u0430 \u0432\u044B\u0445\u043E\u0434*"
+      duration: 2.6
+    - speaker: 1
+      text: "\u0421\u043E\u043A \u043C\u043E\u0439! \u0414\u044B\u043D\u043D\u044B\u0439!"
+      duration: 2
+    - speaker: 2
+      text: "\u042F \u0431\u0435\u0440\u0451\u0433 \u0441\u0438\u043B\u044B."
+      duration: 2
+    timeline: {fileID: 0}
+    minDuration: 5
+    setFlags:
+    - fizra_teacher_angry
+  outcomeNames:
+  - "\u0411\u043B\u0435\u0441\u0442\u044F\u0449\u0435"
+  - "\u041D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E"
+  - "\u041F\u043E\u0437\u043E\u0440\u043D\u043E"
+  resultFlagFormat: '{0}_day{1}_result'
+  bellDelay: 1

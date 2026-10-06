@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: afa1a194f5a2fd243bda3a17bca1b36e
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/Shader/lts_tess_trans.shader
+  uploadId: 771726

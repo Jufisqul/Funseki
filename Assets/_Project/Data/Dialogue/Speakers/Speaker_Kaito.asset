@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f987bb822747c4d96724283040c865, type: 3}
+  m_Name: Speaker_Kaito
+  m_EditorClassIdentifier: Funseki.Dialogue::Funseki.Dialogue.Speaker
+  displayName: "\u041A\u0430\u0439\u0442\u043E"
+  portrait: {fileID: 21300000, guid: 3c850ac9965c96d47b83d7bff5aba9fc, type: 3}
+  nameColor: {r: 1, g: 0.62, b: 0.25, a: 1}
+  mumbleClips: []
+  mumblePitch: 0.85
+  mumbleVolume: 1

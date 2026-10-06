@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 2bde4bd29a2a70a4d9cf98772a6717ac
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/Shader/ltspass_dummy.shader
+  uploadId: 771726

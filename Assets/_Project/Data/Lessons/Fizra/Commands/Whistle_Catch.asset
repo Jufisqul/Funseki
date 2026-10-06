@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f921a68bc2731499e5eddbb82804b7, type: 3}
+  m_Name: Whistle_Catch
+  m_EditorClassIdentifier: Funseki.Lessons::Funseki.Lessons.Fizra.WhistleCommand
+  id: catch
+  caption: "\u041B\u043E\u0432\u0438 \u043C\u044F\u0447!"
+  icon: {fileID: 0}
+  glyph: '! !'
+  whistleClip: {fileID: 0}
+  fingerClip: {fileID: 0}
+  synthPattern: x _ x
+  inputAction: Catch
+  directional: 0
+  window: 0
+  move: 4
+  isFalse: 0
+  falseMoveOfStudents: 1

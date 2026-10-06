@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 30a9295b35a61c54088a3b40502b80ad
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/CustomShaderResources/HDRP/DefaultTessellation.lilblock
+  uploadId: 771726

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b31f555a2a840974585f4d01711f729d
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/Shader/Includes/lil_pass_shadowcaster.hlsl
+  uploadId: 771726

@@ -7,7 +7,7 @@ using UnityEngine;
 // and an Airborne state for jumps and falls. Re-runnable: it overwrites the controller.
 public static class HeroAnimatorBuilder
 {
-    public const string ControllerPath = "Assets/_Game/Art/Characters/Tomura/Hero.controller";
+    public const string ControllerPath = "Assets/_Game/Art/Characters/Hero/Hero.controller";
 
     [MenuItem("Tools/One Funseki/Hero/2. Build Animator Controller")]
     public static void Build()

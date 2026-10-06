@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4e99b0fe0caac41a95fc89c90e9e90, type: 3}
+  m_Name: BarkSet_WhistleGossip
+  m_EditorClassIdentifier: Funseki.Dialogue::Funseki.Dialogue.BarkSet
+  lines:
+  - text: "\u0422\u044B \u0432\u0438\u0434\u0435\u043B? \u0424\u0438\u0437\u0440\u0443\u043A \u0441\u0432\u0438\u0441\u0442\u0435\u043B \u0432 \u043F\u0430\u043B\u044C\u0446\u044B!"
+    conditions:
+    - kind: 0
+      id: prank_whistle_done
+      value: 0
+      hero: 0
+  - text: "\u0413\u043E\u0432\u043E\u0440\u044F\u0442, \u0443 \u043D\u0435\u0433\u043E \u0441\u0432\u0438\u0441\u0442\u043E\u043A \u0443\u043A\u0440\u0430\u043B\u0438."
+    conditions:
+    - kind: 0
+      id: prank_whistle_done
+      value: 0
+      hero: 0
+  - text: "\u0411\u0435\u0437 \u0441\u0432\u0438\u0441\u0442\u043A\u0430 \u043E\u043D \u043A\u0430\u043A \u0431\u0435\u0437 \u0433\u043E\u043B\u043E\u0441\u0430."
+    conditions:
+    - kind: 0
+      id: prank_whistle_done
+      value: 0
+      hero: 0
+  - text: "\u041E\u043D \u043D\u0430\u0441 \u0447\u0442\u043E, \u0432 \u043F\u0430\u043B\u044C\u0446\u044B \u0441\u0442\u0440\u043E\u0438\u0442\u044C \u0431\u0443\u0434\u0435\u0442?"
+    conditions:
+    - kind: 0
+      id: prank_whistle_done
+      value: 0
+      hero: 0
+  - text: "\u0424\u0438\u0437\u0440\u0443\u043A \u043E\u043F\u044F\u0442\u044C \u0441 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u043E\u043C \u0434\u0435\u0440\u0451\u0442\u0441\u044F."
+    conditions:
+    - kind: 1
+      id: prank_whistle_done
+      value: 0
+      hero: 0
+  triggerRadius: 4
+  cooldown: 10
+  allowedStates: 03000000i

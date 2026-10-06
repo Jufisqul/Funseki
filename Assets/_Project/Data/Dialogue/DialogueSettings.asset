@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe34324b5436a340955845955c1d293, type: 3}
+  m_Name: DialogueSettings
+  m_EditorClassIdentifier: Funseki.Dialogue::Funseki.Dialogue.DialogueSettings
+  charsPerSecond: 50
+  fastMultiplier: 5
+  fastLineDelay: 0.12
+  autoDelay: 5
+  mumbleEveryChars: 2
+  mumbleVolume: 0.5
+  mumblePitchJitter: 0.08
+  fallbackHero: 2
+  cameraBlendTime: 0.9
+  cameraPriority: 50
+  cameraSideDistance: 2.2
+  cameraHeight: 1.6
+  cameraShoulderShift: 0.7
+  cameraLookHeight: 1.35
+  cameraFramingSize: 0.8
+  cameraFovRange: {x: 25, y: 55}
+  npcFacesHero: 1
+  font: {fileID: 11400000, guid: 8969047a57a7a1a48b98b080e76dead6, type: 2}
+  panelSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  textFontSize: 38
+  nameFontSize: 32
+  textColor: {r: 0.12, g: 0.12, b: 0.14, a: 1}
+  cloudColor: {r: 1, g: 0.98, b: 0.94, a: 0.97}
+  portraitFrameColor: {r: 0.12, g: 0.12, b: 0.14, a: 0.9}
+  portraitSize: 260
+  cloudHeight: 250
+  margin: 60
+  skipLabel: "\u041F\u0440\u043E\u043F\u0443\u0441\u043A"
+  autoLabel: "\u0410\u0432\u0442\u043E"
+  buttonFontSize: 26
+  buttonColor: {r: 0.12, g: 0.12, b: 0.14, a: 0.8}
+  buttonActiveColor: {r: 0.95, g: 0.65, b: 0.15, a: 0.95}
+  buttonTextColor: {r: 1, g: 1, b: 1, a: 1}
+  choiceFontSize: 32
+  choiceColor: {r: 0.12, g: 0.12, b: 0.14, a: 0.85}
+  choiceSelectedColor: {r: 0.95, g: 0.65, b: 0.15, a: 0.95}
+  choiceTextColor: {r: 1, g: 1, b: 1, a: 1}
+  voiceIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  voiceColor: {r: 0.55, g: 0.3, b: 0.85, a: 0.95}
+  voicePrefix: "\u0413\u043E\u043B\u043E\u0441: "
+  barkFontSize: 28
+  barkMinDuration: 2
+  barkMaxDuration: 3
+  barkSecondsPerChar: 0.04
+  barkFadeTime: 0.3
+  barkHeadOffset: 0.3
+  barkMaxWidth: 460
+  barkBubbleColor: {r: 1, g: 0.98, b: 0.94, a: 0.95}
+  barkTextColor: {r: 0.12, g: 0.12, b: 0.14, a: 1}
+  barkMaxDistance: 25

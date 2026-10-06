@@ -1,4 +1,5 @@
 using System.Collections;
+using Funseki.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -21,8 +22,6 @@ public class MainMenuController : MonoBehaviour
         public float fov = 45f;
     }
 
-    public const string SaveKey = "save.exists";
-
     public Camera cam;
     public View[] views;
     public CanvasGroup fade;
@@ -37,7 +36,10 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
-        continueButton.SetActive(PlayerPrefs.GetInt(SaveKey, 0) == 1);
+        SetContinueAvailable(SaveSystem != null && SaveSystem.HasSave);
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         var home = Find(Section.Home);
         cam.transform.SetPositionAndRotation(home.pose.position, home.pose.rotation);
         cam.fieldOfView = home.fov;
@@ -74,15 +76,29 @@ public class MainMenuController : MonoBehaviour
     public void NewGame()
     {
         if (busy) return;
-        PlayerPrefs.SetInt(SaveKey, 1);
+        SaveSystem?.ResetForNewGame();
         StartCoroutine(LoadScene(introScene, 0.2f));
     }
 
+    // Back to the last autosave: flags, inventory and journal now, the day and the heroes when the scene loads.
     public void Continue()
     {
-        if (busy) return;
+        if (busy || SaveSystem == null || !SaveSystem.PrepareContinue(out var scene)) return;
         Go(Section.Continue);
-        StartCoroutine(LoadScene(gameScene, 1.1f));
+        StartCoroutine(LoadScene(string.IsNullOrEmpty(scene) ? gameScene : scene, 1.1f));
+    }
+
+    static ISaveSystem SaveSystem => ServiceLocator.TryGet<ISaveSystem>(out var s) ? s : null;
+
+    // «Продолжить» stays in the menu but greyed out and unclickable while there is no save.
+    void SetContinueAvailable(bool available)
+    {
+        continueButton.SetActive(true);
+        if (!continueButton.TryGetComponent<CanvasGroup>(out var group)) group = continueButton.AddComponent<CanvasGroup>();
+        group.alpha = available ? 1f : 0.4f;
+        group.interactable = available;
+        group.blocksRaycasts = available;
+        foreach (var fx in continueButton.GetComponentsInChildren<MenuButtonFx>(true)) fx.enabled = available;
     }
 
     public void OpenCollection() => Go(Section.Collection);

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e03a05e7a51ae944280b84199c373536
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/Shader/Includes/lil_common_input.hlsl
+  uploadId: 771726

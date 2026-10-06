@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8a6ef0489c3ffbf46812460af3d52bb0
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/Shader/ltspass_lite_cutout.shader
+  uploadId: 771726

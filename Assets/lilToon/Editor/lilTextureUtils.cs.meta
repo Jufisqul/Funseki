@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e753050b495ae6e4faa372fc78a4b7e8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/Editor/lilTextureUtils.cs
+  uploadId: 771726

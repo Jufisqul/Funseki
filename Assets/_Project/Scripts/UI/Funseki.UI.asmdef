@@ -2,7 +2,10 @@
     "name": "Funseki.UI",
     "rootNamespace": "Funseki.UI",
     "references": [
-        "Funseki.Core"
+        "Funseki.Core",
+        "Unity.TextMeshPro",
+        "Unity.InputSystem",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6c7c6ea0cfb556b41a446160f4dd72e0
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/CustomShaderResources/BRP/DefaultFakeShadow.lilblock
+  uploadId: 771726

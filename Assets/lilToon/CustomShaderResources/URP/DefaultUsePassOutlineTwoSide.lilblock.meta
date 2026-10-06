@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e27e9b6f6d46fd349b9b5d153597df2e
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/CustomShaderResources/URP/DefaultUsePassOutlineTwoSide.lilblock
+  uploadId: 771726

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 94274b8ef5d3af842b9427384cba3a8f
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/Shader/lts_overlay.shader
+  uploadId: 771726

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: eb9a5de8acbfdac438a1069c8c834dae
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/External/Editor/ChilloutVRModule.cs
+  uploadId: 771726

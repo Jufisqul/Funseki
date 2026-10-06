@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3fb94a39b2685ee4d9817dcaf6542d99
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/Shader/lts_ref_blur.shader
+  uploadId: 771726

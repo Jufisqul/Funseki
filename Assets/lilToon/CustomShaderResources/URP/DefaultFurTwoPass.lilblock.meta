@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 314c973dce805b74e96ce9a63de07a56
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/CustomShaderResources/URP/DefaultFurTwoPass.lilblock
+  uploadId: 771726

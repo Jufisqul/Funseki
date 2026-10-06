@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464ea2c06ce81ca478c5efc742d37c15, type: 3}
+  m_Name: InventorySettings
+  m_EditorClassIdentifier: Funseki.Inventory::Funseki.Inventory.InventorySettings
+  capacity: 8
+  selectPickedItem: 1
+  allItems:
+  - {fileID: 11400000, guid: 5e9ec1ec39f7ad945b9b3427ffa7a253, type: 2}
+  - {fileID: 11400000, guid: ff6af591f0de37146afaab4a5562d979, type: 2}
+  pickupPromptFormat: "\u0412\u0437\u044F\u0442\u044C \xAB{0}\xBB"
+  wontWorkLine: "\u041D\u0435 \u0441\u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442"
+  fullLine: "\u0411\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u0443\u043D\u0435\u0441\u0443"
+  panelHideDelay: 2
+  panelFadeTime: 0.2
+  slotSize: 72
+  slotSpacing: 8
+  panelBottomOffset: 40
+  font: {fileID: 11400000, guid: 8969047a57a7a1a48b98b080e76dead6, type: 2}
+  nameFontSize: 26
+  slotFontSize: 13
+  slotColor: {r: 0, g: 0, b: 0, a: 0.55}
+  selectedSlotColor: {r: 1, g: 0.85, b: 0.3, a: 0.9}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  activeStates: 03000000i

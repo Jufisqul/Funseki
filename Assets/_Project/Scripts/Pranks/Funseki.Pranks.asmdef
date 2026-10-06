@@ -1,0 +1,19 @@
+{
+    "name": "Funseki.Pranks",
+    "rootNamespace": "Funseki.Pranks",
+    "references": [
+        "Funseki.Core",
+        "Unity.Timeline",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2341159bc9ad4ca48b131d077085c04c
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/CustomShaderResources/URP/DefaultRefractionBlur.lilblock
+  uploadId: 771726

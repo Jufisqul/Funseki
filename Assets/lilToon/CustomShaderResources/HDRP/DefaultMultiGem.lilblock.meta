@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 099f08aefc3f6c74d9ee0ec3df919fd9
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/CustomShaderResources/HDRP/DefaultMultiGem.lilblock
+  uploadId: 771726

@@ -6,11 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 432e9c1c376f9ac4ba92c49b57e24a59
+    path: Assets/_Project/Scenes/Bootstrap.unity
+    guid: 08d236ad6fddf304f950e04a5f131b24
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 432e9c1c376f9ac4ba92c49b57e24a59
+  - enabled: 1
+    path: Assets/_Game/Scenes/PlayerTest.unity
+    guid: ff3587ae1ce741b49b2f08bc96a8bd52
+  - enabled: 1
+    path: Assets/_Game/Scenes/Day1_Greybox.unity
+    guid: 096d35a3ba4d84f48b40b820beb1a396
+  - enabled: 1
+    path: Assets/_Project/School/Scenes/School_Greybox.unity
+    guid: 2b4b8f53ced0bc14fb0bed6da1598f1b
+  - enabled: 1
+    path: Assets/_Project/Scenes/Slice_Day1.unity
+    guid: b90291f00c3e2a14595031706283a97c
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

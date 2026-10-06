@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e3dbe4ae202b9094eab458bbc934c964
+ShaderIncludeImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/lilToon/Shader/Includes/lil_common_vert_fur_thirdparty.hlsl
+  uploadId: 771726

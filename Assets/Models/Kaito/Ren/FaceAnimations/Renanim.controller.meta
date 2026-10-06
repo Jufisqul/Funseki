@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cd51d0c99f20a9940a8cf7176b7b1a38
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324143
+  packageName: Ren 3D Anime Style Character
+  packageVersion: 1.0
+  assetPath: Assets/RoloArt/Ren/FaceAnimations/Renanim.controller
+  uploadId: 771726
