@@ -74,7 +74,8 @@ namespace Funseki.Dialogue
             b.rect.gameObject.SetActive(true);
             Place(b);
 
-            mumble.Play(tag != null ? tag.speaker : null);
+            // A bark nobody can see is not heard either.
+            if (b.rect.gameObject.activeSelf) mumble.Play(tag != null ? tag.speaker : null);
         }
 
         void LateUpdate()
@@ -97,18 +98,47 @@ namespace Funseki.Dialogue
             }
         }
 
-        // Follows the head on screen; hidden when behind the camera or too far.
+        // Follows the head on screen; hidden when behind the camera, too far from the active hero or behind a wall.
         void Place(Bubble b)
         {
             var cam = Camera.main;
             if (cam == null) { b.rect.gameObject.SetActive(false); return; }
             Vector3 world = b.speaker.transform.position + Vector3.up * (b.headHeight + settings.barkHeadOffset);
             Vector3 screen = cam.WorldToScreenPoint(world);
-            bool visible = screen.z > 0f && screen.z < settings.barkMaxDistance;
+            var hero = HeroService.CurrentObject;
+            bool own = hero != null && b.speaker.transform.IsChildOf(hero.transform);
+            Vector3 listener = hero != null ? hero.transform.position : cam.transform.position;
+            bool visible = screen.z > 0f
+                && (own || (Vector3.Distance(listener, b.speaker.transform.position) <= settings.barkMaxDistance
+                            && !BehindWall(cam.transform.position, world - Vector3.up * settings.barkHeadOffset, b.speaker, hero)));
             if (b.rect.gameObject.activeSelf != visible) b.rect.gameObject.SetActive(visible);
             if (!visible) return;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screen, null, out var local);
             b.rect.anchoredPosition = local;
+        }
+
+        readonly RaycastHit[] hits = new RaycastHit[16];
+
+        // Is level geometry between the camera and the speaker's head? Characters (heroes, NPCs, the speaker) and triggers don't count.
+        bool BehindWall(Vector3 from, Vector3 head, GameObject speaker, GameObject hero)
+        {
+            if (!settings.barkHideBehindWalls) return false;
+            Vector3 dir = head - from;
+            float dist = dir.magnitude - 0.2f;
+            if (dist <= 0f) return false;
+            int n = Physics.RaycastNonAlloc(from, dir / (dist + 0.2f), hits, dist, settings.barkOcclusionMask, QueryTriggerInteraction.Ignore);
+            for (int i = 0; i < n; i++)
+            {
+                var c = hits[i].collider;
+                if (c is CharacterController) continue;
+                var t = c.transform;
+                if (t.IsChildOf(speaker.transform) || (hero != null && t.IsChildOf(hero.transform))) continue;
+                if (c.GetComponentInParent<INpc>() != null || c.GetComponentInParent<SpeakerTag>() != null) continue;
+                var body = c.attachedRigidbody;
+                if (body != null && !body.isKinematic) continue; // loose props, cans
+                return true;
+            }
+            return false;
         }
 
         static float HeadHeight(GameObject speaker)

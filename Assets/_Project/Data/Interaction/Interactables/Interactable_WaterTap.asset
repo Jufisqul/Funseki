@@ -14,10 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Funseki.Interaction::Funseki.Interaction.WaterTapData
   prompt: "\u041E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C"
   repeat: 2
+  allowedHeroes: 
+  onlyOnDays: 
   firstLines:
   - "\u0414\u0435\u0440\u044C\u043C\u043E."
   repeatLines: []
-  heroLines: []
+  heroLines:
+  - hero: 1
+    first:
+    - "\u041E\u0442\u0432\u0440\u0430\u0442\u0438\u0442\u0435\u043B\u044C\u043D\u043E."
+    repeat: []
+  - hero: 2
+    first:
+    - "\u0413\u043E\u043B\u043E\u0441: \xAB\u042F\u043C\u043C\u0438\xBB."
+    repeat: []
   teacherNearbyLines: []
   teacherRadius: 12
   noiseAmount: 0
@@ -35,3 +45,5 @@ MonoBehaviour:
   milestoneEvery: 10
   milestoneLines:
   - "\u0414\u0430, \u0432\u0441\u0451 \u0435\u0449\u0451 \u0432\u043E\u0434\u0430."
+  teacherShoutLines:
+  - "\u041D\u0435 \u0442\u0440\u0430\u0442\u044C \u0432\u043E\u0434\u0443!"

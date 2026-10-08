@@ -15,10 +15,14 @@ using UnityEngine.SceneManagement;
 namespace Funseki.EditorTools
 {
     // Tools > Funseki > Interaction > Place slice interactables in Slice_Day1:
-    // the five world objects of the slice (GDD 5.9) as grey boxes under the root "Interactables", plus the marker
-    // pickup in the courtyard (PE lesson area). Positions are School_Greybox plan meters (x, -y) from SchoolLayout.
-    // Data assets in Data/Interaction/Interactables are created once and kept (designer edits survive);
-    // the "Interactables" root is rebuilt every time. Other roots of Slice_Day1 are not touched.
+    // the world objects of the slice (GDD 5.9 and the Notion item specs) as grey boxes under the root "Interactables",
+    // plus the marker pickup in the courtyard (PE lesson area). The spec additions (more taps, 7 posters + 4 paintings
+    // with drawing, the shower, the paint pickup) sit in the child "Spec"; "Add spec items" rebuilds only that child
+    // and the corridor poster, keeping hand-moved objects of the root.
+    // Positions are School_Greybox plan meters (x, -y) from SchoolLayout.
+    // Data assets in Data/Interaction/Interactables are created once and kept (designer edits survive; the spec
+    // changes of the old five assets are applied once, see ApplySpecToOldData); "Place slice interactables" rebuilds
+    // the whole "Interactables" root. Other roots of Slice_Day1 are not touched.
     // Also puts InventoryService, InventoryPanel and SaveService under [Bootstrap] if they are missing.
     public static class InteractablesSetup
     {
@@ -27,9 +31,11 @@ namespace Funseki.EditorTools
         const string ArtDir = "Assets/_Project/Art/Placeholders/Interactables";
         const string FontPath = "Assets/MainMenu/Fonts/GolosText-SemiBold SDF.asset";
         const string MarkerPath = "Assets/_Project/Data/Inventory/Items/Item_Marker.asset";
+        const string PaintPath = "Assets/_Project/Data/Inventory/Items/Item_Paint.asset";
         const string InventorySettingsPath = "Assets/_Project/Data/Inventory/InventorySettings.asset";
         const string SchoolMapPath = "Assets/_Project/School/Docs/School_TopView_F1.png";
         const string RootName = "Interactables";
+        const string SpecName = "Spec";
 
         // Plan of School_Greybox floor 1: world x = plan x, world z = -plan y; yaw 180 faces plan south (-Z).
         static readonly Vector3 TapPos = new(53f, 0f, -30.25f);          // Туалет М, over the first sink by the north wall
@@ -40,36 +46,121 @@ namespace Funseki.EditorTools
         static readonly Vector3 RackPos = new(28.2f, 0f, -41.75f);       // by the main entrance doors, inside
         static readonly Vector3 MarkerPos = new(21f, 0.06f, -23.3f);     // courtyard, PE lesson area, by the west bench
 
+        // Spec additions (the "Spec" child). Sinks of the toilets are on their north walls (SchoolFurnisher: door west).
+        static readonly (string id, string name, Vector3 pos)[] ExtraTaps =
+        {
+            ("tap_wc_m_2", "WaterTap_WC_M_2", new Vector3(53.8f, 0f, -30.25f)),   // Туалет М, second sink
+            ("tap_wc_f", "WaterTap_WC_F", new Vector3(53f, 0f, -22.25f)),         // Туалет Ж, first sink
+            ("tap_wc_f_2", "WaterTap_WC_F_2", new Vector3(53.8f, 0f, -22.25f)),   // Туалет Ж, second sink
+        };
+        // Spec: 7 posters and 4 paintings around the school. Corridor walls between the classroom doors
+        // (north rooms: doors at x = room + 5; south rooms: shop 11, shop_2 20, anatomy 30, literature 39).
+        static readonly (string id, string name, Vector3 pos, float yaw)[] ExtraPosters =
+        {
+            ("poster_n_1", "Poster_North_1", new Vector3(15f, 0f, -8.03f), 180f),  // north corridor, wall of the heroes' class
+            ("poster_n_2", "Poster_North_2", new Vector3(23f, 0f, -8.03f), 180f),  // wall of Геометрия
+            ("poster_n_3", "Poster_North_3", new Vector3(31f, 0f, -8.03f), 180f),  // wall of Музыка
+            ("poster_n_4", "Poster_North_4", new Vector3(39f, 0f, -8.03f), 180f),  // wall of Физика
+            ("poster_s_1", "Poster_South_1", new Vector3(8f, 0f, -37.03f), 180f),  // shoe-locker corridor, wall of Труд
+            ("poster_s_2", "Poster_South_2", new Vector3(16.5f, 0f, -37.03f), 180f), // wall of the shop store room
+        };
+        static readonly (string id, string name, Vector3 pos, float yaw)[] Paintings =
+        {
+            ("painting_n", "Painting_North", new Vector3(4.5f, 0f, -8.03f), 180f),  // north corridor, wall of the utility room
+            ("painting_w", "Painting_West", new Vector3(5.97f, 0f, -33f), 270f),    // west corridor, wall of Труд
+            ("painting_e", "Painting_East", new Vector3(46.03f, 0f, -33.5f), 90f),  // east corridor, wall of Литература
+            ("painting_canteen", "Painting_Canteen", new Vector3(51.97f, 0f, -18f), 270f), // east corridor, wall of the canteen
+        };
+        static readonly Vector3 ShowerPos = new(55f, 0f, -37.95f);       // Туалет М, south wall (no dorm floor in the slice yet)
+        static readonly Vector3 PaintPos = new(9.2f, 0.11f, -8.45f);     // north corridor, by the door of Рисование
+
         [MenuItem("Tools/Funseki/Interaction/Place slice interactables in Slice_Day1")]
         public static void Build()
         {
-            foreach (var dir in new[] { DataDir, SaveDir, ArtDir }) Directory.CreateDirectory(dir);
-            var a = EnsureAssets();
-            AddServicesToBootstrap();
-
-            var active = SceneManager.GetActiveScene();
-            var slice = SceneManager.GetSceneByPath(CoreScenesSetup.SlicePath);
-            bool opened = !slice.isLoaded;
-            if (opened) slice = EditorSceneManager.OpenScene(CoreScenesSetup.SlicePath, OpenSceneMode.Additive);
-            SceneManager.SetActiveScene(slice);
+            var a = Prepare();
+            var slice = OpenSlice(out var active, out bool opened);
 
             foreach (var go in slice.GetRootGameObjects())
                 if (go.name == RootName) Object.DestroyImmediate(go);
             var root = new GameObject(RootName).transform;
 
-            BuildTap(root, a);
+            BuildTap(root, a, "tap_wc_m", "WaterTap_WC_M", TapPos);
             BuildVending(root, a, "vending_corridor", "VendingMachine_Corridor", VendingCorridorPos, 180f);
             BuildVending(root, a, "vending_courtyard", "VendingMachine_Courtyard", VendingYardPos, 0f);
             BuildLocker(root, a);
-            BuildPoster(root, a);
+            BuildPoster(root, a, a.poster, "poster_corridor", "Poster_Corridor", PosterPos, 180f, false);
             BuildRack(root, a);
             BuildMarker(root, a);
+            BuildSpec(root, a);
 
+            CloseSlice(slice, active, opened);
+            Debug.Log("[InteractablesSetup] Slice_Day1: taps, 2 vending machines, Рюта's locker, 7 posters, 4 paintings, booklet rack, " +
+                      "shower, marker and paint placed under 'Interactables'.");
+        }
+
+        // Adds the spec objects without touching the rest of the root (hand-moved machines, lockers...).
+        // The corridor poster is rebuilt in its current place, because drawing needs a close-up camera on it.
+        [MenuItem("Tools/Funseki/Interaction/Add spec items to Slice_Day1 (keeps the rest)")]
+        public static void AddSpecItems()
+        {
+            var a = Prepare();
+            var slice = OpenSlice(out var active, out bool opened);
+
+            Transform root = null;
+            foreach (var go in slice.GetRootGameObjects())
+                if (go.name == RootName) root = go.transform;
+            if (root == null) root = new GameObject(RootName).transform;
+
+            var old = root.Find("Poster_Corridor");
+            Vector3 posterPos = old != null ? old.position : PosterPos;
+            float posterYaw = old != null ? old.eulerAngles.y : 180f;
+            if (old != null) Object.DestroyImmediate(old.gameObject);
+            BuildPoster(root, a, a.poster, "poster_corridor", "Poster_Corridor", posterPos, posterYaw, false);
+
+            BuildSpec(root, a);
+            CloseSlice(slice, active, opened);
+            Debug.Log("[InteractablesSetup] Slice_Day1: spec items (3 taps, 6 posters, 4 paintings, shower, paint) placed under 'Interactables/Spec'; " +
+                      "the corridor poster got its drawing camera.");
+        }
+
+        static Assets Prepare()
+        {
+            foreach (var dir in new[] { DataDir, SaveDir, ArtDir }) Directory.CreateDirectory(dir);
+            var a = EnsureAssets();
+            AddServicesToBootstrap();
+            return a;
+        }
+
+        static Scene OpenSlice(out Scene active, out bool opened)
+        {
+            active = SceneManager.GetActiveScene();
+            var slice = SceneManager.GetSceneByPath(CoreScenesSetup.SlicePath);
+            opened = !slice.isLoaded;
+            if (opened) slice = EditorSceneManager.OpenScene(CoreScenesSetup.SlicePath, OpenSceneMode.Additive);
+            SceneManager.SetActiveScene(slice);
+            return slice;
+        }
+
+        static void CloseSlice(Scene slice, Scene active, bool opened)
+        {
             EditorSceneManager.MarkSceneDirty(slice);
             EditorSceneManager.SaveScene(slice);
             if (opened) EditorSceneManager.CloseScene(slice, true);
             else if (active.IsValid() && active.isLoaded) SceneManager.SetActiveScene(active);
-            Debug.Log("[InteractablesSetup] Slice_Day1: tap, 2 vending machines, Рюта's locker, poster, booklet rack and the marker placed under 'Interactables'.");
+        }
+
+        static void BuildSpec(Transform root, Assets a)
+        {
+            var old = root.Find(SpecName);
+            if (old != null) Object.DestroyImmediate(old.gameObject);
+            var spec = new GameObject(SpecName).transform;
+            spec.SetParent(root, false);
+
+            foreach (var t in ExtraTaps) BuildTap(spec, a, t.id, t.name, t.pos);
+            foreach (var p in ExtraPosters) BuildPoster(spec, a, a.poster, p.id, p.name, p.pos, p.yaw, false);
+            foreach (var p in Paintings) BuildPoster(spec, a, a.painting, p.id, p.name, p.pos, p.yaw, true);
+            BuildShower(spec, a);
+            BuildPaint(spec, a);
         }
 
         // ---------------------------------------------------------------- data
@@ -79,12 +170,13 @@ namespace Funseki.EditorTools
             public WaterTapData tap;
             public VendingMachineData vending;
             public LockerData locker;
-            public PosterData poster;
+            public PosterData poster, painting;
+            public ShowerData shower;
             public BookletData booklet;
-            public ItemData marker;
+            public ItemData marker, paint;
             public InputActionAsset input;
             public Material water, metal, porcelain, machine, machineScreen, slot, lockerBody, lockerDoor, frame, paper, wood,
-                photo, shoe, book, bento, markerMat;
+                photo, shoe, book, bento, markerMat, canvas, tile, tray, paintCan;
         }
 
         static Assets EnsureAssets()
@@ -98,6 +190,9 @@ namespace Funseki.EditorTools
             var drawn = new[] { PosterTexture("T_Poster_Drawn_1", 1), PosterTexture("T_Poster_Drawn_2", 2), PosterTexture("T_Poster_Drawn_3", 3) };
             var cover = CoverTexture("T_Booklet_Cover");
             var schoolMap = AssetDatabase.LoadAssetAtPath<Texture2D>(SchoolMapPath);
+            var paintingClean = PaintingTexture("T_Painting_Clean", 0);
+            var paintingDrawn = new[] { PaintingTexture("T_Painting_Drawn_1", 1), PaintingTexture("T_Painting_Drawn_2", 2), PaintingTexture("T_Painting_Drawn_3", 3) };
+            a.paint = PaintItem();
 
             a.tap = Data<WaterTapData>("Interactable_WaterTap", d =>
             {
@@ -156,6 +251,28 @@ namespace Funseki.EditorTools
                     },
                 };
             });
+            a.painting = Data<PosterData>("Interactable_Painting", d =>
+            {
+                d.prompt = "Рассмотреть картину";
+                d.firstLines = new[] { "Фудзи. Как у всех." };
+                d.repeatLines = new[] { "Гора как гора." };
+                d.heroLines.Add(new HeroLines { hero = HeroId.Rei, first = new[] { "Подпись «Директор, 1974». Многое объясняет." } });
+                d.heroLines.Add(new HeroLines { hero = HeroId.Kaito, first = new[] { "Голос говорит, Фудзи грустит." } });
+                d.font = font;
+                d.cleanTexture = paintingClean;
+                d.drawnTextures = paintingDrawn;
+                d.drawItem = a.marker;
+                d.drawLines = new[] { "Фудзи стало веселее.", "Теперь тут есть сюжет.", "Музей оторвёт с руками." };
+                d.heroDrawLines.Add(new HeroLines { hero = HeroId.Ryuta, first = new[] { "Голоса в голове аплодируют." } });
+            });
+            a.shower = Data<ShowerData>("Interactable_Shower", d =>
+            {
+                d.prompt = "Включить душ";
+                d.firstLines = new[] { "Вода ледяная. Конечно." };
+                d.repeatLines = new string[0];
+                d.paintItem = a.paint;
+            });
+            ApplySpecToOldData(a, font);
 
             a.water = Mat("M_Water", new Color(0.65f, 0.85f, 1f, 0.55f), transparent: true);
             a.metal = Mat("M_TapMetal", new Color(0.75f, 0.77f, 0.8f), metallic: 0.8f);
@@ -173,10 +290,64 @@ namespace Funseki.EditorTools
             a.book = Mat("M_Detail_Book", new Color(0.2f, 0.55f, 0.3f));
             a.bento = Mat("M_Detail_Bento", new Color(0.55f, 0.6f, 0.2f));
             a.markerMat = Mat("M_Pickup_Marker", new Color(0.85f, 0.15f, 0.15f));
+            a.canvas = Mat("M_Painting", Color.white, texture: paintingClean);
+            a.tile = Mat("M_ShowerTile", new Color(0.78f, 0.86f, 0.88f));
+            a.tray = Mat("M_ShowerTray", new Color(0.9f, 0.9f, 0.92f));
+            a.paintCan = Mat("M_Pickup_Paint", new Color(0.95f, 0.2f, 0.6f));
 
             Asset<SaveSettings>($"{SaveDir}/SaveSettings.asset", _ => { });
             AssetDatabase.SaveAssets();
             return a;
+        }
+
+        // The Notion specs changed some of the first five objects. Applied once: each block runs only while its asset
+        // still has the old value it replaces, so later designer edits are kept.
+        static void ApplySpecToOldData(Assets a, TMP_FontAsset font)
+        {
+            // «Стелаж с журналами»: only Рюта, once, on day 1; «Ну и залупа» after closing.
+            if (a.booklet != null && (a.booklet.allowedHeroes == null || a.booklet.allowedHeroes.Length == 0))
+            {
+                a.booklet.allowedHeroes = new[] { HeroId.Ryuta };
+                a.booklet.repeat = InteractRepeat.Once;
+                a.booklet.onlyOnDays = new[] { 1 };
+                a.booklet.prompt = "Почитать журнал";
+                a.booklet.firstLines = new[] { "Ну и залупа." };
+                a.booklet.repeatLines = new string[0];
+                EditorUtility.SetDirty(a.booklet);
+            }
+            // «Кранчик с водой»: own lines of Рэй and Кайто.
+            if (a.tap != null && a.tap.heroLines.Count == 0)
+            {
+                a.tap.heroLines.Add(new HeroLines { hero = HeroId.Rei, first = new[] { "Отвратительно." } });
+                a.tap.heroLines.Add(new HeroLines { hero = HeroId.Kaito, first = new[] { "Голос: «Ямми»." } });
+                EditorUtility.SetDirty(a.tap);
+            }
+            // «Плакаты и картины»: the close-up screen font and Рюта's «голоса в голове».
+            if (a.poster != null && a.poster.heroDrawLines.Count == 0)
+            {
+                if (a.poster.font == null) a.poster.font = font;
+                a.poster.heroDrawLines.Add(new HeroLines { hero = HeroId.Ryuta, first = new[] { "Голоса в голове одобряют." } });
+                EditorUtility.SetDirty(a.poster);
+            }
+        }
+
+        // «Краска» for the shower; added to InventorySettings.allItems so the save can find it by id.
+        static ItemData PaintItem()
+        {
+            var item = Asset<ItemData>(PaintPath, d =>
+            {
+                d.id = "paint";
+                d.displayName = "Краска";
+                d.description = "Банка розовой краски для плакатов. Почти полная.";
+            });
+            var settings = AssetDatabase.LoadAssetAtPath<InventorySettings>(InventorySettingsPath);
+            if (settings != null && (settings.allItems == null || System.Array.IndexOf(settings.allItems, item) < 0))
+            {
+                var list = new System.Collections.Generic.List<ItemData>(settings.allItems ?? new ItemData[0]) { item };
+                settings.allItems = list.ToArray();
+                EditorUtility.SetDirty(settings);
+            }
+            return item;
         }
 
         static T Data<T>(string name, System.Action<T> init) where T : ScriptableObject =>
@@ -254,6 +425,39 @@ namespace Funseki.EditorTools
                 default: // crossed-out slogan and a speech bubble
                     for (int i = 0; i < 200; i++) { Fill(px, w, 28 + i, h - 76 + i * 60 / 200, 4, 4, ink); Fill(px, w, 28 + i, h - 16 - i * 60 / 200, 4, 4, ink); }
                     Ring(px, w, 205, 120, 36, 4, ink); Fill(px, w, 175, 150, 12, 12, ink);
+                    break;
+            }
+            return SavePng(name, w, h, px);
+        }
+
+        // 0: clean painting (Fuji under the sun); 1-3: the same painting defaced with the marker.
+        static Texture2D PaintingTexture(string name, int variant)
+        {
+            const int w = 384, h = 256;
+            var px = new Color32[w * h];
+            Fill(px, w, 0, 0, w, h, new Color32(150, 190, 225, 255));                  // sky
+            Disc(px, w, 300, 200, 28, new Color32(240, 120, 60, 255));                   // sun
+            for (int x = 0; x < w; x++)                                                  // Fuji with its snow cap
+            {
+                int top = Mathf.Max(0, 170 - Mathf.Abs(x - 160) * 7 / 8);
+                Fill(px, w, x, 0, 1, top, new Color32(80, 95, 130, 255));
+                if (top > 130) Fill(px, w, x, 130, 1, top - 130, new Color32(245, 245, 250, 255));
+            }
+            Fill(px, w, 0, 0, w, 40, new Color32(70, 120, 70, 255));                     // fields
+            var ink = new Color32(200, 20, 25, 255);
+            switch (variant)
+            {
+                case 1: // the sun gets a face and a moustache
+                    Disc(px, w, 291, 208, 4, ink); Disc(px, w, 309, 208, 4, ink); Fill(px, w, 284, 190, 32, 5, ink);
+                    break;
+                case 2: // a UFO abducts the mountain top
+                    Ring(px, w, 160, 225, 22, 4, ink); Fill(px, w, 130, 220, 60, 4, ink);
+                    for (int i = 0; i < 40; i++) { Fill(px, w, 150 - i / 4, 185 - i, 2, 2, ink); Fill(px, w, 170 + i / 4, 185 - i, 2, 2, ink); }
+                    break;
+                default: // «Р+К» carved into the field and an arrow to it
+                    Fill(px, w, 40, 10, 4, 22, ink); Ring(px, w, 48, 26, 6, 3, ink); Fill(px, w, 60, 19, 10, 3, ink); Fill(px, w, 64, 14, 3, 12, ink);
+                    Fill(px, w, 78, 10, 4, 22, ink); for (int i = 0; i < 11; i++) { Fill(px, w, 82 + i, 21 + i, 3, 3, ink); Fill(px, w, 82 + i, 21 - i, 3, 3, ink); }
+                    for (int i = 0; i < 60; i++) Fill(px, w, 110 + i, 40 + i / 2, 3, 3, ink);
                     break;
             }
             return SavePng(name, w, h, px);
@@ -343,9 +547,9 @@ namespace Funseki.EditorTools
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
-        static void BuildTap(Transform parent, Assets a)
+        static void BuildTap(Transform parent, Assets a, string id, string name, Vector3 pos)
         {
-            var root = Root(parent, "WaterTap_WC_M", TapPos, 180f);
+            var root = Root(parent, name, pos, 180f);
             // Local +Z points out of the wall into the room.
             Box(root.transform, "Base", new Vector3(0f, 1.05f, 0.03f), new Vector3(0.08f, 0.08f, 0.06f), a.metal, false);
             Box(root.transform, "Spout", new Vector3(0f, 1.07f, 0.11f), new Vector3(0.04f, 0.04f, 0.14f), a.metal, false);
@@ -368,7 +572,7 @@ namespace Funseki.EditorTools
             hit.size = new Vector3(0.4f, 0.35f, 0.3f);
 
             var tap = root.AddComponent<WaterTap>();
-            Init(tap, "tap_wc_m", a.tap);
+            Init(tap, id, a.tap);
             PlayerSliceSetup.Set(tap, "water", water.GetComponent<Renderer>());
         }
 
@@ -439,23 +643,99 @@ namespace Funseki.EditorTools
             go.AddComponent<InspectDetail>().index = index;
         }
 
-        static void BuildPoster(Transform parent, Assets a)
+        // A portrait poster (0.58 x 0.85) or a landscape painting (0.9 x 0.6) on the wall; local +Z faces the room.
+        // The close-up camera in front of it is what the drawing mini-game looks through.
+        static GameObject BuildPoster(Transform parent, Assets a, PosterData data, string id, string name, Vector3 pos, float yaw,
+            bool landscape)
         {
-            var root = Root(parent, "Poster_Corridor", PosterPos, 180f);
-            Box(root.transform, "Frame", new Vector3(0f, 1.6f, 0.01f), new Vector3(0.66f, 0.92f, 0.02f), a.frame);
+            var root = Root(parent, name, pos, yaw);
+            Vector2 size = landscape ? new Vector2(0.9f, 0.6f) : new Vector2(0.58f, 0.85f);
+            float y = landscape ? 1.65f : 1.6f;
+            Box(root.transform, "Frame", new Vector3(0f, y, 0.01f), new Vector3(size.x + 0.08f, size.y + 0.07f, 0.02f), landscape ? a.wood : a.frame);
             var quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
             quad.name = "Picture";
             quad.transform.SetParent(root.transform, false);
-            quad.transform.localPosition = new Vector3(0f, 1.6f, 0.022f);
+            quad.transform.localPosition = new Vector3(0f, y, 0.022f);
             // A quad faces -Z; turn it so the picture faces the corridor (+Z of the root).
             quad.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
-            quad.transform.localScale = new Vector3(0.58f, 0.85f, 1f);
+            quad.transform.localScale = new Vector3(size.x, size.y, 1f);
             Object.DestroyImmediate(quad.GetComponent<Collider>());
-            quad.GetComponent<Renderer>().sharedMaterial = a.paper;
+            quad.GetComponent<Renderer>().sharedMaterial = landscape ? a.canvas : a.paper;
+
+            var camGo = new GameObject("CloseUpCamera");
+            camGo.transform.SetParent(root.transform, false);
+            camGo.transform.localPosition = new Vector3(0f, y, 1.25f);
+            camGo.transform.localRotation = Quaternion.LookRotation(Vector3.back);
+            var cam = camGo.AddComponent<CinemachineCamera>();
+            cam.Lens.FieldOfView = 45f;
+            cam.Lens.NearClipPlane = 0.05f;
+            camGo.SetActive(false);
 
             var poster = root.AddComponent<DrawablePoster>();
-            Init(poster, "poster_corridor", a.poster);
+            Init(poster, id, data);
             PlayerSliceSetup.Set(poster, "picture", quad.GetComponent<Renderer>());
+            PlayerSliceSetup.Set(poster, "actions", a.input);
+            PlayerSliceSetup.Set(poster, "closeUpCamera", cam);
+            return root;
+        }
+
+        static void BuildShower(Transform parent, Assets a)
+        {
+            var root = Root(parent, "Shower_WC_M", ShowerPos, 0f);
+            var t = root.transform;
+            // Local +Z points out of the wall into the room.
+            Box(t, "TileWall", new Vector3(0f, 1.1f, 0.01f), new Vector3(1f, 2.2f, 0.02f), a.tile, false);
+            Box(t, "Tray", new Vector3(0f, 0.03f, 0.47f), new Vector3(0.9f, 0.06f, 0.9f), a.tray);
+            Box(t, "Pipe", new Vector3(0f, 1.6f, 0.05f), new Vector3(0.04f, 1f, 0.04f), a.metal, false);
+            Box(t, "Arm", new Vector3(0f, 2.1f, 0.18f), new Vector3(0.04f, 0.04f, 0.28f), a.metal, false);
+            var head = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            head.name = "Head";
+            head.transform.SetParent(t, false);
+            head.transform.localPosition = new Vector3(0f, 2.06f, 0.32f);
+            head.transform.localScale = new Vector3(0.18f, 0.02f, 0.18f);
+            Object.DestroyImmediate(head.GetComponent<Collider>());
+            head.GetComponent<Renderer>().sharedMaterial = a.metal;
+            Box(t, "Valve", new Vector3(0f, 1.2f, 0.05f), new Vector3(0.14f, 0.04f, 0.06f), a.metal, false);
+
+            var water = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            water.name = "Water";
+            water.transform.SetParent(t, false);
+            water.transform.localPosition = new Vector3(0f, 1.05f, 0.32f);
+            water.transform.localScale = new Vector3(0.16f, 1f, 0.16f);
+            Object.DestroyImmediate(water.GetComponent<Collider>());
+            water.GetComponent<Renderer>().sharedMaterial = a.water;
+            water.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.Off;
+            water.SetActive(false);
+
+            // Generous trigger over the valve and the stall, so it is easy to aim at.
+            var hit = root.AddComponent<BoxCollider>();
+            hit.isTrigger = true;
+            hit.center = new Vector3(0f, 1.2f, 0.3f);
+            hit.size = new Vector3(0.9f, 1.4f, 0.5f);
+
+            var shower = root.AddComponent<ShowerHead>();
+            Init(shower, "shower_wc_m", a.shower);
+            PlayerSliceSetup.Set(shower, "water", water.GetComponent<Renderer>());
+        }
+
+        static void BuildPaint(Transform parent, Assets a)
+        {
+            if (a.paint == null) return;
+            var go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            go.name = "Pickup_Paint";
+            go.transform.SetParent(parent, false);
+            go.transform.SetPositionAndRotation(PaintPos, Quaternion.identity);
+            go.transform.localScale = new Vector3(0.18f, 0.11f, 0.18f);
+            go.GetComponent<Renderer>().sharedMaterial = a.paintCan;
+            Object.DestroyImmediate(go.GetComponent<Collider>());
+            var box = go.AddComponent<BoxCollider>();
+            box.size = new Vector3(2.5f, 3f, 2.5f);
+            var p = go.AddComponent<PickupItem>();
+            PlayerSliceSetup.Set(p, "item", a.paint);
+            var so = new SerializedObject(p);
+            so.FindProperty("takenFlag").stringValue = "paint_taken";
+            so.FindProperty("voiceHint").stringValue = "У кабинета рисования кто-то бросил банку краски…";
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         static void BuildRack(Transform parent, Assets a)

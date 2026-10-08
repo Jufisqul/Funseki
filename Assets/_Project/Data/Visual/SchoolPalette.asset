@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1ff69b48a8b004fae6e603f037c6d5, type: 3}
+  m_Name: SchoolPalette
+  m_EditorClassIdentifier: Funseki.Core::Funseki.Core.SchoolPalette
+  ash: {r: 0.16862746, g: 0.18431373, b: 0.22745098, a: 1}
+  chalk: {r: 0.95686275, g: 0.94509804, b: 0.9098039, a: 1}
+  magma: {r: 1, g: 0.41960785, b: 0.23921569, a: 1}
+  sunset: {r: 0.9490196, g: 0.69411767, b: 0.20392157, a: 1}
+  linoleum: {r: 0.30980393, g: 0.6392157, b: 0.64705884, a: 1}
+  haze: {r: 0.6627451, g: 0.7882353, b: 0.84705883, a: 1}
+  gum: {r: 1, g: 0.62352943, b: 0.69803923, a: 1}
+  dusk: {r: 0.3529412, g: 0.23921569, b: 0.41960785, a: 1}
+  plaster: {r: 0.9137255, g: 0.8862745, b: 0.8117647, a: 1}
+  wainscot: {r: 0.30980393, g: 0.6392157, b: 0.64705884, a: 1}
+  trim: {r: 0.2901961, g: 0.30980393, b: 0.36862746, a: 1}
+  baseboard: {r: 0.16862746, g: 0.18431373, b: 0.22745098, a: 1}
+  wallTile: {r: 0.89411765, g: 0.93333334, b: 0.9411765, a: 1}
+  wallTileGrout: {r: 0.6627451, g: 0.7882353, b: 0.84705883, a: 1}
+  gymPanel: {r: 0.7882353, g: 0.64705884, b: 0.45490196, a: 1}
+  facadePlinth: {r: 0.5411765, g: 0.49803922, b: 0.41568628, a: 1}
+  wainscotHeight: 1
+  wallTileHeight: 1.6
+  gymPanelHeight: 1.8
+  corridorFloor: {r: 0.43529412, g: 0.6392157, b: 0.60784316, a: 1}
+  corridorFloorAlt: {r: 0.36862746, g: 0.5686275, b: 0.5411765, a: 1}
+  classroomWood: {r: 0.6627451, g: 0.5176471, b: 0.34509805, a: 1}
+  gymWood: {r: 0.8235294, g: 0.68235296, b: 0.47058824, a: 1}
+  wetTile: {r: 0.72156864, g: 0.8, b: 0.827451, a: 1}
+  wetTileGrout: {r: 0.56078434, g: 0.69803923, b: 0.7607843, a: 1}
+  carpet: {r: 0.70980394, g: 0.28235295, b: 0.22745098, a: 1}
+  carpetPattern: {r: 0.84705883, g: 0.41568628, b: 0.30980393, a: 1}
+  ground: {r: 0.5411765, g: 0.49803922, b: 0.41568628, a: 1}
+  groundSpeck: {r: 0.7254902, g: 0.69411767, b: 0.6117647, a: 1}
+  concrete: {r: 0.7254902, g: 0.69411767, b: 0.6117647, a: 1}
+  ceiling: {r: 0.93333334, g: 0.91764706, b: 0.8745098, a: 1}
+  ceilingLine: {r: 0.8117647, g: 0.78431374, b: 0.7137255, a: 1}
+  slidingDoorFrame: {r: 0.54901963, g: 0.41568628, b: 0.27058825, a: 1}
+  slidingDoorPanel: {r: 0.84705883, g: 0.7882353, b: 0.65882355, a: 1}
+  swingDoor: {r: 0.37254903, g: 0.627451, b: 0.6039216, a: 1}
+  swingDoorPanel: {r: 0.49803922, g: 0.70980394, b: 0.6784314, a: 1}
+  doorGlass: {r: 0.6627451, g: 0.7882353, b: 0.84705883, a: 1}
+  handle: {r: 0.9490196, g: 0.69411767, b: 0.20392157, a: 1}
+  windowFrame: {r: 0.7882353, g: 0.81960785, b: 0.8392157, a: 1}
+  windowGlass: {r: 0.66, g: 0.79, b: 0.85, a: 0.28}
+  deskWood: {r: 0.7882353, g: 0.64705884, b: 0.45490196, a: 1}
+  metal: {r: 0.54509807, g: 0.60784316, b: 0.627451, a: 1}
+  darkMetal: {r: 0.2901961, g: 0.30980393, b: 0.36862746, a: 1}
+  lockerSteel: {r: 0.6156863, g: 0.7019608, b: 0.70980394, a: 1}
+  blackboard: {r: 0.24313726, g: 0.36862746, b: 0.2901961, a: 1}
+  stallMale: {r: 0.6627451, g: 0.7882353, b: 0.84705883, a: 1}
+  stallFemale: {r: 1, g: 0.62352943, b: 0.69803923, a: 1}
+  porcelain: {r: 0.95686275, g: 0.94509804, b: 0.9098039, a: 1}
+  fabric: {r: 0.6627451, g: 0.7882353, b: 0.84705883, a: 1}
+  vendingBody: {r: 1, g: 0.41960785, b: 0.23921569, a: 1}
+  stone: {r: 0.6039216, g: 0.64705884, b: 0.6784314, a: 1}
+  trashBin: {r: 0.30980393, g: 0.6392157, b: 0.64705884, a: 1}
+  pixelsPerMeter: 64
+  noise: 0.07
+  pointFilter: 0
+  smoothness: 0.12

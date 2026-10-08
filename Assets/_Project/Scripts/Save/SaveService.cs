@@ -114,7 +114,8 @@ namespace Funseki.Save
         // Saves at the end of the frame, once, so every listener of the same event has already updated its state.
         void Queue(string reason)
         {
-            if (!owner || !settings.autosave) return;
+            // Editor Quick Play never overwrites the real save.
+            if (!owner || !settings.autosave || QuickPlay.Active) return;
             bool first = queuedReason == null;
             queuedReason = first ? reason : $"{queuedReason}+{reason}";
             if (first) StartCoroutine(SaveAtEndOfFrame());

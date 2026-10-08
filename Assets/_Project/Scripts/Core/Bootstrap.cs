@@ -30,11 +30,13 @@ namespace Funseki.Core
 
         void Start()
         {
-            if (string.IsNullOrEmpty(flow.firstScene)) return;
-            if (Application.CanStreamedLevelBeLoaded(flow.firstScene))
-                SceneManager.LoadScene(flow.firstScene);
+            // Editor quick test (Tools > Funseki > Quick Play) skips straight to its scene.
+            string first = QuickPlay.Active ? QuickPlay.Scene : flow.firstScene;
+            if (string.IsNullOrEmpty(first)) return;
+            if (Application.CanStreamedLevelBeLoaded(first))
+                SceneManager.LoadScene(first);
             else
-                Debug.LogError($"[Bootstrap] Scene '{flow.firstScene}' is not in Build Settings.");
+                Debug.LogError($"[Bootstrap] Scene '{first}' is not in Build Settings.");
         }
 
         void OnDestroy()
@@ -48,6 +50,22 @@ namespace Funseki.Core
             if (mode != LoadSceneMode.Single) return;
             if (flow.TryGetStartState(scene.name, out var state))
                 ServiceLocator.Get<GameStateMachine>().ChangeState(state);
+            if (QuickPlay.Active && scene.name == QuickPlay.Scene && QuickPlay.TryGetSpawn(out var spawn))
+                StartCoroutine(DropLeader(spawn));
+        }
+
+        // Quick Play from the Scene View: moves the leading hero to the chosen point once the heroes exist.
+        System.Collections.IEnumerator DropLeader(Vector3 position)
+        {
+            // Give the heroes and the additively loaded school time to appear.
+            yield return new WaitForSeconds(0.5f);
+            var hero = HeroService.CurrentObject;
+            if (hero == null) { Debug.LogWarning("[QuickPlay] No leading hero to move."); yield break; }
+            var cc = hero.GetComponent<CharacterController>();
+            if (cc != null) cc.enabled = false;
+            hero.transform.position = position;
+            if (cc != null) cc.enabled = true;
+            Debug.Log($"[QuickPlay] {hero.name} moved to {position}.");
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

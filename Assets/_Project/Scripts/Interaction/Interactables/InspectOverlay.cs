@@ -25,6 +25,12 @@ namespace Funseki.Interaction
             root.SetActive(true);
         }
 
+        /// <summary>Replaces the bottom hint (the poster shows its drawing controls there).</summary>
+        public void SetHint(string text)
+        {
+            if (hint != null) hint.text = text ?? "";
+        }
+
         public void Hide()
         {
             if (root != null) root.SetActive(false);

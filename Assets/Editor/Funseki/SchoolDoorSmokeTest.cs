@@ -49,7 +49,7 @@ namespace Funseki.School.EditorTools
         {
             Door best = null;
             float bestD = float.MaxValue;
-            foreach (var d in Object.FindObjectsByType<Door>(FindObjectsSortMode.None))
+            foreach (var d in Object.FindObjectsByType<Door>())
             {
                 float dist = Vector3.Distance(d.transform.position, Player().position);
                 if (dist < bestD) { bestD = dist; best = d; }

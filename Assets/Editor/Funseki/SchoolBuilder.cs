@@ -20,6 +20,10 @@ namespace Funseki.School.EditorTools
     {
         public const string ScenePath = KitGenerator.Root + "Scenes/School_Greybox.unity";
         const string RootName = "School";
+        // Furniture from the zone presets: placed once, then left alone so hand edits survive rebuilds.
+        public const string FurnitureRootName = "School_Furniture";
+        // The user's own assets: the builder only makes sure the root exists.
+        public const string PropsRootName = "School_Props";
 
         static KitSettings S;
         static Dictionary<string, GameObject> _prefabs;
@@ -61,6 +65,25 @@ namespace Funseki.School.EditorTools
             var scene = OpenSchoolScene(interactive);
             if (!scene.IsValid()) return false;
 
+            if (IsFrozen(scene))
+            {
+                const string msg = "School_Greybox is frozen for hand editing, so Build School will not touch it. " +
+                                   "Use Tools > Funseki > Unfreeze School first if you really want to rebuild (hand edits in School will be lost).";
+                Debug.LogWarning("[Funseki] " + msg);
+                if (interactive) EditorUtility.DisplayDialog("Build School", msg, "OK");
+                return false;
+            }
+
+            var furnitureRoot = FindRoot(scene, FurnitureRootName);
+            bool migrated = false;
+            if (furnitureRoot == null)
+            {
+                furnitureRoot = CreateRoot(scene, FurnitureRootName);
+                migrated = MigrateFurniture(scene, furnitureRoot.transform);
+            }
+            if (FindRoot(scene, PropsRootName) == null) CreateRoot(scene, PropsRootName);
+            _furnitureRoot = furnitureRoot.transform;
+
             foreach (var go in scene.GetRootGameObjects())
                 if (go.name == RootName) Object.DestroyImmediate(go);
 
@@ -86,13 +109,15 @@ namespace Funseki.School.EditorTools
                 BuildFloors(z);
                 BuildCeilings(z);
                 if (z.kind == ZoneKind.Stair || z.kind == ZoneKind.StairTop) BuildStairs(z);
-                Furnish(z);
+                // Only zones that have no furniture yet: new zones, or the first build.
+                if (_furnitureRoot.Find(z.group + "/Zone_" + z.zoneId) == null) Furnish(z);
             }
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene, ScenePath);
 
             foreach (var w in _warnings) Debug.LogWarning("[Funseki] " + w);
+            if (migrated) Debug.Log("[Funseki] Furniture moved from School to " + FurnitureRootName + " (kept as it was in the scene).");
             Debug.Log($"[Funseki] School built: {zones.Count} zones, {root.GetComponentsInChildren<Transform>().Length} objects -> {ScenePath}");
             return true;
         }

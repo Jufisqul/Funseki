@@ -22,3 +22,16 @@ namespace Funseki.Core
         public float handScale = 1f;
     }
 }
+
+namespace Funseki.Core
+{
+    // Read side of the shared inventory for modules that can't reference Funseki.Inventory (a world object asking
+    // whether the heroes carry the marker). Funseki.Inventory.Inventory implements it; get it via ServiceLocator.
+    public interface IItemBag
+    {
+        /// <summary>The item in the hero's hand, or null.</summary>
+        ItemData Selected { get; }
+        bool Contains(ItemData item);
+        bool Remove(ItemData item);
+    }
+}

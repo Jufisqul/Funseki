@@ -17,6 +17,7 @@ MonoBehaviour:
   allItems:
   - {fileID: 11400000, guid: 5e9ec1ec39f7ad945b9b3427ffa7a253, type: 2}
   - {fileID: 11400000, guid: ff6af591f0de37146afaab4a5562d979, type: 2}
+  - {fileID: 11400000, guid: 7cea4ff7a62bbda43bec98ecb6d62c85, type: 2}
   pickupPromptFormat: "\u0412\u0437\u044F\u0442\u044C \xAB{0}\xBB"
   wontWorkLine: "\u041D\u0435 \u0441\u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442"
   fullLine: "\u0411\u043E\u043B\u044C\u0448\u0435 \u043D\u0435 \u0443\u043D\u0435\u0441\u0443"

@@ -6,8 +6,9 @@ namespace Funseki.Interaction
 {
     // Base of the slice's world objects (GDD 5.9): E with the prompt from InteractableData, the repeat rule,
     // first-time / repeat / teacher-nearby lines per hero through IBarkService, world flags and «Шум».
-    // On its own it is an «inspect» object that only talks; WaterTap, VendingMachine, RyutaLocker, DrawablePoster
-    // and BookletRack add their behaviour by overriding OnUsed / RestoreState.
+    // On its own it is an «inspect» object that only talks; WaterTap, VendingMachine, RyutaLocker, DrawablePoster,
+    // BookletRack and ShowerHead add their behaviour by overriding OnUsed / RestoreState. allowedHeroes / onlyOnDays
+    // of the data hide the E prompt from other heroes and on other days.
     //
     // State lives in WorldFlags under obj_<objectId>_<name> (uses, day and whatever the object adds), so it goes into
     // the save with the world and comes back when the scene loads (RestoreState in Start).
@@ -42,6 +43,8 @@ namespace Funseki.Interaction
             if (data == null) return false;
             if (!string.IsNullOrEmpty(data.requiredFlag) && !Flags.GetFlag(data.requiredFlag)) return false;
             if (!string.IsNullOrEmpty(data.blockedByFlag) && Flags.GetFlag(data.blockedByFlag)) return false;
+            if (!IsAllowed(data.allowedHeroes, HeroOf(hero))) return false;
+            if (data.onlyOnDays is { Length: > 0 } && System.Array.IndexOf(data.onlyOnDays, CurrentDay) < 0) return false;
             switch (data.repeat)
             {
                 case InteractRepeat.Once when Uses > 0: return false;
@@ -102,6 +105,13 @@ namespace Funseki.Interaction
 
         protected static HeroId HeroOf(GameObject hero) =>
             hero != null && HeroService.TryGetId(hero, out var id) ? id : HeroService.Current;
+
+        /// <summary>Empty list = every hero.</summary>
+        protected static bool IsAllowed(HeroId[] heroes, HeroId hero) =>
+            heroes == null || heroes.Length == 0 || System.Array.IndexOf(heroes, hero) >= 0;
+
+        /// <summary>The shared inventory (null in scenes without the Inventory service).</summary>
+        protected static IItemBag Bag => ServiceLocator.TryGet<IItemBag>(out var bag) ? bag : null;
 
         protected void Report(GameObject hero, string action) => GameEvents.RaiseObjectUsed(hero, gameObject, objectId, action);
 

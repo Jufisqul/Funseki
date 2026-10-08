@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe1131fdad89324ebbd8f4702b4c7bf, type: 3}
   m_Name: Interactable_Booklet
   m_EditorClassIdentifier: Funseki.Interaction::Funseki.Interaction.BookletData
-  prompt: "\u0412\u0437\u044F\u0442\u044C \u0431\u0443\u043A\u043B\u0435\u0442"
-  repeat: 2
+  prompt: "\u041F\u043E\u0447\u0438\u0442\u0430\u0442\u044C \u0436\u0443\u0440\u043D\u0430\u043B"
+  repeat: 0
+  allowedHeroes: 00000000i
+  onlyOnDays: 01000000i
   firstLines:
-  - "\u041F\u043E\u043B\u043D\u0430\u044F \u0437\u0430\u043B\u0443\u043F\u0430."
-  repeatLines:
-  - "\u041F\u043E\u043B\u043D\u0430\u044F \u0437\u0430\u043B\u0443\u043F\u0430."
+  - "\u041D\u0443 \u0438 \u0437\u0430\u043B\u0443\u043F\u0430."
+  repeatLines: []
   heroLines: []
   teacherNearbyLines: []
   teacherRadius: 12

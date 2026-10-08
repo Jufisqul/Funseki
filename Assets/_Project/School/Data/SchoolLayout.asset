@@ -474,7 +474,7 @@ MonoBehaviour:
       width: 10
       height: 6
     heightFloors: 1
-    unlockDay: 2
+    unlockDay: 1
     autoWindows: 1
     openGroup: 
     stairEntry: 1
@@ -497,7 +497,7 @@ MonoBehaviour:
       width: 4
       height: 6
     heightFloors: 1
-    unlockDay: 2
+    unlockDay: 1
     autoWindows: 0
     openGroup: 
     stairEntry: 1
@@ -520,7 +520,7 @@ MonoBehaviour:
       width: 8
       height: 6
     heightFloors: 1
-    unlockDay: 2
+    unlockDay: 1
     autoWindows: 1
     openGroup: 
     stairEntry: 1
@@ -548,7 +548,7 @@ MonoBehaviour:
       width: 22
       height: 16
     heightFloors: 2
-    unlockDay: 2
+    unlockDay: 1
     autoWindows: 1
     openGroup: 
     stairEntry: 1
@@ -576,7 +576,7 @@ MonoBehaviour:
       width: 6
       height: 5
     heightFloors: 1
-    unlockDay: 2
+    unlockDay: 1
     autoWindows: 0
     openGroup: 
     stairEntry: 1
@@ -599,7 +599,7 @@ MonoBehaviour:
       width: 6
       height: 5
     heightFloors: 1
-    unlockDay: 2
+    unlockDay: 1
     autoWindows: 0
     openGroup: 
     stairEntry: 1
@@ -622,7 +622,7 @@ MonoBehaviour:
       width: 4
       height: 10
     heightFloors: 1
-    unlockDay: 2
+    unlockDay: 1
     autoWindows: 1
     openGroup: 
     stairEntry: 1
@@ -645,7 +645,7 @@ MonoBehaviour:
       width: 22
       height: 12
     heightFloors: 1
-    unlockDay: 3
+    unlockDay: 1
     autoWindows: 1
     openGroup: 
     stairEntry: 1
@@ -673,7 +673,7 @@ MonoBehaviour:
       width: 12
       height: 10
     heightFloors: 1
-    unlockDay: 3
+    unlockDay: 1
     autoWindows: 1
     openGroup: 
     stairEntry: 1
@@ -1057,7 +1057,7 @@ MonoBehaviour:
       width: 16
       height: 7
     heightFloors: 1
-    unlockDay: 4
+    unlockDay: 1
     autoWindows: 1
     openGroup: 
     stairEntry: 1
@@ -1315,7 +1315,7 @@ MonoBehaviour:
       width: 10
       height: 10
     heightFloors: 1
-    unlockDay: 5
+    unlockDay: 1
     autoWindows: 1
     openGroup: 
     stairEntry: 1

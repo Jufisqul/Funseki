@@ -94,7 +94,11 @@ namespace Funseki.Dialogue
         public float barkMaxWidth = 460f;
         public Color barkBubbleColor = new(1f, 0.98f, 0.94f, 0.95f);
         public Color barkTextColor = new(0.12f, 0.12f, 0.14f);
-        [Tooltip("Barks farther than this from the camera are not shown, m")]
-        public float barkMaxDistance = 25f;
+        [Tooltip("Barks farther than this from the active hero (the camera in scenes without heroes) are not shown, m")]
+        public float barkMaxDistance = 12f;
+        [Tooltip("Hide a bark when a wall is between the camera and the speaker's head")]
+        public bool barkHideBehindWalls = true;
+        [Tooltip("Layers that block barks (characters and triggers are always ignored)")]
+        public LayerMask barkOcclusionMask = ~0;
     }
 }

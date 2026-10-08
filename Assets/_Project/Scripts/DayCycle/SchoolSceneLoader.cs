@@ -11,7 +11,7 @@ namespace Funseki.DayCycle
         [SerializeField] string sceneName = "School_Greybox";
         [Tooltip("Used in the Editor when the scene is not in Build Settings")]
         [SerializeField] string scenePath = "Assets/_Project/School/Scenes/School_Greybox.unity";
-        [SerializeField] string[] keepRoots = { "School" };
+        [SerializeField] string[] keepRoots = { "School", "School_Furniture", "School_Props" };
         [Tooltip("The main entrance (the heroes start just inside it): doors within doorRadius of this point open at load")]
         [SerializeField] Vector3 mainEntrance = new(25.2f, 0f, -42f);
         [SerializeField] float doorRadius = 2f;

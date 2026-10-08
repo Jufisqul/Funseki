@@ -990,6 +990,24 @@
                                          "processors":  "",
                                          "interactions":  "",
                                          "initialStateCheck":  false
+                                     },
+                                     {
+                                         "name":  "Paint",
+                                         "type":  "Button",
+                                         "id":  "0d7c4a1e-6b2f-4f0e-9a51-3c8e2b7d9f10",
+                                         "expectedControlType":  "Button",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  false
+                                     },
+                                     {
+                                         "name":  "Cursor",
+                                         "type":  "Value",
+                                         "id":  "5a9e1f3b-2c7d-4e8a-b6f4-1d0c9e8b7a21",
+                                         "expectedControlType":  "Vector2",
+                                         "processors":  "",
+                                         "interactions":  "",
+                                         "initialStateCheck":  true
                                      }
                                  ],
                      "bindings":  [
@@ -1122,6 +1140,39 @@
                                           "processors":  "",
                                           "groups":  "Keyboard\u0026Mouse",
                                           "action":  "Point",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "b3e8d2a4-7f61-4c9b-8e0a-2f5d1c6b9e33",
+                                          "path":  "<Mouse\u003e/leftButton",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Keyboard\u0026Mouse",
+                                          "action":  "Paint",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "c4f9e3b5-8a72-4d0c-9f1b-3a6e2d7c0f44",
+                                          "path":  "<Gamepad\u003e/buttonSouth",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "Paint",
+                                          "isComposite":  false,
+                                          "isPartOfComposite":  false
+                                      },
+                                      {
+                                          "name":  "",
+                                          "id":  "d5a0f4c6-9b83-4e1d-a02c-4b7f3e8d1a55",
+                                          "path":  "<Gamepad\u003e/leftStick",
+                                          "interactions":  "",
+                                          "processors":  "",
+                                          "groups":  "Gamepad",
+                                          "action":  "Cursor",
                                           "isComposite":  false,
                                           "isPartOfComposite":  false
                                       }

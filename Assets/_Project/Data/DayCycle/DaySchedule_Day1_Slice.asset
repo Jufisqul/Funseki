@@ -33,7 +33,7 @@ MonoBehaviour:
     goToLessonObjective: 
     end:
       goalFlag: day1_break1_goal
-      maxDuration: 300
+      maxDuration: 120
   - id: lesson_fizra
     type: 2
     state: 4

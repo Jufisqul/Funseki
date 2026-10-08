@@ -36,6 +36,12 @@ namespace Funseki.Interaction
         public string prompt = "Осмотреть";
         public InteractRepeat repeat = InteractRepeat.Always;
 
+        [Header("Who and when")]
+        [Tooltip("Heroes that get the E prompt; empty = any hero")]
+        public HeroId[] allowedHeroes;
+        [Tooltip("School days the object works on; empty = every day")]
+        public int[] onlyOnDays;
+
         [Header("Lines (a random one from the list)")]
         [Tooltip("The first use in the game")]
         [TextArea(1, 3)] public string[] firstLines;

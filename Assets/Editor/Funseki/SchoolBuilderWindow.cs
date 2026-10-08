@@ -60,14 +60,13 @@ namespace Funseki.School.EditorTools
         public static void Capture()
         {
             var settings = KitGenerator.LoadOrCreateSettings();
-            GameObject source = null;
-            for (int i = 0; i < SceneManager.sceneCount && source == null; i++)
-            {
-                var s = SceneManager.GetSceneAt(i);
-                if (s.path == SchoolBuilder.ScenePath && s.isLoaded)
-                    source = s.GetRootGameObjects().FirstOrDefault(g => g.name == "School");
-            }
-            if (source == null)
+            // The building, the preset furniture and the hand-placed props.
+            var roots = new[] { "School", SchoolBuilder.FurnitureRootName, SchoolBuilder.PropsRootName };
+            var scene = SceneManager.GetSceneByPath(SchoolBuilder.ScenePath);
+            var sources = scene.IsValid() && scene.isLoaded
+                ? scene.GetRootGameObjects().Where(g => roots.Contains(g.name)).ToList()
+                : new System.Collections.Generic.List<GameObject>();
+            if (!sources.Any(g => g.name == "School"))
             {
                 Debug.LogError("[Funseki] Open School_Greybox.unity and build the school before capturing.");
                 return;
@@ -78,8 +77,9 @@ namespace Funseki.School.EditorTools
                 var preview = EditorSceneManager.NewPreviewScene();
                 try
                 {
-                    var clone = Object.Instantiate(source);
+                    var clone = new GameObject("Capture");
                     SceneManager.MoveGameObjectToScene(clone, preview);
+                    foreach (var source in sources) Object.Instantiate(source, clone.transform);
 
                     float cut = floor * settings.floorHeight - settings.slabThickness - 0.01f;
                     foreach (var t in clone.GetComponentsInChildren<Transform>(true))

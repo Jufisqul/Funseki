@@ -63,6 +63,7 @@ namespace Funseki.EditorTools
             var font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(FontPath);
             var settings = EnsureFizraData();
             var prefab = BuildPrefab(settings, font);
+            NpcModelsSetup.DressLessonPrefab();
             var lesson = EnsureLesson(prefab);
             FixSchedule();
 

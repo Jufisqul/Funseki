@@ -1,12 +1,134 @@
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Funseki.School;
 
 namespace Funseki.School.EditorTools
 {
     // Placeholder furniture per zone preset (ZoneData.furnish). Positions are in plan meters.
+    // Furniture lives in its own scene root (School_Furniture/<group>/Zone_<id>): Build School places it
+    // only for zones that have none yet, so moved, deleted or added pieces survive rebuilds.
+    // Tools > Funseki > Refurnish ... puts zones back to their presets on request.
     public static partial class SchoolBuilder
     {
+        static Transform _furnitureRoot;
+
+        [MenuItem("Tools/Funseki/Refurnish Selected Zones")]
+        static void RefurnishSelected()
+        {
+            var ids = new HashSet<string>();
+            foreach (var go in Selection.gameObjects)
+                for (var t = go.transform; t != null; t = t.parent)
+                    if (t.name.StartsWith("Zone_")) { ids.Add(t.name.Substring("Zone_".Length)); break; }
+            if (ids.Count == 0)
+            {
+                Debug.LogWarning("[Funseki] Select an object inside a Zone_<id> (School or School_Furniture) first.");
+                return;
+            }
+            if (!EditorUtility.DisplayDialog("Refurnish zones",
+                    $"Put the preset furniture back in {string.Join(", ", ids)}? Hand edits to the furniture of these zones will be lost.",
+                    "Refurnish", "Cancel")) return;
+            Refurnish(ids);
+        }
+
+        [MenuItem("Tools/Funseki/Refurnish All Zones")]
+        static void RefurnishAll()
+        {
+            if (!EditorUtility.DisplayDialog("Refurnish all zones",
+                    "Replace all furniture in School_Furniture with the presets? Every hand edit to the furniture will be lost. School_Props is not touched.",
+                    "Refurnish all", "Cancel")) return;
+            Refurnish(null);
+        }
+
+        // Moves the furniture out of School and adds School_Props without rebuilding anything.
+        [MenuItem("Tools/Funseki/Split Furniture And Props Roots (no rebuild)")]
+        public static void SplitRoots()
+        {
+            var scene = OpenSchoolScene(true);
+            if (!scene.IsValid()) return;
+            bool migrated = false;
+            if (FindRoot(scene, FurnitureRootName) == null)
+                migrated = MigrateFurniture(scene, CreateRoot(scene, FurnitureRootName).transform);
+            if (FindRoot(scene, PropsRootName) == null) CreateRoot(scene, PropsRootName);
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene);
+            Debug.Log($"[Funseki] {FurnitureRootName} and {PropsRootName} are ready in {scene.path}" +
+                      (migrated ? "; furniture moved out of School as it was." : "."));
+        }
+
+        static void Refurnish(HashSet<string> ids)
+        {
+            var scene = SceneManager.GetSceneByPath(ScenePath);
+            if (!scene.IsValid() || !scene.isLoaded)
+            {
+                Debug.LogError("[Funseki] Open School_Greybox.unity first.");
+                return;
+            }
+            S = KitGenerator.LoadOrCreateSettings();
+            _warnings = new List<string>();
+            if (!LoadPrefabs()) return;
+            var layout = SchoolLayoutDefaults.LoadOrCreate();
+            _furnitureRoot = (FindRoot(scene, FurnitureRootName) ?? CreateRoot(scene, FurnitureRootName)).transform;
+
+            int n = 0;
+            foreach (var z in layout.zones.Where(z => z != null && !string.IsNullOrEmpty(z.zoneId)))
+            {
+                if (ids != null && !ids.Contains(z.zoneId)) continue;
+                var old = _furnitureRoot.Find(z.group + "/Zone_" + z.zoneId);
+                if (old != null) Undo.DestroyObjectImmediate(old.gameObject);
+                Furnish(z);
+                var created = _furnitureRoot.Find(z.group + "/Zone_" + z.zoneId);
+                if (created != null) Undo.RegisterCreatedObjectUndo(created.gameObject, "Refurnish zones");
+                n++;
+            }
+            foreach (var w in _warnings) Debug.LogWarning("[Funseki] " + w);
+            EditorSceneManager.MarkSceneDirty(scene);
+            Debug.Log($"[Funseki] Refurnished {n} zone(s). Save the scene to keep it.");
+        }
+
+        static GameObject FindRoot(Scene scene, string name) =>
+            scene.GetRootGameObjects().FirstOrDefault(g => g.name == name);
+
+        static GameObject CreateRoot(Scene scene, string name)
+        {
+            var go = new GameObject(name);
+            SceneManager.MoveGameObjectToScene(go, scene);
+            return go;
+        }
+
+        static Transform FindOrCreateChild(Transform parent, string name)
+        {
+            var t = parent.Find(name);
+            if (t != null) return t;
+            t = new GameObject(name).transform;
+            t.SetParent(parent, false);
+            return t;
+        }
+
+        static Transform FurnitureZone(ZoneData z) =>
+            FindOrCreateChild(FindOrCreateChild(_furnitureRoot, z.group.ToString()), "Zone_" + z.zoneId);
+
+        // Scenes built before the split kept furniture in School/<group>/Zone_<id>/Props.
+        // Move it out as it is (with any hand edits) before School is rebuilt.
+        static bool MigrateFurniture(Scene scene, Transform furniture)
+        {
+            var school = FindRoot(scene, RootName);
+            if (school == null) return false;
+            bool any = false;
+            foreach (Transform group in school.transform)
+            foreach (Transform zone in group)
+            {
+                var props = zone.Find("Props");
+                if (props == null) continue;
+                var target = FindOrCreateChild(FindOrCreateChild(furniture, group.name), zone.name);
+                foreach (var child in props.Cast<Transform>().ToList()) child.SetParent(target, true);
+                any = true;
+            }
+            return any;
+        }
         // Local footprint of each prop: x along the prop, y = depth along its +Z.
         static readonly Dictionary<string, Vector2> Footprints = new Dictionary<string, Vector2>
         {
@@ -222,7 +344,7 @@ namespace Funseki.School.EditorTools
             var rot = Quaternion.Euler(0f, yaw, 0f);
             var center = new Vector3(cx, Base(z.floor) + yOffset, -cy);
             var pivot = center - rot * new Vector3(fp.x * 0.5f, 0f, fp.y * 0.5f);
-            return Spawn(name, Child(z, "Props"), pivot, yaw);
+            return Spawn(name, FurnitureZone(z), pivot, yaw);
         }
 
         // Puts a prop with its back against a wall of the zone, centered at `along`.

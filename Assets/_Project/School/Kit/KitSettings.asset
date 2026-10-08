@@ -41,7 +41,7 @@ MonoBehaviour:
   stageHeight: 1
   wallColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
   floorColor: {r: 0.35, g: 0.35, b: 0.37, a: 1}
-  doorColor: {r: 0, g: 0.3167702, b: 1, a: 1}
+  doorColor: {r: 0.9433962, g: 0.6630473, b: 0.88521063, a: 1}
   propColor: {r: 0.95, g: 0.55, b: 0.15, a: 1}
   interactiveColor: {r: 1, g: 0.85, b: 0.1, a: 1}
   gridTextureSize: 256

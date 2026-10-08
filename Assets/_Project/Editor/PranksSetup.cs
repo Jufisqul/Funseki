@@ -65,6 +65,7 @@ namespace Funseki.EditorTools
             BuildNoiseAndCaught(root, a);
             BuildHideZones(root);
             BuildWhistle(root, a);
+            NpcModelsSetup.DressSlice(slice);
 
             EditorSceneManager.MarkSceneDirty(slice);
             EditorSceneManager.SaveScene(slice);

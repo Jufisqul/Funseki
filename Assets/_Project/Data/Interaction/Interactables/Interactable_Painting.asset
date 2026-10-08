@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85348067cbc27f042880cd6813536c76, type: 3}
+  m_Name: Interactable_Painting
+  m_EditorClassIdentifier: Funseki.Interaction::Funseki.Interaction.PosterData
+  prompt: "\u0420\u0430\u0441\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043A\u0430\u0440\u0442\u0438\u043D\u0443"
+  repeat: 2
+  allowedHeroes: 
+  onlyOnDays: 
+  firstLines:
+  - "\u0424\u0443\u0434\u0437\u0438. \u041A\u0430\u043A \u0443 \u0432\u0441\u0435\u0445."
+  repeatLines:
+  - "\u0413\u043E\u0440\u0430 \u043A\u0430\u043A \u0433\u043E\u0440\u0430."
+  heroLines:
+  - hero: 1
+    first:
+    - "\u041F\u043E\u0434\u043F\u0438\u0441\u044C \xAB\u0414\u0438\u0440\u0435\u043A\u0442\u043E\u0440, 1974\xBB. \u041C\u043D\u043E\u0433\u043E\u0435 \u043E\u0431\u044A\u044F\u0441\u043D\u044F\u0435\u0442."
+    repeat: []
+  - hero: 2
+    first:
+    - "\u0413\u043E\u043B\u043E\u0441 \u0433\u043E\u0432\u043E\u0440\u0438\u0442, \u0424\u0443\u0434\u0437\u0438 \u0433\u0440\u0443\u0441\u0442\u0438\u0442."
+    repeat: []
+  teacherNearbyLines: []
+  teacherRadius: 12
+  noiseAmount: 0
+  noiseReason: 
+  requiredFlag: 
+  blockedByFlag: 
+  flagsOnFirstUse: []
+  countersOnUse: []
+  font: {fileID: 11400000, guid: 8969047a57a7a1a48b98b080e76dead6, type: 2}
+  closeHint: "Esc / E \u2014 \u0437\u0430\u043A\u0440\u044B\u0442\u044C"
+  hintFontSize: 24
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  panelColor: {r: 0.08, g: 0.08, b: 0.1, a: 0.85}
+  cleanTexture: {fileID: 2800000, guid: cf27ecf6db48bf74688441f8ae073aab, type: 3}
+  drawnTextures:
+  - {fileID: 2800000, guid: 01e7991afa8785447a18434c8c3c665f, type: 3}
+  - {fileID: 2800000, guid: 2f97be263d09f4e45a1315f9daf69ed9, type: 3}
+  - {fileID: 2800000, guid: 63a1537ee596c0a46aedb824a6e7f480, type: 3}
+  drawItem: {fileID: 11400000, guid: 5e9ec1ec39f7ad945b9b3427ffa7a253, type: 2}
+  drawHeroes: 0000000002000000i
+  drawPrompt: "\u0420\u0430\u0437\u0440\u0438\u0441\u043E\u0432\u0430\u0442\u044C"
+  drawnInspectLines:
+  - "\u0428\u0435\u0434\u0435\u0432\u0440. \u041D\u0435 \u0442\u0440\u043E\u0433\u0430\u044E."
+  drawHint: "\u041B\u041A\u041C / A \u2014 \u0440\u0438\u0441\u043E\u0432\u0430\u0442\u044C \xB7 Esc / E \u2014 \u0433\u043E\u0442\u043E\u0432\u043E"
+  inkColor: {r: 0.8, g: 0.05, b: 0.08, a: 1}
+  brushRadius: 4
+  cursorSpeed: 0.6
+  cameraPriority: 60
+  minPaintedPixels: 40
+  watchCheckInterval: 0.5
+  drawLines:
+  - "\u0424\u0443\u0434\u0437\u0438 \u0441\u0442\u0430\u043B\u043E \u0432\u0435\u0441\u0435\u043B\u0435\u0435."
+  - "\u0422\u0435\u043F\u0435\u0440\u044C \u0442\u0443\u0442 \u0435\u0441\u0442\u044C \u0441\u044E\u0436\u0435\u0442."
+  - "\u041C\u0443\u0437\u0435\u0439 \u043E\u0442\u043E\u0440\u0432\u0451\u0442 \u0441 \u0440\u0443\u043A\u0430\u043C\u0438."
+  heroDrawLines:
+  - hero: 0
+    first:
+    - "\u0413\u043E\u043B\u043E\u0441\u0430 \u0432 \u0433\u043E\u043B\u043E\u0432\u0435 \u0430\u043F\u043B\u043E\u0434\u0438\u0440\u0443\u044E\u0442."
+    repeat: []
+  drawSeenLines:
+  - "\u041E\u0439."
+  seenMeansCaught: 1
+  caughtScene: {fileID: 0}
+  drawNoiseAmount: 1
+  drawNoiseReason: poster_drawn
+  drawnFlag: poster_drawn

@@ -6,13 +6,14 @@ namespace Funseki.Interaction
 {
     // A close-up the hero opens with E (Рюта's locker, the booklet): holds the game in the Dialogue state
     // (hero input off, cursor free, the bell waits), reads the "Inspect" action map (Esc / E / B — close,
-    // A / D / arrows / d-pad / shoulders — previous / next, pointer position) and returns the previous state on End.
+    // A / D / arrows / d-pad / shoulders — previous / next, pointer position, LMB / A paint, left stick cursor)
+    // and returns the previous state on End.
     public class InspectSession
     {
         public const string MapName = "Inspect";
 
         readonly InputActionMap map;
-        readonly InputAction close, next, previous, point;
+        readonly InputAction close, next, previous, point, paint, cursor;
         GameState before = GameState.None;
         int openedFrame = -1, closedFrame = -1;
 
@@ -25,6 +26,8 @@ namespace Funseki.Interaction
             next = map.FindAction("Next", true);
             previous = map.FindAction("Previous", true);
             point = map.FindAction("Point", true);
+            paint = map.FindAction("Paint", false);
+            cursor = map.FindAction("Cursor", false);
         }
 
         /// <summary>False in the frame the view closed, so the same E press doesn't open it again.</summary>
@@ -37,6 +40,12 @@ namespace Funseki.Interaction
         public int Step => !Active ? 0 : next.WasPressedThisFrame() ? 1 : previous.WasPressedThisFrame() ? -1 : 0;
 
         public Vector2 Pointer => point.ReadValue<Vector2>();
+
+        /// <summary>LMB / A held (drawing on a poster).</summary>
+        public bool PaintHeld => Active && paint != null && paint.IsPressed();
+
+        /// <summary>Gamepad stick for a virtual cursor; zero without a gamepad.</summary>
+        public Vector2 CursorMove => Active && cursor != null ? cursor.ReadValue<Vector2>() : Vector2.zero;
 
         /// <summary>The pointer moved this frame (switches the hover back from the gamepad to the mouse).</summary>
         public bool PointerMoved => Mouse.current != null && Mouse.current.delta.ReadValue().sqrMagnitude > 0.01f;

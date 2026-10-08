@@ -62,13 +62,13 @@ Docs/                 отчёты (cleanup_report.md)
 - Инвентарь общий на троих: сервис `Inventory` (ServiceLocator, `ToJson/LoadJson`), правила и тексты в `Data/Inventory/InventorySettings.asset`, предметы в `Data/Inventory/Items`. На герое `HeroItemUser` (колесо, ЛКМ/ПКМ) и `HeldItemView` (предмет в правой руке). `PickupItem` кладёт предмет и прячется. Реплики героя — `GameEvents.OnHeroBark`, показывает `Funseki.UI.BarkView`.
 - Тестовая сцена `Scenes/Interaction_Test`: `Tools > Funseki > Interaction > Build Interaction_Test scene`, Play прямо из неё.
 
-## Интерактивные предметы среза (Funseki.Interaction, GDD 5.9)
+## Интерактивные предметы среза (Funseki.Interaction, GDD 5.9 и спеки «Интерактивные предметы» в Notion)
 
-- База: `InteractableObject` (IInteractable) + `InteractableData` (подсказка, повторяемость Once / OncePerDay / Always, реплики первый раз / повтор по каждому герою, реплика при учителе рядом, флаги, «Шум»). Реплики идут через `IBarkService`. Состояние объекта хранится в WorldFlags под `obj_<objectId>_<имя>` и восстанавливается в Start, поэтому попадает в сейв вместе с миром.
-- Предметы: `WaterTap` (кран, бурая вода при первом открытии), `VendingMachine` (банки из пула, заклинило / сломался, шансы в данных), `RyutaLocker` (дверца, CM-камера крупного плана, подписи `InspectDetail` по наведению), `DrawablePoster` (IItemTarget, маркер меняет текстуру, учитель видит → `OnNoiseMade`), `BookletRack` (UI-буклет со страницами). Данные в `Data/Interaction/Interactables`, плейсхолдеры в `Art/Placeholders/Interactables`.
-- Шкафчик и буклет держат игру в состоянии Dialogue (ввод героя выключен, курсор свободен) и читают карту ввода `Inspect` (Esc / E / B, A / D / стрелки / d-pad, указатель).
-- `GameEvents.OnObjectUsed(hero, obj, objectId, action)` — что сделал предмет (tap_opened, machine_broken, poster_drawn…).
-- Расстановка: `Tools > Funseki > Interaction > Place slice interactables in Slice_Day1` (пересобирает только корень `Interactables` и маркер во дворе, данные не трогает).
+- База: `InteractableObject` (IInteractable) + `InteractableData` (подсказка, повторяемость Once / OncePerDay / Always, кто может — `allowedHeroes`, в какие дни — `onlyOnDays`, реплики первый раз / повтор по каждому герою, реплика при учителе рядом, флаги, «Шум»). Реплики идут через `IBarkService`. Состояние объекта хранится в WorldFlags под `obj_<objectId>_<имя>` и восстанавливается в Start, поэтому попадает в сейв вместе с миром. Инвентарь предметы видят через `IItemBag` (Core, его реализует `Inventory`).
+- Предметы: `WaterTap` (кран, бурая вода при первом открытии, учитель кричит «Не трать воду!»), `VendingMachine` (банки из пула, заклинило / сломался, шансы в данных), `RyutaLocker` (спека «Кабинки»: дверца, CM-камера крупного плана, подписи `InspectDetail` по наведению), `DrawablePoster` (плакаты и картины: Рюта / Кайто с маркером в инвентаре по E или ЛКМ рисуют прямо по картинке — камера крупного плана, ЛКМ / A, курсор стиком, Esc / E готово; один раз на картинку; учитель видит — сразу `OnCaught`; после перезагрузки вместо рисунка одна из `drawnTextures`), `BookletRack` (спека «Стелаж с журналами»: только Рюта, один раз, день 1), `ShowerHead` (душ: E вкл / выкл; Рюта / Кайто с «Краской» в руке заливают её в лейку, флаг `shower_paint_ready`, дальше душ льёт краской). Данные в `Data/Interaction/Interactables`, плейсхолдеры в `Art/Placeholders/Interactables`, предмет `Data/Inventory/Items/Item_Paint`.
+- Шкафчик, буклет и рисование держат игру в состоянии Dialogue (ввод героя выключен, курсор свободен) и читают карту ввода `Inspect` (Esc / E / B, A / D / стрелки / d-pad, указатель, Paint — ЛКМ / A, Cursor — левый стик).
+- `GameEvents.OnObjectUsed(hero, obj, objectId, action)` — что сделал предмет (tap_opened, machine_broken, poster_drawn, shower_painted…).
+- Расстановка: `Tools > Funseki > Interaction > Place slice interactables in Slice_Day1` (пересобирает весь корень `Interactables`, данные не трогает) или `Add spec items to Slice_Day1 (keeps the rest)` (пересобирает только `Interactables/Spec` — ещё 3 крана, 6 плакатов, 4 картины, душ в туалете М, краска у кабинета рисования — и плакат в коридоре). Душ стоит в туалете М 1-го этажа временно: душевые по плану на 2-м этаже.
 
 ## Сохранение (Funseki.Save)
 
@@ -132,6 +132,13 @@ Docs/                 отчёты (cleanup_report.md)
 - Подсказки: триггеры BreakTime / InteractionTarget / ItemAdded / HeroSwitched, показанные запоминаются флагом `hud_hint_<id>`. Подписи по последнему устройству ввода: по умолчанию клавиатура и мышь, на геймпад переключаются только после нажатия кнопки или движения стика.
 - `GameStateDebugLabel` скрыт, пока есть HUD; F1 показывает его.
 - Сборка: `Tools > Funseki > UI > Setup HUD in Slice_Day1` (данные создаёт один раз, корень `HUD` пересобирает).
+
+## Стиль школы (палитра и текстуры)
+
+- Палитра — `Data/Visual/SchoolPalette.asset` (`Funseki.Core.SchoolPalette`): 8 цветов визуальной доски + цвета поверхностей (стены, полы по типам зон, двери, мебель), плотность текстур, шум, point-фильтр.
+- `Tools > Funseki > School Style > Apply Palette and Textures to School` печёт текстуры (`Art/School/Textures`), URP Lit материалы `M_School_*` (`Art/School/Materials`) и детальные меши `SM_School_*` (`Art/School/Meshes`: парта, стул, стол учителя, доска, скамья, двухъярусная кровать, кабинка, урна, плиты пола с потолком снизу, рама и стекло окна) и назначает их рендерерам School_Greybox на месте: объекты не двигаются, Build School не нужен. Материал пола и стен выбирается по зоне (`Zone_<id>` в иерархии). В проёмы окон добавляется `Style_Window` без коллайдера.
+- Первый Apply пишет `Art/School/SchoolStyleBackup.json`; `Revert School to Greybox Look` возвращает серую коробку. `Rebake Textures and Materials Only` — после правки палитры. `Capture Before/After Shots` — кадры в `Docs/SchoolStyle`.
+- Generate Kit материалы `M_School_*` не трогает: стиль держится на переопределениях в сцене.
 
 ## Ядро (Funseki.Core)
 

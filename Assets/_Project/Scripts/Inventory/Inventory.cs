@@ -8,7 +8,7 @@ namespace Funseki.Inventory
     // The shared inventory of all three heroes (GDD 5.1): up to InventorySettings.capacity items,
     // one of them selected (in the hand). Registered in ServiceLocator by InventoryService.
     // Changes raise GameEvents.OnItemAdded / OnItemRemoved / OnSelectedItemChanged.
-    public class Inventory
+    public class Inventory : IItemBag
     {
         [Serializable]
         struct SaveData

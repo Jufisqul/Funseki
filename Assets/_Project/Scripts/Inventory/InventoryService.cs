@@ -21,6 +21,7 @@ namespace Funseki.Inventory
             if (ServiceLocator.IsRegistered<Inventory>()) { Destroy(gameObject); return; }
             inventory = new Inventory(settings);
             ServiceLocator.Register(inventory);
+            ServiceLocator.Register<IItemBag>(inventory);
             SaveRegistry.Register(this);
         }
 
@@ -37,7 +38,10 @@ namespace Funseki.Inventory
             if (inventory == null) return;
             SaveRegistry.Unregister(this);
             if (ServiceLocator.TryGet<Inventory>(out var current) && current == inventory)
+            {
                 ServiceLocator.Unregister<Inventory>();
+                ServiceLocator.Unregister<IItemBag>();
+            }
         }
     }
 }

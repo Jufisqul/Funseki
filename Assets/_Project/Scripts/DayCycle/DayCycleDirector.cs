@@ -76,7 +76,9 @@ namespace Funseki.DayCycle
             if (restored) { Reenter(); return; }
             s.day = schedule.day;
             Debug.Log($"[DayCycle] Day {s.day} ({schedule.name}): {schedule.phases.Count} phases.");
-            StartPhase(0);
+            // Editor Quick Play can start the day at a later phase (e.g. skip the intro cutscene).
+            int first = QuickPlay.Active ? Mathf.Max(0, schedule.phases.FindIndex(p => p.id == QuickPlay.Phase)) : 0;
+            StartPhase(first);
         }
 
         void Update()

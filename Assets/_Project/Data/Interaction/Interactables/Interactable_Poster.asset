@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Funseki.Interaction::Funseki.Interaction.PosterData
   prompt: "\u0420\u0430\u0441\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043F\u043B\u0430\u043A\u0430\u0442"
   repeat: 2
+  allowedHeroes: 
+  onlyOnDays: 
   firstLines:
   - "\xAB\u0427\u0438\u0441\u0442\u044B\u0435 \u0440\u0443\u043A\u0438 \u2014 \u0441\u0432\u0435\u0442\u043B\u043E\u0435 \u0431\u0443\u0434\u0443\u0449\u0435\u0435\xBB. \u0421\u043F\u043E\u0440\u043D\u043E."
   repeatLines:
@@ -35,19 +37,42 @@ MonoBehaviour:
   blockedByFlag: 
   flagsOnFirstUse: []
   countersOnUse: []
+  font: {fileID: 11400000, guid: 8969047a57a7a1a48b98b080e76dead6, type: 2}
+  closeHint: "Esc / E \u2014 \u0437\u0430\u043A\u0440\u044B\u0442\u044C"
+  hintFontSize: 24
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  panelColor: {r: 0.08, g: 0.08, b: 0.1, a: 0.85}
   cleanTexture: {fileID: 2800000, guid: b9d29bd3a7696fc499255180850fa8ee, type: 3}
   drawnTextures:
   - {fileID: 2800000, guid: 30554b99e519ca941a7c39256f2622b8, type: 3}
   - {fileID: 2800000, guid: 43a0fc184120fb9408b5f2532f79b8ca, type: 3}
   - {fileID: 2800000, guid: 5e6b4a0164d673f4290d2ca6f4032536, type: 3}
   drawItem: {fileID: 11400000, guid: 5e9ec1ec39f7ad945b9b3427ffa7a253, type: 2}
+  drawHeroes: 0000000002000000i
+  drawPrompt: "\u0420\u0430\u0437\u0440\u0438\u0441\u043E\u0432\u0430\u0442\u044C"
+  drawnInspectLines:
+  - "\u0428\u0435\u0434\u0435\u0432\u0440. \u041D\u0435 \u0442\u0440\u043E\u0433\u0430\u044E."
+  drawHint: "\u041B\u041A\u041C / A \u2014 \u0440\u0438\u0441\u043E\u0432\u0430\u0442\u044C \xB7 Esc / E \u2014 \u0433\u043E\u0442\u043E\u0432\u043E"
+  inkColor: {r: 0.8, g: 0.05, b: 0.08, a: 1}
+  brushRadius: 4
+  cursorSpeed: 0.6
+  cameraPriority: 60
+  minPaintedPixels: 40
+  watchCheckInterval: 0.5
   drawLines:
   - "\u0423\u0441\u044B \u2014 \u044D\u0442\u043E \u043A\u043B\u0430\u0441\u0441\u0438\u043A\u0430."
   - "\u0422\u0435\u043F\u0435\u0440\u044C \u044D\u0442\u043E \u0438\u0441\u043A\u0443\u0441\u0441\u0442\u0432\u043E."
   - "\u0422\u0430\u043A-\u0442\u043E \u043B\u0443\u0447\u0448\u0435."
   - "\u0414\u0438\u0440\u0435\u043A\u0442\u043E\u0440 \u043E\u0446\u0435\u043D\u0438\u0442."
+  heroDrawLines:
+  - hero: 0
+    first:
+    - "\u0413\u043E\u043B\u043E\u0441\u0430 \u0432 \u0433\u043E\u043B\u043E\u0432\u0435 \u043E\u0434\u043E\u0431\u0440\u044F\u044E\u0442."
+    repeat: []
   drawSeenLines:
   - "\u041E\u0439."
+  seenMeansCaught: 1
+  caughtScene: {fileID: 0}
   drawNoiseAmount: 1
   drawNoiseReason: poster_drawn
   drawnFlag: poster_drawn

@@ -21,5 +21,13 @@ namespace Funseki.NPC
         public float prankLookTime = 10f;
         [Tooltip("deg/s")]
         public float turnSpeed = 240f;
+
+        [Header("Animation (NpcLocomotion, NpcArmPointer)")]
+        [Tooltip("Smoothing of the measured walking speed fed to the animator, s")]
+        public float speedDamping = 0.15f;
+        [Tooltip("Below this speed the NPC plays idle, m/s")]
+        public float idleBelowSpeed = 0.1f;
+        [Tooltip("How fast the arm swings to a pointing gesture and back, 1/s")]
+        public float armPointSpeed = 10f;
     }
 }

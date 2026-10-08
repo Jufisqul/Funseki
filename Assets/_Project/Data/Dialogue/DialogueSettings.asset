@@ -61,4 +61,8 @@ MonoBehaviour:
   barkMaxWidth: 460
   barkBubbleColor: {r: 1, g: 0.98, b: 0.94, a: 0.95}
   barkTextColor: {r: 0.12, g: 0.12, b: 0.14, a: 1}
-  barkMaxDistance: 25
+  barkMaxDistance: 12
+  barkHideBehindWalls: 1
+  barkOcclusionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295

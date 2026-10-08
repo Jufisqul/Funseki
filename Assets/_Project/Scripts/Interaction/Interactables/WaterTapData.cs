@@ -23,5 +23,9 @@ namespace Funseki.Interaction
         [Tooltip("Every N-th opening says a milestone line instead; 0 = never")]
         public int milestoneEvery = 10;
         [TextArea(1, 3)] public string[] milestoneLines = { "Да, всё ещё вода." };
+
+        [Header("Teacher nearby")]
+        [Tooltip("Shouted by the teacher who sees the tap opened (over the teacher, not the hero); empty = nothing")]
+        [TextArea(1, 3)] public string[] teacherShoutLines = { "Не трать воду!" };
     }
 }

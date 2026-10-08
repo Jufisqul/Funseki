@@ -5,7 +5,8 @@ namespace Funseki.Interaction
 {
     // Кранчик с водой (GDD 5.9): E opens / closes the water. The very first opening in the game runs brown for a while,
     // then clear, and the hero says the first-time line («Дерьмо»). Later openings are silent, except every
-    // milestoneEvery-th one («Да, всё ещё вода»). Saved: open or closed, the brown water already seen, number of openings.
+    // milestoneEvery-th one («Да, всё ещё вода»). A teacher who sees it shouts teacherShoutLines (bark over the teacher).
+    // Saved: open or closed, the brown water already seen, number of openings.
     public class WaterTap : InteractableObject
     {
         static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
@@ -41,6 +42,7 @@ namespace Funseki.Interaction
             int opens = Flags.AddCounter(Key("opens"));
             SetWater(true);
             Report(hero, "tap_opened");
+            if (witness != null) Say(witness, InteractableData.Pick(D.teacherShoutLines));
 
             if (!Flags.GetFlag(Key("dirty_seen")))
             {
