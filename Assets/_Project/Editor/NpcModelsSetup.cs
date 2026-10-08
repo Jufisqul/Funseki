@@ -213,7 +213,7 @@ namespace Funseki.EditorTools
         }
 
         // Puts the model under the NPC's "Body" (the pivot Timelines and puppets move) and hides the placeholder shapes.
-        static GameObject Dress(Transform npc, string modelName)
+        internal static GameObject Dress(Transform npc, string modelName)
         {
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{PrefabDir}/{modelName}.prefab");
             if (prefab == null)

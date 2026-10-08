@@ -12,6 +12,8 @@ namespace Funseki.Heroes
     // that pauses the game; there 1 / 2 / 3 (HeroSelect map) or a click
     // picks a hero. Control and camera then move to that hero in HeroSettings.switchTime and the other two follow.
     // Q (Gameplay/HeroAbility) fires the leader's unique action.
+    // Until HeroSettings.partyUnlockFlag is set only startHero is in the party: the other two stand where they were put
+    // (HeroUnit.MakeIdle) and switching is closed; when the flag is set they join and follow.
     // Saved under "heroes" (ISaveable): the hero in control and where each hero stands.
     [DefaultExecutionOrder(-800)]
     public class HeroParty : MonoBehaviour, IHeroRoster, ISaveable
@@ -87,7 +89,8 @@ namespace Funseki.Heroes
                 startId = (HeroId)restoredParty.current;
                 restoredParty = null;
             }
-            var first = Find(startId) ?? (heroes.Length > 0 ? heroes[0] : null);
+            var first = Find(startId);
+            if (first == null || !IsInParty(first.Data.id)) first = Find(settings.startHero) ?? (heroes.Length > 0 ? heroes[0] : null);
             if (first != null) SetLeader(first, 0f);
         }
 
@@ -112,10 +115,15 @@ namespace Funseki.Heroes
             Start();
         }
 
-        void OnEnable() => gameplay?.Enable();
+        void OnEnable()
+        {
+            gameplay?.Enable();
+            GameEvents.OnWorldFlagChanged += OnWorldFlagChanged;
+        }
 
         void OnDisable()
         {
+            GameEvents.OnWorldFlagChanged -= OnWorldFlagChanged;
             if (view != null && view.IsOpen) CloseMenu();
         }
 
@@ -140,7 +148,7 @@ namespace Funseki.Heroes
             }
 
             var state = ServiceLocator.TryGet<GameStateMachine>(out var fsm) ? fsm.Current : GameState.Break;
-            if (menuAction.WasPressedThisFrame() && settings.CanSwitchIn(state) && !IsSwitching)
+            if (menuAction.WasPressedThisFrame() && settings.CanSwitchIn(state) && !IsSwitching && PartySize > 1)
             {
                 if (settings.tabCyclesHeroes) CycleNext();
                 else OpenMenu();
@@ -174,6 +182,7 @@ namespace Funseki.Heroes
             if (!view.IsOpen) return;
             CloseMenu();
             if (index < 0 || index >= heroes.Length || heroes[index] == null || heroes[index] == leader) return;
+            if (!IsInParty(heroes[index].Data.id)) return;
             SetLeader(heroes[index], settings.switchTime);
         }
 
@@ -184,7 +193,7 @@ namespace Funseki.Heroes
             for (int step = 1; step <= heroes.Length; step++)
             {
                 var next = heroes[(start + step + heroes.Length) % heroes.Length];
-                if (next == null || next == leader) continue;
+                if (next == null || next == leader || !IsInParty(next.Data.id)) continue;
                 SetLeader(next, settings.switchTime);
                 return;
             }
@@ -198,6 +207,32 @@ namespace Funseki.Heroes
         }
 
         // ---------------------------------------------------------------- switching
+
+        public bool IsInParty(HeroId id)
+        {
+            if (string.IsNullOrEmpty(settings.partyUnlockFlag) || id == settings.startHero) return true;
+            return ServiceLocator.TryGet<WorldFlags>(out var flags) && flags.GetFlag(settings.partyUnlockFlag);
+        }
+
+        int PartySize
+        {
+            get
+            {
+                int n = 0;
+                foreach (var h in heroes)
+                    if (h != null && h.Data != null && IsInParty(h.Data.id)) n++;
+                return n;
+            }
+        }
+
+        // The other two join (or leave, on a new game) when the unlock flag changes.
+        void OnWorldFlagChanged(string id, bool value)
+        {
+            if (leader == null || id != settings.partyUnlockFlag) return;
+            Debug.Log($"[HeroParty] {(value ? "Рэй и Кайто в группе" : "В группе только " + settings.startHero)}.");
+            if (!IsInParty(leader.Data.id)) { SetLeader(Find(settings.startHero) ?? leader, 0f); return; }
+            PlaceOthers(leader);
+        }
 
         public GameObject GetHero(HeroId id)
         {
@@ -217,11 +252,21 @@ namespace Funseki.Heroes
             var previous = leader;
             leader = next;
             next.MakeLeader();
-            int slot = 0;
-            foreach (var h in heroes)
-                if (h != null && h != next) h.MakeFollower(next, slot++);
+            PlaceOthers(next);
             switchEndsAt = Time.time + time;
             GameEvents.RaiseHeroSwitched(previous != null ? previous.gameObject : null, next.gameObject, time);
+        }
+
+        // Party members follow the leader; heroes not in the party yet stay where they stand.
+        void PlaceOthers(HeroUnit lead)
+        {
+            int slot = 0;
+            foreach (var h in heroes)
+            {
+                if (h == null || h == lead) continue;
+                if (IsInParty(h.Data.id)) h.MakeFollower(lead, slot++);
+                else h.MakeIdle();
+            }
         }
     }
 }

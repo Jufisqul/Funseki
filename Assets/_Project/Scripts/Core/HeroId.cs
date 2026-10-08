@@ -21,5 +21,8 @@ namespace Funseki.Core
         bool IsSwitching { get; }
         /// <summary>Null when that hero is not in the scene.</summary>
         GameObject GetHero(HeroId id);
+        /// <summary>Is this hero in the party now (follows the leader, can be switched to, shows in the HUD)?
+        /// Before the heroes are unlocked only the starting hero is.</summary>
+        bool IsInParty(HeroId id);
     }
 }

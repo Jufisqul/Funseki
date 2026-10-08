@@ -54,8 +54,10 @@ namespace Funseki.UI
             foreach (var c in cards)
             {
                 if (c.status == null || (c.status is Object o && o == null)) Bind(c);
-                c.root.gameObject.SetActive(c.status != null);
-                if (c.status == null) continue;
+                // Heroes not in the party yet (day 1 before room 7) get no card.
+                bool shown = c.status != null && HeroService.IsInParty(c.id);
+                c.root.gameObject.SetActive(shown);
+                if (!shown) continue;
                 any = true;
 
                 bool isCurrent = hasCurrent ? c.id == current : HeroService.Current == c.id;

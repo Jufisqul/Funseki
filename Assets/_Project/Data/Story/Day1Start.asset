@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652fb52569961f348a92681dbbbd30d0, type: 3}
+  m_Name: Day1Start
+  m_EditorClassIdentifier: Funseki.Story::Funseki.Story.Day1StartData
+  arrivalPhaseId: arrival
+  chainPhaseIds:
+  - prologue
+  - arrival
+  - dorm
+  placedFlag: day1_start_placed
+  directorMetFlag: day1_director_met
+  directorDoneFlag: day1_director_done
+  partyFlag: heroes_unlocked
+  skipFlags:
+  - day1_start_placed
+  - day1_director_met
+  - day1_director_done
+  - day1_met_takeshi
+  - day1_met_yukki
+  - day1_met_masumi
+  - day1_met_hiro
+  - day1_met_tsubaki
+  - heroes_unlocked
+  directorTalkRadius: 3
+  directorIntro: {fileID: 11400000, guid: 85d8716447f9eed44baf13b4ed2d599e, type: 2}
+  directorRoom: {fileID: 11400000, guid: 8d65b79bea31a434db060bb05cbc27d5, type: 2}
+  directorWalkSpeed: 1.5
+  room7Meet: {fileID: 11400000, guid: 1483b375f6128754890ca2414d648f0c, type: 2}
+  fadeOutTime: 0.6
+  blackTime: 0.5
+  fadeInTime: 0.6
+  fenceLine: "[TODO] \u0417\u0430\u0431\u043E\u0440. \u0414\u0430\u043B\u044C\u0448\u0435 \u043C\u043D\u0435 \u043D\u0435\u043B\u044C\u0437\u044F."
+  fenceLineCooldown: 5

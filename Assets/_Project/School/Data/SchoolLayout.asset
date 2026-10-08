@@ -837,7 +837,7 @@ MonoBehaviour:
       width: 0
       floorOffset: 0
   - zoneId: dorm_1
-    displayName: "\u0416\u0438\u043B\u0430\u044F \u043A\u043E\u043C\u043D\u0430\u0442\u0430 1"
+    displayName: "\u041A\u043E\u043C\u043D\u0430\u0442\u0430 11"
     floor: 2
     group: 2
     kind: 0
@@ -860,7 +860,7 @@ MonoBehaviour:
       width: 0
       floorOffset: 0
   - zoneId: dorm_2
-    displayName: "\u0416\u0438\u043B\u0430\u044F \u043A\u043E\u043C\u043D\u0430\u0442\u0430 2"
+    displayName: "\u041A\u043E\u043C\u043D\u0430\u0442\u0430 10"
     floor: 2
     group: 2
     kind: 0
@@ -883,7 +883,7 @@ MonoBehaviour:
       width: 0
       floorOffset: 0
   - zoneId: dorm_3
-    displayName: "\u0416\u0438\u043B\u0430\u044F \u043A\u043E\u043C\u043D\u0430\u0442\u0430 3"
+    displayName: "\u041A\u043E\u043C\u043D\u0430\u0442\u0430 9"
     floor: 2
     group: 2
     kind: 0
@@ -906,7 +906,7 @@ MonoBehaviour:
       width: 0
       floorOffset: 0
   - zoneId: dorm_4
-    displayName: "\u0416\u0438\u043B\u0430\u044F \u043A\u043E\u043C\u043D\u0430\u0442\u0430 4"
+    displayName: "\u041A\u043E\u043C\u043D\u0430\u0442\u0430 8"
     floor: 2
     group: 2
     kind: 0
@@ -929,7 +929,7 @@ MonoBehaviour:
       width: 0
       floorOffset: 0
   - zoneId: dorm_5
-    displayName: "\u0416\u0438\u043B\u0430\u044F \u043A\u043E\u043C\u043D\u0430\u0442\u0430 5"
+    displayName: "\u041A\u043E\u043C\u043D\u0430\u0442\u0430 7"
     floor: 2
     group: 2
     kind: 0

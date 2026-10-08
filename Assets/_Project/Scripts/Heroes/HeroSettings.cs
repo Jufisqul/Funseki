@@ -16,6 +16,8 @@ namespace Funseki.Heroes
         public float switchTime = 0.5f;
         [Tooltip("On: Tab switches straight to the next hero (Рюта → Рэй → Кайто → Рюта). Off: Tab opens the switch window")]
         public bool tabCyclesHeroes = true;
+        [Tooltip("WorldFlag that brings the other two heroes into the party (day 1: they join in room 7). Until it is set only startHero is played: the others stay where they stand, switching is closed and the HUD shows only startHero. Empty = all three from the start")]
+        public string partyUnlockFlag = "heroes_unlocked";
         [Tooltip("Game states in which Tab switches heroes (closed in Lesson, Dialogue, Cutscene...)")]
         public GameState[] switchStates = { GameState.Break };
         [Tooltip("Game states in which Q works")]

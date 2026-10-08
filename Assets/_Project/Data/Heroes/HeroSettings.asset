@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e09f34b142ff940a9bb98c94cd296b, type: 3}
   m_Name: HeroSettings
   m_EditorClassIdentifier: Funseki.Heroes::Funseki.Heroes.HeroSettings
-  startHero: 1
+  startHero: 0
   switchTime: 0.5
   tabCyclesHeroes: 1
+  partyUnlockFlag: heroes_unlocked
   switchStates: 03000000i
   abilityStates: 03000000i
   followMinDistance: 1.5

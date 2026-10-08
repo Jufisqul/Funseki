@@ -61,6 +61,16 @@ namespace Funseki.Heroes
             cc.enabled = true;
         }
 
+        /// <summary>Not in the party yet: stands where it was put (no collider, no NavMesh agent) until it joins.</summary>
+        public void MakeIdle()
+        {
+            IsLeader = false;
+            leader = null;
+            moving = false;
+            if (agent.enabled) agent.enabled = false;
+            cc.enabled = false;
+        }
+
         // slot 0 = behind on the left, 1 = behind on the right.
         public void MakeFollower(HeroUnit newLeader, int followSlot)
         {

@@ -17,6 +17,9 @@ namespace Funseki.Core
 
         public static GameObject GetHero(HeroId id) => ServiceLocator.TryGet<IHeroRoster>(out var r) ? r.GetHero(id) : null;
 
+        /// <summary>Is this hero in the party now; true for every hero without a roster.</summary>
+        public static bool IsInParty(HeroId id) => !ServiceLocator.TryGet<IHeroRoster>(out var r) || r.IsInParty(id);
+
         /// <summary>Is this hero the leader (true for any hero when there is no roster)?</summary>
         public static bool IsLeader(GameObject hero) =>
             !ServiceLocator.TryGet<IHeroRoster>(out var r) || r.CurrentObject == hero;

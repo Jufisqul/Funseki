@@ -139,6 +139,18 @@ namespace Funseki.Core
         public static void RaiseLessonStarted(string lessonId) => OnLessonStarted?.Invoke(lessonId);
         public static void RaiseLessonFinished(string lessonId, string outcome) => OnLessonFinished?.Invoke(lessonId, outcome);
 
+        // ---- Quests
+        /// <summary>(quest id) — a quest started; its first step is active</summary>
+        public static event Action<string> OnQuestStarted;
+        /// <summary>(quest id, new step index) — a step was done and the next one is active</summary>
+        public static event Action<string, int> OnQuestStepChanged;
+        /// <summary>(quest id) — the last step was done</summary>
+        public static event Action<string> OnQuestCompleted;
+
+        public static void RaiseQuestStarted(string questId) => OnQuestStarted?.Invoke(questId);
+        public static void RaiseQuestStepChanged(string questId, int step) => OnQuestStepChanged?.Invoke(questId, step);
+        public static void RaiseQuestCompleted(string questId) => OnQuestCompleted?.Invoke(questId);
+
         // ---- Save
         /// <summary>(reason, e.g. lesson_fizra) — write the game now (autosave before a lesson, after an event)</summary>
         public static event Action<string> OnAutosaveRequested;
@@ -191,6 +203,9 @@ namespace Funseki.Core
             OnCaught = null;
             OnCaughtEnded = null;
             OnJournalEntryAdded = null;
+            OnQuestStarted = null;
+            OnQuestStepChanged = null;
+            OnQuestCompleted = null;
         }
     }
 }
