@@ -54,6 +54,7 @@ namespace Funseki.EditorTools
             var so = new SerializedObject(director);
             so.FindProperty("schedule").objectReferenceValue = EnsureSchedule();
             so.ApplyModifiedPropertiesWithoutUndo();
+            RoomAccessSetup.AddDirector(director.gameObject);
 
             var entrance = new GameObject("LessonEntrance_fizra");
             entrance.transform.position = FizraEntrancePos;
