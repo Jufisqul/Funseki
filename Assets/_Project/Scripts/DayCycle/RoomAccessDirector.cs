@@ -89,6 +89,7 @@ namespace Funseki.DayCycle
                     if (!settings.IsOpen(z, time)) { open = false; break; }
                 if (open) Open(g);
                 else { Close(g); closed++; }
+                UpdatePassage(g, open);
             }
             Debug.Log($"[RoomAccess] {Label(time)}: {closed} of {gates.Count} door(s) closed.");
         }
@@ -123,6 +124,18 @@ namespace Funseki.DayCycle
             }
             Set(g.lockComp, "unlockDay", g.ownUnlockDay);
             if (g.ownLockLine != null) Set(g.lockComp, "lockedLine", g.ownLockLine);
+        }
+
+        // A locked passage (an open doorway with LockedDoor and no Door) is an invisible wall: its collider
+        // blocks always, even after the zone's unlockDay has come. It blocks only while the passage is locked
+        // by its day or closed for this time of day.
+        void UpdatePassage(Gate g, bool openNow)
+        {
+            if (g.door != null || g.Go == null) return;
+            int day = ServiceLocator.TryGet<IDayCycle>(out var d) ? d.Day : 1;
+            bool blocked = !openNow || (!g.lockAdded && g.ownUnlockDay > day);
+            foreach (var col in g.Go.GetComponents<Collider>())
+                if (!col.isTrigger) col.enabled = blocked;
         }
 
         // ---------------------------------------------------------------- scan
@@ -173,6 +186,7 @@ namespace Funseki.DayCycle
             if (lockType == null && gates.Count > 0 && gates[0].door != null)
                 lockType = gates[0].door.GetType().Assembly.GetType("Funseki.School.LockedDoor");
             scanned = true;
+            foreach (var g in gates) UpdatePassage(g, true);
 
             if (lockType == null) Debug.LogWarning("[RoomAccess] Funseki.School.LockedDoor not found: doors cannot be closed.");
             foreach (var r in settings.rooms)
