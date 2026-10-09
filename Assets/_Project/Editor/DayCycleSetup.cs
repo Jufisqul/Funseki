@@ -33,11 +33,13 @@ namespace Funseki.EditorTools
             bool opened = !slice.isLoaded;
             if (opened) slice = EditorSceneManager.OpenScene(CoreScenesSetup.SlicePath, OpenSceneMode.Additive);
             SceneManager.SetActiveScene(slice);
+            var keep = LayoutKeeper.Capture(slice);
 
             foreach (var go in slice.GetRootGameObjects())
                 if (System.Array.IndexOf(OwnedRoots, go.name) >= 0) Object.DestroyImmediate(go);
             AddToActiveScene();
 
+            keep.Restore();
             EditorSceneManager.MarkSceneDirty(slice);
             EditorSceneManager.SaveScene(slice);
             if (opened) EditorSceneManager.CloseScene(slice, true);
