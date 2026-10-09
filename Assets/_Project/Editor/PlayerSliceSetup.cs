@@ -73,6 +73,7 @@ namespace Funseki.EditorTools
             var active = SceneManager.GetActiveScene();
             var slice = OpenAdditive(SlicePath, out bool openedSlice);
             SceneManager.SetActiveScene(slice);
+            var keep = LayoutKeeper.Capture(slice);
             foreach (var go in slice.GetRootGameObjects())
                 if (OwnedRoots.Contains(go.name)) Object.DestroyImmediate(go);
 
@@ -91,6 +92,7 @@ namespace Funseki.EditorTools
             // The hero.s lines ("Заперто"). Moves under [Bootstrap] together with the inventory service later.
             Set(new GameObject("HeroBarks").AddComponent<BarkView>(), "settings", InteractionTestSetup.EnsureBarkSettings());
 
+            keep.Restore();
             EditorSceneManager.MarkSceneDirty(slice);
             EditorSceneManager.SaveScene(slice);
             if (openedSlice) EditorSceneManager.CloseScene(slice, true);

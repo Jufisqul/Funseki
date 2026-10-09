@@ -2505,7 +2505,7 @@ Transform:
   m_GameObject: {fileID: 237702824}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.2, y: 0.05, z: -38.2}
+  m_LocalPosition: {x: 27.423, y: 0.05, z: -36.882}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4814,7 +4814,7 @@ Transform:
   m_GameObject: {fileID: 444429993}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.85, z: 0}
+  m_LocalPosition: {x: -0, y: 0.85, z: 3.1}
   m_LocalScale: {x: 0.5, y: 0.85, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8624,7 +8624,7 @@ Transform:
   m_GameObject: {fileID: 744213258}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.85, z: 0}
+  m_LocalPosition: {x: -0.73, y: 0.85, z: 0.266}
   m_LocalScale: {x: 0.5, y: 0.85, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9774,7 +9774,7 @@ Transform:
   m_GameObject: {fileID: 871938220}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000004371139}
-  m_LocalPosition: {x: 25.2, y: 0, z: -46.3}
+  m_LocalPosition: {x: 28.99, y: 2.6, z: -46.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13252,7 +13252,7 @@ Transform:
   m_GameObject: {fileID: 1194575983}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.2, y: 1.0953364, z: -38.100002}
+  m_LocalPosition: {x: 27.423, y: 1.0953364, z: -36.782}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15942,7 +15942,7 @@ Transform:
   m_GameObject: {fileID: 1441903516}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.2, y: 1.0953364, z: -38.100002}
+  m_LocalPosition: {x: 27.423, y: 1.0953364, z: -36.782}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18781,6 +18781,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1726530194}
   - component: {fileID: 1726530193}
+  - component: {fileID: 1726530195}
   m_Layer: 0
   m_Name: DayCycle
   m_TagString: Untagged
@@ -18816,6 +18817,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1726530195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726530192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb347417b3df18c49a65a27b12b81e4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Funseki.DayCycle::Funseki.DayCycle.RoomAccessDirector
+  settings: {fileID: 11400000, guid: d92b9b1b799ab214ba90e590a301fce6, type: 2}
+  schoolScene: School_Greybox
 --- !u!1 &1730392572
 GameObject:
   m_ObjectHideFlags: 0
@@ -21823,7 +21838,7 @@ Transform:
   m_GameObject: {fileID: 1996617144}
   serializedVersion: 2
   m_LocalRotation: {x: 0.1521234, y: 0, z: 0, w: 0.98836154}
-  m_LocalPosition: {x: 25.2, y: 2.565145, z: -42.968586}
+  m_LocalPosition: {x: 27.423, y: 2.565145, z: -41.650585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

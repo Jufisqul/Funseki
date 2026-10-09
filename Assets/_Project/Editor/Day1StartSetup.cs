@@ -404,6 +404,7 @@ namespace Funseki.EditorTools
             }
 
             // Beds and nightstands.
+            var keepBeds = LayoutKeeper.Capture(props.transform);
             var oldBeds = props.transform.Find("Dorm_Day1");
             if (oldBeds != null) Object.DestroyImmediate(oldBeds.gameObject);
             var beds = new GameObject("Dorm_Day1").transform;
@@ -425,6 +426,7 @@ namespace Funseki.EditorTools
                 }
             }
 
+            keepBeds.Restore();
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
             if (!wasOpen) EditorSceneManager.CloseScene(scene, true);
@@ -476,6 +478,7 @@ namespace Funseki.EditorTools
             bool opened = !slice.isLoaded;
             if (opened) slice = EditorSceneManager.OpenScene(CoreScenesSetup.SlicePath, OpenSceneMode.Additive);
             SceneManager.SetActiveScene(slice);
+            var keep = LayoutKeeper.Capture(slice);
 
             HeroUnit kaito = null, rei = null;
             foreach (var go in slice.GetRootGameObjects())
@@ -545,6 +548,7 @@ namespace Funseki.EditorTools
             Classmate(classmates, "Hiro", "NPC_Hiro", new Vector3(24.8f, Floor2, -3f), 170f, NpcModelsSetup.Joker, dialogues, speakers, npcSettings);
             Classmate(classmates, "Tsubaki", "NPC_Tsubaki", new Vector3(27.6f, Floor2, -3.2f), 195f, NpcModelsSetup.GossipB, dialogues, speakers, npcSettings);
 
+            keep.Restore();
             EditorSceneManager.MarkSceneDirty(slice);
             EditorSceneManager.SaveScene(slice);
             if (opened) EditorSceneManager.CloseScene(slice, true);
