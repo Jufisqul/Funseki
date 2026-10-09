@@ -78,6 +78,8 @@ Docs/                 отчёты (cleanup_report.md)
 
 Пути к ассетам прописаны строками в редакторских скриптах (`_Project/Editor/*Setup.cs`, `MainMenu/Editor/MainMenuBuilder.cs`, `Assets/Editor/Funseki`). Перенос ассета — через AssetDatabase.MoveAsset вместе с правкой этих констант. После переноса — `Tools > Funseki > Validate References` (Missing Script / Missing Reference по сценам и префабам).
 
+Setup-меню `Tools > Funseki > …` пересобирают свои корни, но ручные правки сохраняются: `Editor/LayoutKeeper` перед пересборкой запоминает позицию, поворот и масштаб каждого объекта по пути в иерархии и возвращает их перед сохранением сцены (новые объекты встают по умолчанию). Вернуть место из кода — удалить объект и перезапустить меню или снять галочку `Tools > Funseki > Keep Hand-Placed Positions on Rebuild`.
+
 Старое:
 - `Assets/_Game/` — остатки первого контроллера героя (`Scripts/Player`, `Hero.controller`, `Input/GameControls.inputactions`). Не удалять: на них ссылается объект игрока в School_Greybox и `SchoolPlayerSetup` (тред школы).
 - `Assets/PF_Kit_*.fbx` в корне Assets и `Assets/InputSystem_Actions.inputactions` — назначение не выяснено, не трогать (см. Docs/cleanup_report.md, таблица C).
