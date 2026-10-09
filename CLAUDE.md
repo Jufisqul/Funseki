@@ -78,6 +78,8 @@ Docs/                 отчёты (cleanup_report.md)
 
 Пути к ассетам прописаны строками в редакторских скриптах (`_Project/Editor/*Setup.cs`, `MainMenu/Editor/MainMenuBuilder.cs`, `Assets/Editor/Funseki`). Перенос ассета — через AssetDatabase.MoveAsset вместе с правкой этих констант. После переноса — `Tools > Funseki > Validate References` (Missing Script / Missing Reference по сценам и префабам).
 
+Setup-меню `Tools > Funseki > …` пересобирают свои корни, но ручные правки сохраняются: `Editor/LayoutKeeper` перед пересборкой запоминает позицию, поворот и масштаб каждого объекта по пути в иерархии и возвращает их перед сохранением сцены (новые объекты встают по умолчанию). Вернуть место из кода — удалить объект и перезапустить меню или снять галочку `Tools > Funseki > Keep Hand-Placed Positions on Rebuild`.
+
 Старое:
 - `Assets/_Game/` — остатки первого контроллера героя (`Scripts/Player`, `Hero.controller`, `Input/GameControls.inputactions`). Не удалять: на них ссылается объект игрока в School_Greybox и `SchoolPlayerSetup` (тред школы).
 - `Assets/PF_Kit_*.fbx` в корне Assets и `Assets/InputSystem_Actions.inputactions` — назначение не выяснено, не трогать (см. Docs/cleanup_report.md, таблица C).
@@ -156,6 +158,7 @@ Docs/                 отчёты (cleanup_report.md)
 - В сцене дня: `DayCycleDirector` (объект DayCycle, регистрируется как `IDayCycle`, `ToJson/LoadJson` для сейва) и `LessonEntrance` (триггер, урок начинается, когда герой входит после звонка). Урок или катсцена завершают фазу флагом цели или `IDayCycle.CompletePhase()`.
 - Физра дня 1 — в спортзале (`LessonEntrance_fizra` у восточной двери zone gym). Спортзал по SchoolLayout открыт со 2-го дня; в день 1 его открывает `Funseki.Lessons.LessonWalk` по звонку после break_1. Урок идёт без лимита времени, фазу завершает Funseki.Lessons флагом `lesson_fizra_done`.
 - Debug в редакторе: F9 — следующая фаза, F10 — выставить флаг цели текущей фазы.
+- Комнаты по времени суток: `Data/DayCycle/RoomAccess.asset` (`RoomAccessSettings`: по зоне школы галочки утро / день / вечер, текст «закрыто»). `RoomAccessDirector` на объекте DayCycle при смене `DayPhase.timeOfDay` (Dawn / Sun / Sunset) запирает двери закрытых зон: через рефлексию ставит на дверь `LockedDoor` с недостижимым днём (свой замок двери с unlockDay потом возвращается); внутри одного времени суток двери не трогает. Список зон — `Tools > Funseki > DayCycle > Setup room access (fill rooms from the school)` (галочки сохраняет, директора добавляет; Setup Day 1 schedule тоже его ставит). Зоны без дверей закрыть нельзя.
 - Звук звонка: `Funseki.Audio.BellSoundPlayer` (объект BellSound под `[Bootstrap]`) слушает `OnBell`, клипы и громкость по типу звонка в `Data/Audio/BellSettings.asset` (сейчас везде `Assets/_Project/Audio/SFX/BellRing.mp3`). Ставится через `Tools > Funseki > Audio > Add bell sound to Bootstrap`.
 - `Tools > Funseki > DayCycle > Setup Day 1 schedule in Slice_Day1` — создаёт расписание (существующее не трогает) и объекты в Slice_Day1; Build Slice_Day1 делает то же.
 

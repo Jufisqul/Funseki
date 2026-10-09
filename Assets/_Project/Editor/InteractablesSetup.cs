@@ -79,6 +79,7 @@ namespace Funseki.EditorTools
         {
             var a = Prepare();
             var slice = OpenSlice(out var active, out bool opened);
+            var keep = LayoutKeeper.Capture(slice);
 
             foreach (var go in slice.GetRootGameObjects())
                 if (go.name == RootName) Object.DestroyImmediate(go);
@@ -93,6 +94,7 @@ namespace Funseki.EditorTools
             BuildMarker(root, a);
             BuildSpec(root, a);
 
+            keep.Restore();
             CloseSlice(slice, active, opened);
             Debug.Log("[InteractablesSetup] Slice_Day1: taps, 2 vending machines, Рюта's locker, 7 posters, 4 paintings, booklet rack, " +
                       "shower, marker and paint placed under 'Interactables'.");
@@ -105,6 +107,7 @@ namespace Funseki.EditorTools
         {
             var a = Prepare();
             var slice = OpenSlice(out var active, out bool opened);
+            var keep = LayoutKeeper.Capture(slice);
 
             Transform root = null;
             foreach (var go in slice.GetRootGameObjects())
@@ -118,6 +121,7 @@ namespace Funseki.EditorTools
             BuildPoster(root, a, a.poster, "poster_corridor", "Poster_Corridor", posterPos, posterYaw, false);
 
             BuildSpec(root, a);
+            keep.Restore();
             CloseSlice(slice, active, opened);
             Debug.Log("[InteractablesSetup] Slice_Day1: spec items (3 taps, 6 posters, 4 paintings, shower, paint) placed under 'Interactables/Spec'; " +
                       "the corridor poster got its drawing camera.");

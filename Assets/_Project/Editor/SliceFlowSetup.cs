@@ -285,6 +285,7 @@ namespace Funseki.EditorTools
             bool opened = !slice.isLoaded;
             if (opened) slice = EditorSceneManager.OpenScene(CoreScenesSetup.SlicePath, OpenSceneMode.Additive);
             SceneManager.SetActiveScene(slice);
+            var keep = LayoutKeeper.Capture(slice);
 
             foreach (var go in slice.GetRootGameObjects())
                 if (go.name == RootName) Object.DestroyImmediate(go);
@@ -340,6 +341,7 @@ namespace Funseki.EditorTools
             so.FindProperty("subtitleText").objectReferenceValue = subtitleText;
             so.ApplyModifiedPropertiesWithoutUndo();
 
+            keep.Restore();
             EditorSceneManager.MarkSceneDirty(slice);
             EditorSceneManager.SaveScene(slice);
             if (opened) EditorSceneManager.CloseScene(slice, true);
