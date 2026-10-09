@@ -70,6 +70,7 @@ Assets/Editor/Funseki/  билдер школы (тред школы)
 Assets/_Design/Plans/   планы этажей
 Assets/_Trash/        кандидаты на удаление после уборки (Docs/cleanup_report.md); удаляет владелец
 Art/                  вне Assets: Blender-исходники и скрипты генерации
+Tools/CharacterGen/   bpy-скрипты тун-моделей героев (Рюта: ryuta_build.py, ryuta_render.py)
 Docs/                 отчёты (cleanup_report.md)
 ```
 
@@ -98,6 +99,15 @@ Setup-меню `Tools > Funseki > …` пересобирают свои кор�
 - События в Core: `OnHeroSwitched`, `OnHeroAbilityUsed`, `OnKicked(npc, hero)`, `OnNoiseMade(hero, witness, reason, amount)` (для будущей шкалы «Шума»). Карта ввода `HeroSelect` (Hero1–3, Close).
 - NPC пока заглушка: `Funseki.NPC.NpcActor` (INpc: isTeacher, обзор из `Data/NPC/NpcSettings.asset`, пинок — Debug.Log). Тестовые NPC и предмет — объект `HeroesTest` на крыльце.
 - Пересборка: `Tools > Funseki > Heroes > Build Slice_Day1 with the three heroes` (то же, что Build Slice_Day1); портреты — `Re-render portraits`.
+
+## Тун-модель Рюты (Art/Characters/Ryuta, 2026-10-10)
+
+- Новая модель Рюты в аниме-стиле (ориентир — рендер Persona 3 Reload). В игре пока не подключена: герой в Slice_Day1 всё ещё Ryuto (Akane), замена — отдельный шаг по слову владельца. Волосы тёмные, с чёлкой, как в ТЗ треда (на старых концептах `Art/Characters/Tomura` блондин с сигаретой).
+- Всё строится скриптами Blender 5.2, руками ничего не правится: `Tools/CharacterGen/ryuta_build.py` (меш, UV, текстуры, скелет, веса, блендшейпы, FBX) и `ryuta_render.py` (тун-превью, позы, эмоции в `Art/Characters/Ryuta/previews`). Запуск из корня проекта: `blender -b --python Tools/CharacterGen/ryuta_build.py`, затем `blender -b Art/Characters/Ryuta/Ryuta.blend --python Tools/CharacterGen/ryuta_render.py`. Исходник `.blend`, план, отчёт сборки — в `Art/Characters/Ryuta`.
+- В Unity: `Assets/_Project/Art/Characters/Ryuta` — `Ryuta.fbx` (9,1k треугольников, 3 сабмеша Body/Face/Hair, 52 кости с именами HumanBodyBones, 11 блендшейпов blink_L/R, angry, bored, smirk, surprised, mouth_A/I/U/E/O), `Textures` (Body 1024: одежда, кожа, волосы, альфа 0 = кожа; Face 512: альфа-клип для карточек глаз, век, бровей и рта; Ramp 256×4), `Materials` (Ryuta_Body/Face/Hair на `Funseki/ToonLit`, Ryuta_Outline на `Funseki/ToonOutline`; создаются один раз, потом не перезаписываются), `Ryuta.prefab` (Animator с Humanoid-аватаром + второй SkinnedMeshRenderer `Ryuta_Outline` с тем же мешем и `Funseki.Heroes.OutlineBlendShapeSync`).
+- Шейдеры `Assets/_Project/Art/Shaders`: `ToonLit` (рампа, цвет тени и отдельный цвет тени кожи, основной свет с тенями, доп. источники, рим, альфа-клип; лицо не принимает тени) и `ToonOutline` (inverted hull, ширина × R вершинного цвета, 0 — без линии).
+- `Tools > Funseki > Characters > Setup Ryuta model (import, materials, prefab)` — импорт (аватар из A-pose выпрямляется в T-pose, нормали из файла, блендшейпы без нормалей), материалы, префаб, проверка в консоли `[RyutaModelSetup] PASS/FAIL`. `Render Ryuta previews (Unity)` — кадры с настоящими шейдерами и клипами Idle/Walk в `previews/unity_*.png`.
+- Лицо: глаза, веки, брови и рот — карточки на 1–3 мм перед лицом с нормалями эллипсоида; моргание опускает веко, открытый рот — карточка, спрятанная в голове, пока все mouth_* на нуле; закрытый рот нарисован в текстуре головы.
 
 ## Взаимодействие и инвентарь (Funseki.Interaction, Funseki.Inventory)
 

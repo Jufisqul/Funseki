@@ -1,0 +1,7 @@
+Ryuta build 2026-10-10 00:49
+triangles: 9114 (body 6100, face 1184, hair 1830); vertices (Blender): 4840
+textures: Ryuta_Body 1024x1024 (body + hair), Ryuta_Face 512x512 (alpha clip), Ryuta_Ramp 256x4
+texel density: body 461 px/m, face 1101 px/m
+bones (52): Hips, Spine, Chest, UpperChest, Neck, Head, LeftShoulder, LeftUpperArm, LeftLowerArm, LeftHand, LeftIndexProximal, LeftIndexIntermediate, LeftIndexDistal, LeftMiddleProximal, LeftMiddleIntermediate, LeftMiddleDistal, LeftRingProximal, LeftRingIntermediate, LeftRingDistal, LeftLittleProximal, LeftLittleIntermediate, LeftLittleDistal, LeftThumbProximal, LeftThumbIntermediate, LeftThumbDistal, LeftUpperLeg, LeftLowerLeg, LeftFoot, LeftToes, RightShoulder, RightUpperArm, RightLowerArm, RightHand, RightIndexProximal, RightIndexIntermediate, RightIndexDistal, RightMiddleProximal, RightMiddleIntermediate, RightMiddleDistal, RightRingProximal, RightRingIntermediate, RightRingDistal, RightLittleProximal, RightLittleIntermediate, RightLittleDistal, RightThumbProximal, RightThumbIntermediate, RightThumbDistal, RightUpperLeg, RightLowerLeg, RightFoot, RightToes
+blend shapes (11): blink_L, blink_R, angry, bored, smirk, surprised, mouth_A, mouth_I, mouth_U, mouth_E, mouth_O
+height: 1.784 m with hair, head top 1.754 m
