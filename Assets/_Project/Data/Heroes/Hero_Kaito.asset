@@ -19,4 +19,4 @@ MonoBehaviour:
   prefab: {fileID: 6091285885990134690, guid: 63b58b5d30ab35c4eae9151f24714a19, type: 3}
   color: {r: 1, g: 0.62, b: 0.25, a: 1}
   speaker: {fileID: 11400000, guid: b35d70ba55761a242a6cf3bd027340e9, type: 2}
-  ability: {fileID: 11400000, guid: 37447c245e4857a439bdf520a555f977, type: 2}
+  ability: {fileID: 11400000, guid: cf6592eaa61843f489f90232411e35ec, type: 2}

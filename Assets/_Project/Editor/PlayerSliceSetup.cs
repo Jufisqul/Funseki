@@ -208,8 +208,44 @@ namespace Funseki.EditorTools
                 back.duration = 0.2f;
             }
 
+            ConnectKickAnimation(ac);
             AssetDatabase.SaveAssets();
             return ac;
+        }
+
+        [MenuItem("Tools/Funseki/Ryuta V3/Connect gameplay kick animation")]
+        public static void ConnectGameplayKick()
+        {
+            if (EditorApplication.isPlaying) throw new System.InvalidOperationException("Stop Play mode first.");
+            ConnectKickAnimation(AssetDatabase.LoadAssetAtPath<AnimatorController>(ControllerPath));
+            AssetDatabase.SaveAssets();
+            Debug.Log("[RyutaKick] Connected Ryuta_Kick: Kick trigger, automatic return to Locomotion.");
+        }
+
+        internal static void ConnectKickAnimation(AnimatorController controller)
+        {
+            if (controller == null) throw new System.InvalidOperationException("Player controller missing.");
+            var clip = AssetDatabase.LoadAllAssetsAtPath("Assets/Characters/Ryuta/Animations/Ryuta_Kick.fbx")
+                .OfType<AnimationClip>().FirstOrDefault(c => !c.name.StartsWith("__preview"));
+            if (clip == null) throw new System.InvalidOperationException("Ryuta_Kick clip missing.");
+            string trigger = Funseki.Heroes.KickAbility.AnimationTrigger;
+            if (!controller.parameters.Any(p => p.name == trigger))
+                controller.AddParameter(trigger, AnimatorControllerParameterType.Trigger);
+            var sm = controller.layers[0].stateMachine;
+            var locomotion = sm.states.First(s => s.state.name == "Locomotion").state;
+            var kick = sm.states.FirstOrDefault(s => s.state.name == "Kick").state ?? sm.AddState("Kick");
+            kick.motion = clip;
+            var enter = sm.anyStateTransitions.FirstOrDefault(t => t.destinationState == kick) ?? sm.AddAnyStateTransition(kick);
+            enter.hasExitTime = false;
+            enter.duration = 0.06f;
+            enter.canTransitionToSelf = false;
+            enter.conditions = new AnimatorCondition[0];
+            enter.AddCondition(AnimatorConditionMode.If, 0, trigger);
+            var back = kick.transitions.FirstOrDefault(t => t.destinationState == locomotion) ?? kick.AddTransition(locomotion);
+            back.hasExitTime = true;
+            back.exitTime = 1f;
+            back.duration = 0.12f;
+            EditorUtility.SetDirty(controller);
         }
 
         // Mixamo FBX dropped in as Generic: make it Humanoid with its own avatar and name / loop its one clip.
@@ -323,7 +359,9 @@ namespace Funseki.EditorTools
             model.transform.localRotation = Quaternion.identity;
             var animator = model.GetComponentInChildren<Animator>();
             if (animator == null) animator = model.AddComponent<Animator>();
-            animator.runtimeAnimatorController = controller;
+            var modelController = animator.runtimeAnimatorController as AnimatorOverrideController;
+            animator.runtimeAnimatorController = modelController != null && modelController.runtimeAnimatorController == controller
+                ? modelController : controller;
             animator.applyRootMotion = false;
 
             var pivot = new GameObject(PlayerCameraController.PivotName).transform;

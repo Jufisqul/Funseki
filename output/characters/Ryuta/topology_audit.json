@@ -1,0 +1,58 @@
+[
+  {
+    "object": "Ryuta_Mesh",
+    "loose_vertices": 0,
+    "degenerate_faces": 0,
+    "boundary_edges": 558,
+    "nonmanifold_nonboundary": 0,
+    "unweighted_vertices": 0
+  },
+  {
+    "object": "Ryuta_Cigarette.003",
+    "loose_vertices": 0,
+    "degenerate_faces": 0,
+    "boundary_edges": 0,
+    "nonmanifold_nonboundary": 0,
+    "unweighted_vertices": 0
+  },
+  {
+    "object": "Ryuta_Cigarette_Filter.003",
+    "loose_vertices": 0,
+    "degenerate_faces": 0,
+    "boundary_edges": 0,
+    "nonmanifold_nonboundary": 0,
+    "unweighted_vertices": 0
+  },
+  {
+    "object": "Ryuta_Cigarette_Tip.003",
+    "loose_vertices": 0,
+    "degenerate_faces": 0,
+    "boundary_edges": 0,
+    "nonmanifold_nonboundary": 0,
+    "unweighted_vertices": 0
+  },
+  {
+    "object": "Ryuta_Button_00.003",
+    "loose_vertices": 0,
+    "degenerate_faces": 0,
+    "boundary_edges": 0,
+    "nonmanifold_nonboundary": 0,
+    "unweighted_vertices": 0
+  },
+  {
+    "object": "Ryuta_Button_01.003",
+    "loose_vertices": 0,
+    "degenerate_faces": 0,
+    "boundary_edges": 0,
+    "nonmanifold_nonboundary": 0,
+    "unweighted_vertices": 0
+  },
+  {
+    "object": "Ryuta_Button_02.003",
+    "loose_vertices": 0,
+    "degenerate_faces": 0,
+    "boundary_edges": 0,
+    "nonmanifold_nonboundary": 0,
+    "unweighted_vertices": 0
+  }
+]

@@ -4,17 +4,19 @@ using UnityEngine;
 
 namespace Funseki.Heroes
 {
-    // Кайто «Пинок» (GDD 5.2): the nearest NPC (or IKickable object: the vending machine) in front of him within reach
+    // Рюта «Пинок» (GDD 5.2): the nearest NPC (or IKickable object: the vending machine) in front of him within reach
     // gets GameEvents.OnKicked(target, hero); the target makes its own reaction. If a teacher sees it, GameEvents.OnNoiseMade goes to the «Шум» meter.
-    [CreateAssetMenu(fileName = "Ability_Kick", menuName = "Funseki/Heroes/Abilities/Kick (Kaito)")]
+    [CreateAssetMenu(fileName = "Ability_Kick", menuName = "Funseki/Heroes/Abilities/Kick (Ryuta)")]
     public class KickAbility : HeroAbility
     {
+        public const string AnimationTrigger = "Kick";
+        static readonly int KickTrigger = Animator.StringToHash(AnimationTrigger);
         [Header("Kick")]
         [Tooltip("m")]
         public float reach = 1.5f;
-        [Tooltip("Width of the cone in front of Кайто, degrees")]
+        [Tooltip("Width of the cone in front of Рюта, degrees")]
         [Range(10f, 360f)] public float coneAngle = 120f;
-        [Tooltip("Height of Кайто's chest for the check, m")]
+        [Tooltip("Height of Рюта's chest for the check, m")]
         public float chestHeight = 1f;
         public LayerMask npcLayers = ~0;
         [Tooltip("Bark when nobody is in reach (the kick still happens); empty = silent")]
@@ -32,6 +34,14 @@ namespace Funseki.Heroes
 
         public override bool TryUse(HeroAbilityContext ctx)
         {
+            var animator = ctx.Hero.GetComponentInChildren<Animator>();
+            if (animator != null && animator.runtimeAnimatorController != null)
+                foreach (var parameter in animator.parameters)
+                    if (parameter.nameHash == KickTrigger && parameter.type == AnimatorControllerParameterType.Trigger)
+                    {
+                        animator.SetTrigger(KickTrigger);
+                        break;
+                    }
             var hero = ctx.Hero.transform;
             var npc = FindTarget(hero);
             if (npc == null)

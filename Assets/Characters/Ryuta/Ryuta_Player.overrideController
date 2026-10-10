@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Ryuta_Player
+  m_Controller: {fileID: 9100000, guid: 5c5cee853a13aa14db9ab9dec1429b5f, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: f552aa4aa5d229449a304f616c5635a8, type: 3}
+    m_OverrideClip: {fileID: -2418609612907248348, guid: f2db990e475886d4a9e11208462694da, type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: d0c14ee6c2b4c48498df6277d68b58f6, type: 3}
+    m_OverrideClip: {fileID: 0}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 36041e26f070066489e9bc3140b36816, type: 3}
+    m_OverrideClip: {fileID: 0}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 24915a4f01b52664ab6e832fe8077728, type: 3}
+    m_OverrideClip: {fileID: 0}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 47b18cd7f4c6c7c47ad8870158e2bd6a, type: 3}
+    m_OverrideClip: {fileID: 0}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 32f5135f42dc2e044b404b85e735d56e, type: 3}
+    m_OverrideClip: {fileID: 0}

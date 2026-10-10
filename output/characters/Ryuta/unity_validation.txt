@@ -1,0 +1,24 @@
+Avatar valid: True
+Avatar Humanoid: True
+Pipeline: PC_RPAsset
+Root scale: (1.00, 1.00, 1.00)
+Triangles excluding outline: 10122
+Neutral mesh ground minY=0, height=1,815613
+Animator trigger and return verified: Kick
+Animator trigger and return verified: BeltGag
+Ryuta_Idle: humanoid=True, duration=4, left foot displacement=1,937151E-07
+Curve count: 142; animated curves: 39
+Hand: (0.05, -998.98, 0.08) Foot: (-0.10, -999.92, -0.02)
+BeltSlip weight: 0
+Ryuta_Kick: humanoid=True, duration=1,5, left foot displacement=1,057317
+Curve count: 142; animated curves: 53
+Hand: (0.05, -998.99, 0.08) Foot: (-0.10, -999.24, 0.80)
+BeltSlip weight: 0
+Ryuta_BeltGag: humanoid=True, duration=3, left foot displacement=6,103542E-05
+Curve count: 142; animated curves: 49
+Hand: (0.14, -998.91, 0.24) Foot: (-0.10, -999.92, -0.02)
+BeltSlip weight: 74,5891
+Blend shape verified: smirk
+Blend shape verified: angry
+Blend shape verified: mouth_A
+Gameplay Kick playback PASS (2026-10-11): HeroAbilityRunner.TryUse -> Kick; left foot displacement 1.060 m; automatic return to Locomotion; second use blocked by cooldown.

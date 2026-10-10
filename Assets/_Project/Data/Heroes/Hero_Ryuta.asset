@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: "\u0422\u0430\u043C\u0443\u0440\u0430 \u0420\u044E\u0442\u0430"
   shortName: "\u0420\u044E\u0442\u0430"
   portrait: {fileID: 21300000, guid: 6ec605b383ee3ec438f5f2fe706a524a, type: 3}
-  prefab: {fileID: 7185873260011113874, guid: 57ac04ba2d5ef75499ea2a6d22018169, type: 3}
+  prefab: {fileID: 6023855523501508707, guid: 31d0d8ff412e3504fa576b94bdc65e30, type: 3}
   color: {r: 0.55, g: 0.5, b: 1, a: 1}
   speaker: {fileID: 11400000, guid: 128aea233156a28449324abab2c4a110, type: 2}
-  ability: {fileID: 11400000, guid: cf6592eaa61843f489f90232411e35ec, type: 2}
+  ability: {fileID: 11400000, guid: 37447c245e4857a439bdf520a555f977, type: 2}

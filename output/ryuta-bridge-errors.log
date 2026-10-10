@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "C:\Users\Jufisqul\AppData\Roaming\Blender Foundation\Blender\5.2\scripts\addons\blender_mcp.py", line 2248, in execute_code
+    exec(code, namespace)
+    ~~~~^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+  File "C:\One Funseki, Seven Days\Tools\CharacterGen\ryuta_build.py", line 64, in <module>
+    sa, ca = math.sin(a), math.cos(a)
+  File "C:\One Funseki, Seven Days\Tools\CharacterGen\ryuta_build.py", line 23, in <module>
+    HERE = os.path.dirname(os.path.abspath(__file__))
+                                           ^^^^^^^^
+NameError: name '__file__' is not defined. Did you mean: '__name__'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Jufisqul\AppData\Roaming\Blender Foundation\Blender\5.2\scripts\addons\blender_mcp.py", line 1577, in _execute_command_internal
+    result = handler(**params)
+  File "C:\Users\Jufisqul\AppData\Roaming\Blender Foundation\Blender\5.2\scripts\addons\blender_mcp.py", line 2258, in execute_code
+    raise Exception(
+    ...<5 lines>...
+    )
+Exception: {"exception_type": "NameError", "message": "name '__file__' is not defined", "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\Jufisqul\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\scripts\\addons\\blender_mcp.py\", line 2248, in execute_code\n    exec(code, namespace)\n    ~~~~^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 1, in <module>\n  File \"C:\\One Funseki, Seven Days\\Tools\\CharacterGen\\ryuta_build.py\", line 64, in <module>\n    sa, ca = math.sin(a), math.cos(a)\n  File \"C:\\One Funseki, Seven Days\\Tools\\CharacterGen\\ryuta_build.py\", line 23, in <module>\n    HERE = os.path.dirname(os.path.abspath(__file__))\n                                           ^^^^^^^^\nNameError: name '__file__' is not defined. Did you mean: '__name__'?\n"}
+C:\One Funseki, Seven Days\Tools\CharacterGen\ryuta_build.py:1146: RuntimeWarning: invalid value encountered in power
+  band = np.abs(elev - (38 + 3.5 * np.sin(az * 7))) < 2.2 + 1.0 * np.sin(az * 23)

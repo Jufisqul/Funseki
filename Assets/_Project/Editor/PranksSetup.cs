@@ -338,7 +338,7 @@ namespace Funseki.EditorTools
             visuals.GetArrayElementAtIndex(0).objectReferenceValue = visual;
             tso.ApplyModifiedPropertiesWithoutUndo();
 
-            // A trigger box around the courtyard vending machine: Кайто's kick hits it.
+            // A trigger box around the courtyard vending machine: Рюта's kick hits it.
             var kickGo = new GameObject("MachineKick");
             kickGo.transform.SetParent(parent, false);
             kickGo.transform.position = MachinePos + Vector3.up * 0.95f;

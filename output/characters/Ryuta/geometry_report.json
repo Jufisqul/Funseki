@@ -1,0 +1,38 @@
+{
+  "triangles": 10122,
+  "bones": 52,
+  "blend_shapes": [
+    "Basis",
+    "blink_L",
+    "blink_R",
+    "angry",
+    "bored",
+    "smirk",
+    "surprised",
+    "mouth_A",
+    "mouth_I",
+    "mouth_U",
+    "mouth_E",
+    "mouth_O",
+    "BeltSlip"
+  ],
+  "clips": [
+    {
+      "name": "Ryuta_Idle",
+      "frames": 121,
+      "fps": 30
+    },
+    {
+      "name": "Ryuta_Kick",
+      "frames": 46,
+      "fps": 30
+    },
+    {
+      "name": "Ryuta_BeltGag",
+      "frames": 91,
+      "fps": 30
+    }
+  ],
+  "height_m": 1.815602421760559,
+  "source": "Existing project generator adapted to concept v3; original resources preserved"
+}

@@ -1,0 +1,228 @@
+BlenderMCP addon registered
+Server thread started
+BlenderMCP server started on localhost:9876
+RYUTA: Blender bridge startup requested
+00:40.328  blend            | Read blend: "C:\One Funseki, Seven Days\Art\Characters\Ryuta\Ryuta.blend"
+04:58.094  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_idle.png'
+06:31.125  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_idle.png'
+09:10.047  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_front.png'
+09:11.656  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_side.png'
+09:13.187  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_back.png'
+09:15.375  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_Ryuta_Kick.png'
+09:17.234  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_Ryuta_BeltGag.png'
+13:56.734  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_idle.png'
+15:25.453  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_front.png'
+15:26.891  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_side.png'
+15:28.203  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_back.png'
+15:29.687  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_Ryuta_Kick.png'
+15:31.078  render           | Saved: 'C:\One Funseki, Seven Days\output\characters\Ryuta\previews\blender_Ryuta_BeltGag.png'
+17:02.953  blend            | Read blend: "C:\One Funseki, Seven Days\output\characters\Ryuta\Ryuta.blend"
+54:51.766  blend            | Saved session recovery to "C:\Users\Jufisqul\AppData\Local\Temp\quit.blend"
+Connected to client: ('127.0.0.1', 52435)
+Client handler started
+Queued command: get_addon_info
+Executing handler for get_addon_info
+Handler execution complete
+Queued command: get_addon_info
+Executing handler for get_addon_info
+Handler execution complete
+Queued command: get_polyhaven_status
+Queued command: get_sketchfab_status
+Executing handler for get_sketchfab_status
+Handler execution complete
+Queued command: get_polypizza_status
+Executing handler for get_polypizza_status
+Handler execution complete
+Queued command: get_hunyuan3d_status
+Executing handler for get_hunyuan3d_status
+Handler execution complete
+Queued command: get_hyper3d_status
+Executing handler for get_hyper3d_status
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Error in handler: {"exception_type": "NameError", "message": "name '__file__' is not defined", "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\Jufisqul\\AppData\\Roaming\\Blender Foundation\\Blender\\5.2\\scripts\\addons\\blender_mcp.py\", line 2248, in execute_code\n    exec(code, namespace)\n    ~~~~^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 1, in <module>\n  File \"C:\\One Funseki, Seven Days\\Tools\\CharacterGen\\ryuta_build.py\", line 64, in <module>\n    sa, ca = math.sin(a), math.cos(a)\n  File \"C:\\One Funseki, Seven Days\\Tools\\CharacterGen\\ryuta_build.py\", line 23, in <module>\n    HERE = os.path.dirname(os.path.abspath(__file__))\n                                           ^^^^^^^^\nNameError: name '__file__' is not defined. Did you mean: '__name__'?\n"}
+Client disconnected
+Client handler stopped
+Connected to client: ('127.0.0.1', 61081)
+Client handler started
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: get_viewport_screenshot
+Executing handler for get_viewport_screenshot
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: get_viewport_screenshot
+Executing handler for get_viewport_screenshot
+Handler execution complete
+Queued command: pick_viewport_object
+Executing handler for pick_viewport_object
+Handler execution complete
+Queued command: pick_viewport_object
+Executing handler for pick_viewport_object
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: get_viewport_screenshot
+Executing handler for get_viewport_screenshot
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: get_viewport_screenshot
+Executing handler for get_viewport_screenshot
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: get_viewport_screenshot
+Executing handler for get_viewport_screenshot
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: execute_code
+Executing handler for execute_code
+Handler execution complete
+Queued command: get_viewport_screenshot
+Executing handler for get_viewport_screenshot
+Handler execution complete
+Connected to client: ('127.0.0.1', 52610)
+Client handler started
+Connected to client: ('127.0.0.1', 52611)
+Queued command: get_addon_info
+Client handler started
+Queued command: get_addon_info
+Executing handler for get_addon_info
+Handler execution complete
+Executing handler for get_addon_info
+Handler execution complete
+Queued command: get_telemetry_consent
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Executing handler for get_telemetry_consent
+Handler execution complete
+Error receiving data: [WinError 10054] Удаленный хост принудительно разорвал существующее подключение
+Client handler stopped
+Connected to client: ('127.0.0.1', 52626)
+Client handler started
+Queued command: get_addon_info
+Executing handler for get_addon_info
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Error receiving data: [WinError 10054] Удаленный хост принудительно разорвал существующее подключение
+Client handler stopped
+Connected to client: ('127.0.0.1', 52659)
+Client handler started
+Queued command: get_addon_info
+Connected to client: ('127.0.0.1', 52660)
+Client handler started
+Queued command: get_addon_info
+Executing handler for get_addon_info
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_addon_info
+Handler execution complete
+Executing handler for get_telemetry_consent
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Error receiving data: [WinError 10054] Удаленный хост принудительно разорвал существующее подключение
+Client handler stopped
+Connected to client: ('127.0.0.1', 52669)
+Client handler started
+Queued command: get_addon_info
+Executing handler for get_addon_info
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Error receiving data: [WinError 10054] Удаленный хост принудительно разорвал существующее подключение
+Client handler stopped
+Connected to client: ('127.0.0.1', 52689)
+Client handler started
+Queued command: get_addon_info
+Executing handler for get_addon_info
+Handler execution complete
+Queued command: get_telemetry_consent
+Executing handler for get_telemetry_consent
+Handler execution complete
+Error receiving data: [WinError 10054] Удаленный хост принудительно разорвал существующее подключение
+Client handler stopped
+Error accepting connection: [WinError 10038] Сделана попытка выполнить операцию на объекте, не являющемся сокетомError receiving data: [WinError 10038] Сделана попытка выполнить операцию на объекте, не являющемся сокетом
+Client handler stopped
+Error receiving data: [WinError 10038] Сделана попытка выполнить операцию на объекте, не являющемся сокетом
+Client handler stopped
+
+Error receiving data: [WinError 10038] Сделана попытка выполнить операцию на объекте, не являющемся сокетом
+Client handler stopped
+Server thread stopped
+BlenderMCP server stopped
+BlenderMCP addon unregistered
+
+Blender quit

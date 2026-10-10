@@ -40,7 +40,7 @@ namespace Funseki.EditorTools
         const string FontPath = "Assets/MainMenu/Fonts/GolosText-SemiBold SDF.asset";
         const string MarkerPath = "Assets/_Project/Data/Inventory/Items/Item_Marker.asset";
 
-        const string RyutaModel = "Assets/ThirdParty/Models/Ryuto/Prefab/angGirl.prefab";
+        const string RyutaModel = "Assets/Characters/Ryuta/Ryuta_Gameplay.prefab";
         const string KaitoModel = "Assets/ThirdParty/Models/Kaito/Ren/Prefabs/Ren_BasicSetup.prefab";
         static string ReiModel => PlayerSliceSetup.GirlFbx;
 
@@ -128,9 +128,9 @@ namespace Funseki.EditorTools
 
             var heroes = new[]
             {
-                HeroAsset("Hero_Ryuta", HeroId.Ryuta, "Тамура Рюта", "Рюта", ryutaColor, RyutaModel, spRyuta, voices),
+                HeroAsset("Hero_Ryuta", HeroId.Ryuta, "Тамура Рюта", "Рюта", ryutaColor, RyutaModel, spRyuta, kick),
                 HeroAsset("Hero_Rei", HeroId.Rei, "Кагами Рэй", "Рэй", reiColor, ReiModel, spRei, phone),
-                HeroAsset("Hero_Kaito", HeroId.Kaito, "Мидзуно Кайто", "Кайто", kaitoColor, KaitoModel, spKaito, kick),
+                HeroAsset("Hero_Kaito", HeroId.Kaito, "Мидзуно Кайто", "Кайто", kaitoColor, KaitoModel, spKaito, voices),
             };
             foreach (var h in heroes) RenderPortrait(h, false);
 
@@ -236,6 +236,8 @@ namespace Funseki.EditorTools
         // A prefab variant of the source model: Player.controller, no root motion, URP materials.
         static GameObject ModelVariant(string name, string sourcePath)
         {
+            if (sourcePath == RyutaModel)
+                return AssetDatabase.LoadAssetAtPath<GameObject>(sourcePath);
             string path = $"{ModelsDir}/{name}_Model.prefab";
             var existing = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             if (existing != null) return existing;
@@ -484,7 +486,7 @@ namespace Funseki.EditorTools
         }
 
         // On the entrance porch, so the Q actions can be tried at once: a classmate to kick, a teacher who watches
-        // him, and an item for Рюта's «Голоса».
+        // him, and an item for Кайто's «Голоса».
         internal static void BuildTestContent(HeroAssets a)
         {
             var root = new GameObject("HeroesTest");

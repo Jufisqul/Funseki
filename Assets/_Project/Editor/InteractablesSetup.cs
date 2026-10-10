@@ -222,7 +222,7 @@ namespace Funseki.EditorTools
                 d.firstLines = new[] { "«Чистые руки — светлое будущее». Спорно." };
                 d.repeatLines = new[] { "Висит. Смотрит." };
                 d.heroLines.Add(new HeroLines { hero = HeroId.Rei, first = new[] { "Шрифт — Arial. Это преступление." } });
-                d.heroLines.Add(new HeroLines { hero = HeroId.Kaito, first = new[] { "Голос говорит, тут не хватает усов." } });
+                d.heroLines.Add(new HeroLines { hero = HeroId.Ryuta, first = new[] { "Голос говорит, тут не хватает усов." } });
                 d.cleanTexture = posterClean;
                 d.drawnTextures = drawn;
                 d.drawItem = a.marker;
@@ -261,13 +261,13 @@ namespace Funseki.EditorTools
                 d.firstLines = new[] { "Фудзи. Как у всех." };
                 d.repeatLines = new[] { "Гора как гора." };
                 d.heroLines.Add(new HeroLines { hero = HeroId.Rei, first = new[] { "Подпись «Директор, 1974». Многое объясняет." } });
-                d.heroLines.Add(new HeroLines { hero = HeroId.Kaito, first = new[] { "Голос говорит, Фудзи грустит." } });
+                d.heroLines.Add(new HeroLines { hero = HeroId.Ryuta, first = new[] { "Голос говорит, Фудзи грустит." } });
                 d.font = font;
                 d.cleanTexture = paintingClean;
                 d.drawnTextures = paintingDrawn;
                 d.drawItem = a.marker;
                 d.drawLines = new[] { "Фудзи стало веселее.", "Теперь тут есть сюжет.", "Музей оторвёт с руками." };
-                d.heroDrawLines.Add(new HeroLines { hero = HeroId.Ryuta, first = new[] { "Голоса в голове аплодируют." } });
+                d.heroDrawLines.Add(new HeroLines { hero = HeroId.Kaito, first = new[] { "Голоса в голове аплодируют." } });
             });
             a.shower = Data<ShowerData>("Interactable_Shower", d =>
             {
@@ -319,18 +319,18 @@ namespace Funseki.EditorTools
                 a.booklet.repeatLines = new string[0];
                 EditorUtility.SetDirty(a.booklet);
             }
-            // «Кранчик с водой»: own lines of Рэй and Кайто.
+            // «Кранчик с водой»: own lines of Рэй and Рюта.
             if (a.tap != null && a.tap.heroLines.Count == 0)
             {
                 a.tap.heroLines.Add(new HeroLines { hero = HeroId.Rei, first = new[] { "Отвратительно." } });
-                a.tap.heroLines.Add(new HeroLines { hero = HeroId.Kaito, first = new[] { "Голос: «Ямми»." } });
+                a.tap.heroLines.Add(new HeroLines { hero = HeroId.Ryuta, first = new[] { "Голос: «Ямми»." } });
                 EditorUtility.SetDirty(a.tap);
             }
-            // «Плакаты и картины»: the close-up screen font and Рюта's «голоса в голове».
+            // «Плакаты и картины»: the close-up screen font and Кайто's «голоса в голове».
             if (a.poster != null && a.poster.heroDrawLines.Count == 0)
             {
                 if (a.poster.font == null) a.poster.font = font;
-                a.poster.heroDrawLines.Add(new HeroLines { hero = HeroId.Ryuta, first = new[] { "Голоса в голове одобряют." } });
+                a.poster.heroDrawLines.Add(new HeroLines { hero = HeroId.Kaito, first = new[] { "Голоса в голове одобряют." } });
                 EditorUtility.SetDirty(a.poster);
             }
         }

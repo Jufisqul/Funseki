@@ -24,7 +24,7 @@ MonoBehaviour:
     first:
     - "\u041E\u0442\u0432\u0440\u0430\u0442\u0438\u0442\u0435\u043B\u044C\u043D\u043E."
     repeat: []
-  - hero: 2
+  - hero: 0
     first:
     - "\u0413\u043E\u043B\u043E\u0441: \xAB\u042F\u043C\u043C\u0438\xBB."
     repeat: []

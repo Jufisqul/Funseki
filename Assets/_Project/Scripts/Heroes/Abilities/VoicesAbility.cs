@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Funseki.Heroes
 {
-    // Рюта «Голоса» (GDD 5.2): the nearest item that can be picked up within radius glows for a few seconds
-    // and Рюта says a hint about where it is (the pickup's own VoiceHint, or a generic line).
-    [CreateAssetMenu(fileName = "Ability_Voices", menuName = "Funseki/Heroes/Abilities/Voices (Ryuta)")]
+    // Кайто «Голоса» (GDD 5.2): the nearest item that can be picked up within radius glows for a few seconds
+    // and Кайто says a hint about where it is (the pickup's own VoiceHint, or a generic line).
+    [CreateAssetMenu(fileName = "Ability_Voices", menuName = "Funseki/Heroes/Abilities/Voices (Kaito)")]
     public class VoicesAbility : HeroAbility
     {
         [Header("Search")]

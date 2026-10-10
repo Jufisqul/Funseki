@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Funseki.Heroes
 {
-    // Рюта's «Голоса» marker on an item: follows the item (without inheriting its scale), pulses its light,
+    // Кайто's «Голоса» marker on an item: follows the item (without inheriting its scale), pulses its light,
     // and disappears as soon as the item is picked up.
     public class VoicesGlow : MonoBehaviour
     {
